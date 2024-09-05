@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
+import { UserEntity } from './entities/user.entity';
+import { UserModule } from './modules/users/user.module';
 
 @Module({
   imports: [
@@ -13,9 +15,10 @@ import { DataSource } from 'typeorm';
       username: 'root',
       password: '',
       database: 'hospital_hrm',
-      entities: [],
+      entities: [UserEntity],
       synchronize: true,
     }),
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],
