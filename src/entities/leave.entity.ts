@@ -8,6 +8,6 @@ export class LeaveEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'leave_types' })
   leaveTypes: string;
 
-  @Column({ name: 'max_leave_entitlement' })
+  @Column({ name: 'max_leave_entitlement', default: 12 })
   MaxLeaveEntitlement: number;
 }

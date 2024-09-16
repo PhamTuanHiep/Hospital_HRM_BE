@@ -18,7 +18,7 @@ export class PositionService {
     return await this.positionRepository.find();
   }
 
-  async findOne(positionId: number): Promise<Position | null> {
+  async findOne(positionId: string): Promise<Position | null> {
     return await this.positionRepository.findOne({ where: { positionId } });
   }
 
@@ -32,7 +32,7 @@ export class PositionService {
     return res;
   }
 
-  async update(positionId: number, positionDto: PositionDto) {
+  async update(positionId: string, positionDto: PositionDto) {
     const position = await this.positionRepository.findOne({
       where: { positionId },
     });
@@ -43,7 +43,7 @@ export class PositionService {
     return await this.positionRepository.save(positionUpdate);
   }
 
-  async delete(positionId: number) {
+  async delete(positionId: string) {
     const role = await this.positionRepository.findOne({
       where: { positionId },
     });

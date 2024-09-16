@@ -39,7 +39,7 @@ export class PositionControllers {
 
   @Get('/:positionId')
   async findOne(
-    @Param('positionId', ParseIntPipe) positionId: number,
+    @Param('positionId') positionId: string,
   ): Promise<ResponseData<Position>> {
     try {
       return new ResponseData<Position>(
@@ -79,7 +79,7 @@ export class PositionControllers {
 
   @Put('/:positionId')
   async update(
-    @Param('positionId', ParseIntPipe) positionId: number,
+    @Param('positionId') positionId: string,
     @Body() positionDto: PositionDto,
   ): Promise<ResponseData<Position>> {
     try {
@@ -100,7 +100,7 @@ export class PositionControllers {
 
   @Delete('/:positionId')
   async delete(
-    @Param('positionId', ParseIntPipe) positionId: number,
+    @Param('positionId') positionId: string,
   ): Promise<ResponseData<boolean>> {
     try {
       return new ResponseData<boolean>(

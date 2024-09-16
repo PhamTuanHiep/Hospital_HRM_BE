@@ -18,6 +18,8 @@ import { AllowanceModule } from './modules/allowances/allowance.module';
 import { AllowanceEntity } from './entities/allowance.entity';
 import { LeaveModule } from './modules/leaves/leave.module';
 import { LeaveEntity } from './entities/leave.entity';
+import { InsuranceModule } from './modules/insurances/insurance.module';
+import { InsuranceEntity } from './entities/insurance.entity';
 
 // @Module({
 //   imports: [
@@ -47,23 +49,25 @@ import { LeaveEntity } from './entities/leave.entity';
       password: '',
       database: 'hospital_hrm',
       entities: [
-        // UserEntity,
+        UserEntity,
         RoleEntity,
         PositionEntity,
         AccountEntity,
         DepartmentEntity,
         AllowanceEntity,
         LeaveEntity,
+        InsuranceEntity,
       ],
       synchronize: true,
     }),
-    // UserModule,
+    UserModule,
     RoleModule,
     PositionModule,
     AccountModule,
     DepartmentModule,
     AllowanceModule,
     LeaveModule,
+    InsuranceModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -11,7 +11,7 @@ export class AccountEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 1000, name: 'password' })
   password: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'role_id' })
+  @Column({ type: 'varchar', length: 250, name: 'role_id', default: 'user' })
   roleId: string;
 
   @Column({ name: 'user_id' })

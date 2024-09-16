@@ -1,5 +1,5 @@
 export class Position {
-  positionId?: number;
+  positionId?: string;
   positionName?: string;
   salaryCoefficient?: number;
   leaveId?: string;

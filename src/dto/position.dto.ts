@@ -1,7 +1,8 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class PositionDto {
-  positionId?: number;
+  @IsNotEmpty()
+  positionId?: string;
 
   @IsNotEmpty()
   positionName?: string;
