@@ -8,6 +8,6 @@ export class AllowanceEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'allowance_name' })
   allowanceName: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'allowance_fee' })
-  allowanceFee: string;
+  @Column({ name: 'allowance_fee' })
+  allowanceFee: number;
 }

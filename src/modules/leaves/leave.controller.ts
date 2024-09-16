@@ -14,7 +14,7 @@ import { LeaveService } from './leave.service';
 import { Leave } from 'src/models/leave.model';
 import { LeaveDto } from 'src/dto/leave.dto';
 
-@Controller('departments')
+@Controller('leaves')
 export class LeaveControllers {
   constructor(private leaveService: LeaveService) {}
 

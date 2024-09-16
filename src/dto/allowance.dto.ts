@@ -8,5 +8,5 @@ export class AllowanceDto {
   allowanceName?: string;
 
   @IsNotEmpty()
-  allowanceFee?: string;
+  allowanceFee?: number;
 }

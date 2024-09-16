@@ -1,7 +1,7 @@
 export class Allowance {
   allowanceId?: string;
   allowanceName?: string;
-  allowanceFee?: string;
+  allowanceFee?: number;
 
   constructor({ allowanceId, allowanceName, allowanceFee }) {
     if (allowanceId !== null) this.allowanceId = allowanceId;
