@@ -16,17 +16,23 @@ export class UserService {
     return await this.userRepository.find();
   }
 
-  async findOne(id: number): Promise<User | null> {
-    return await this.userRepository.findOne({ where: { id } });
+  async findOne(userId: number): Promise<User | null> {
+    return await this.userRepository.findOne({ where: { userId } });
   }
 
   async createUser(userDto: UserDto) {
     const user = this.userRepository.create(userDto);
-    return await this.userRepository.save(user);
+    console.log('userDto:', userDto);
+    console.log('user:', user);
+    //save entity
+    let res = await this.userRepository.save(user);
+    console.log('res:', res);
+
+    return res;
   }
 
-  async update(id: number, userDto: UserDto) {
-    const user = await this.userRepository.findOne({ where: { id } });
+  async update(userId: number, userDto: UserDto) {
+    const user = await this.userRepository.findOne({ where: { userId } });
     const userUpdate = {
       ...user,
       ...userDto,
@@ -34,8 +40,8 @@ export class UserService {
     return await this.userRepository.save(userUpdate);
   }
 
-  async delete(id: number) {
-    const user = await this.userRepository.findOne({ where: { id } });
+  async delete(userId: number) {
+    const user = await this.userRepository.findOne({ where: { userId } });
     return await this.userRepository.remove(user);
   }
 }

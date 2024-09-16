@@ -20,6 +20,8 @@ import { LeaveModule } from './modules/leaves/leave.module';
 import { LeaveEntity } from './entities/leave.entity';
 import { InsuranceModule } from './modules/insurances/insurance.module';
 import { InsuranceEntity } from './entities/insurance.entity';
+import { EvaluateModule } from './modules/evaluates/evaluate.module';
+import { EvaluateEntity } from './entities/evaluate.entity';
 
 // @Module({
 //   imports: [
@@ -57,6 +59,7 @@ import { InsuranceEntity } from './entities/insurance.entity';
         AllowanceEntity,
         LeaveEntity,
         InsuranceEntity,
+        EvaluateEntity,
       ],
       synchronize: true,
     }),
@@ -68,6 +71,7 @@ import { InsuranceEntity } from './entities/insurance.entity';
     AllowanceModule,
     LeaveModule,
     InsuranceModule,
+    EvaluateModule,
   ],
   controllers: [AppController],
   providers: [AppService],

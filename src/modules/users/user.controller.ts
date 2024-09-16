@@ -36,13 +36,13 @@ export class UserControllers {
     }
   }
 
-  @Get('/:id')
+  @Get('/:userId')
   async findOne(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('userId', ParseIntPipe) userId: number,
   ): Promise<ResponseData<User>> {
     try {
       return new ResponseData<User>(
-        await this.userService.findOne(id),
+        await this.userService.findOne(userId),
         HttpStatus.SUCCESS,
         HttpMessage.SUCCESS,
       );
@@ -52,9 +52,12 @@ export class UserControllers {
   }
 
   @Post()
-  async createUser(@Body() userDto: UserDto): Promise<ResponseData<UserDto>> {
+  async createUser(
+    @Body(new ValidationPipe()) userDto: UserDto,
+  ): Promise<ResponseData<UserDto>> {
     try {
       let data = await this.userService.createUser(userDto);
+      console.log('data:', data);
       return new ResponseData<User>(
         data,
         HttpStatus.SUCCESS,
@@ -65,13 +68,13 @@ export class UserControllers {
     }
   }
 
-  @Put('/:id')
+  @Put('/:userId')
   async update(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('userId', ParseIntPipe) userId: number,
     @Body() userDto: UserDto,
   ): Promise<ResponseData<User>> {
     try {
-      let data = await this.userService.update(id, userDto);
+      let data = await this.userService.update(userId, userDto);
       return new ResponseData<User>(
         data,
         HttpStatus.SUCCESS,
@@ -82,13 +85,13 @@ export class UserControllers {
     }
   }
 
-  @Delete('/:id')
+  @Delete('/:userId')
   async delete(
-    @Param('id', ParseIntPipe) id: number,
+    @Param('userId', ParseIntPipe) userId: number,
   ): Promise<ResponseData<boolean>> {
     try {
       return new ResponseData<boolean>(
-        (await this.userService.delete(id)) ? true : false,
+        (await this.userService.delete(userId)) ? true : false,
         HttpStatus.SUCCESS,
         HttpMessage.SUCCESS,
       );

@@ -1,59 +1,55 @@
-import {
-  IsEmail,
-  IsNotEmpty,
-  IsNumber,
-  IsOptional,
-  IsString,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
+import { IsNotEmpty, IsNumber, Length } from 'class-validator';
 
 export class UserDto {
-  id?: number;
+  userId?: number;
 
   @IsNotEmpty()
-  @IsString()
-  firstName?: string;
-
-  @IsNotEmpty()
-  @IsString()
-  lastName?: string;
-
-  @IsNotEmpty()
-  @IsEmail()
-  email?: string;
-
-  @IsNotEmpty()
-  @IsString()
-  @MinLength(3, {
-    message: 'Field password must be more than 3 characters !',
-  })
-  @MaxLength(32, {
-    message: 'Field password must be less than 32 characters !',
-  })
-  password?: string;
+  fullName?: string;
 
   @IsNotEmpty()
   gender?: string;
 
-  @IsString()
+  @IsNotEmpty()
   address?: string;
 
-  @IsString()
+  @IsNotEmpty()
+  @Length(10, 10, {
+    message: 'Field phoneNumber must be 10 characters !',
+  })
   phoneNumber?: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  roleId?: number;
+  nation?: string;
 
-  @IsNotEmpty()
-  @IsNumber()
-  positionId?: number;
+  nationality?: string;
 
-  @IsString()
+  hometown?: string;
+
+  positionId?: string;
+
+  birthday?: string;
+
   image?: string;
+
+  fatherFullName?: string;
+
+  fatherBirthday?: string;
+
+  motherFullName?: string;
+
+  motherBirthday?: string;
+
+  departmentId?: string;
+
+  insuranceId?: string;
+
+  @IsNumber()
+  evaluateId?: number;
+
+  description?: string;
 
   createdAt?: Date;
 
   updatedAt?: Date;
+
+  status?: string;
 }
