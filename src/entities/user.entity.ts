@@ -24,55 +24,72 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'phone_number' })
   phoneNumber: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'nation' })
+  @Column({ type: 'varchar', length: 250, name: 'nation', default: 'Việt Nam' })
   nation: string;
-
-  @Column({ type: 'varchar', length: 250, name: 'nationality' })
-  nationality: string;
-
-  @Column({ type: 'varchar', length: 250, name: 'hometown' })
-  hometown: string;
-
-  // @OnetoMany(() => Position, (position) => position.positionId)
-  @Column({ type: 'varchar', length: 250, name: 'position_id' })
-  positionId: string;
 
   @Column({
     type: 'varchar',
     length: 250,
-    name: 'birthday',
+    name: 'nationality',
+    default: 'Kinh',
   })
+  nationality: string;
+
+  @Column({ type: 'varchar', length: 250, name: 'hometown', default: '' })
+  hometown: string;
+
+  // @OnetoMany(() => Position, (position) => position.positionId)
+  @Column({ type: 'varchar', length: 250, name: 'position_id', default: '' })
+  positionId: string;
+
+  @Column({ type: 'varchar', length: 250, name: 'birthday', default: '' })
   birthday: string;
 
-  @Column({ type: 'varchar', length: 1000, name: 'image' })
+  @Column({ type: 'varchar', length: 1000, name: 'image', default: '' })
   image: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'father_full_name' })
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'father_full_name',
+    default: '',
+  })
   fatherFullName: string;
 
   @Column({
     type: 'varchar',
     length: 250,
     name: 'father_birthday',
+    default: '',
   })
   fatherBirthday: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'mother_full_name' })
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'mother_full_name',
+    default: '',
+  })
   motherFullName: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'mother_birthday' })
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'mother_birthday',
+    default: '',
+  })
   motherBirthday: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'department_id' })
+  @Column({ type: 'varchar', length: 250, name: 'department_id', default: '' })
   departmentId: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'insurance_id' })
+  @Column({ type: 'varchar', length: 250, name: 'insurance_id', default: '' })
   insuranceId: string;
 
-  @Column({ name: 'evaluate_id' })
+  @Column({ name: 'evaluate_id', default: 1 })
   evaluateId: number;
 
-  @Column({ type: 'varchar', length: 1000, name: 'description' })
+  @Column({ type: 'varchar', length: 1000, name: 'description', default: '' })
   description: string;
 
   @CreateDateColumn({
@@ -90,6 +107,6 @@ export class UserEntity extends BaseEntity {
   })
   updatedAt: Date;
 
-  @Column({ type: 'varchar', length: 250, name: 'status' })
+  @Column({ type: 'varchar', length: 250, name: 'status', default: '' })
   status: string;
 }
