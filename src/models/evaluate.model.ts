@@ -12,6 +12,7 @@ export class Evaluate {
   workAttitude?: number;
   workSpirit?: number;
   workResult?: number;
+
   constructor({
     evaluateId,
     userId,

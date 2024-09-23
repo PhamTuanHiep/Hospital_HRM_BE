@@ -18,8 +18,10 @@ export class AllowanceService {
     return await this.allowanceRepository.find();
   }
 
-  async findOne(allowanceId: string): Promise<Allowance | null> {
-    return await this.allowanceRepository.findOne({ where: { allowanceId } });
+  async findOne(allowanceId: number): Promise<Allowance | null> {
+    return await this.allowanceRepository.findOne({
+      where: { allowanceId },
+    });
   }
 
   async createRole(allowanceDto: AllowanceDto) {
@@ -32,7 +34,7 @@ export class AllowanceService {
     return res;
   }
 
-  async update(allowanceId: string, allowanceDto: AllowanceDto) {
+  async update(allowanceId: number, allowanceDto: AllowanceDto) {
     const allowance = await this.allowanceRepository.findOne({
       where: { allowanceId },
     });
@@ -43,7 +45,7 @@ export class AllowanceService {
     return await this.allowanceRepository.save(allowanceUpdate);
   }
 
-  async delete(allowanceId: string) {
+  async delete(allowanceId: number) {
     const allowance = await this.allowanceRepository.findOne({
       where: { allowanceId },
     });

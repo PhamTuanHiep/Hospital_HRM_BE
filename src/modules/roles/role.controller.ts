@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  HttpException,
   Param,
   Post,
   Put,
@@ -13,6 +14,7 @@ import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
 import { RoleService } from './role.service';
 import { Role } from 'src/models/role.model';
 import { RoleDto } from 'src/dto/role.dto';
+import { isString } from 'class-validator';
 
 @Controller('roles')
 export class RoleControllers {
@@ -35,16 +37,30 @@ export class RoleControllers {
     }
   }
 
+  // @Get(':roleId')
+  // async getHello(@Param('roleId') roleId: string): Promise<Role> {
+  //   return this.roleService.getRoleById(roleId);
+  // }
   @Get('/:roleId')
   async findOne(@Param('roleId') roleId: string): Promise<ResponseData<Role>> {
+    let errCode: number;
+    let errMessage: string;
     try {
+      const role = await this.roleService.findOne(roleId);
+      if (!role) {
+        (errCode = HttpStatus.NOT_FOUND), (errMessage = HttpMessage.NOT_FOUND);
+      }
       return new ResponseData<Role>(
-        await this.roleService.findOne(roleId),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
+        role,
+        errCode || HttpStatus.SUCCESS,
+        errMessage || HttpMessage.SUCCESS,
       );
     } catch (e) {
-      return new ResponseData<Role>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return new ResponseData<Role>(
+        null,
+        HttpStatus.ERROR_SERVER,
+        HttpMessage.ERROR_SERVER,
+      );
     }
   }
 

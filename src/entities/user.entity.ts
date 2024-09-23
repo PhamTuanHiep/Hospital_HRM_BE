@@ -21,7 +21,12 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'address' })
   address: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'phone_number' })
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'phone_number',
+    default: '0000000000',
+  })
   phoneNumber: string;
 
   @Column({ type: 'varchar', length: 250, name: 'nation', default: 'Việt Nam' })
@@ -80,16 +85,32 @@ export class UserEntity extends BaseEntity {
   })
   motherBirthday: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'department_id', default: '' })
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'department_id',
+    default: '',
+  })
   departmentId: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'insurance_id', default: '' })
-  insuranceId: string;
+  @Column({
+    type: 'simple-array',
+    name: 'insurance_ids',
+    default: '',
+  })
+  insuranceIds: string[];
+
+  @Column({
+    type: 'json',
+    name: 'allowance_ids',
+    default: [0],
+  })
+  allowanceIds: number[];
 
   @Column({ name: 'evaluate_id', default: 1 })
   evaluateId: number;
 
-  @Column({ type: 'varchar', length: 1000, name: 'description', default: '' })
+  @Column({ type: 'varchar', length: 1000, name: 'description', default: '-' })
   description: string;
 
   @CreateDateColumn({

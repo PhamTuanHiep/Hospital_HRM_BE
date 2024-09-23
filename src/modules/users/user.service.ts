@@ -21,7 +21,12 @@ export class UserService {
   }
 
   async createUser(userDto: UserDto) {
+    // const newUser = {
+    //   ...userDto,
+    //   insuranceIds: userDto.insuranceIds ? userDto.insuranceIds : ['SI'],
+    // };
     const user = this.userRepository.create(userDto);
+
     console.log('userDto:', userDto);
     console.log('user:', user);
     //save entity

@@ -8,9 +8,22 @@ export class InsuranceEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'insurance_name' })
   insuranceName: string;
 
-  @Column({ name: 'monthly_price' })
-  monthlyPrice: number;
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'insurance_type',
+    default: 'E',
+  })
+  insuranceType: string;
 
-  @Column({ name: 'price' })
-  price: number;
+  @Column('decimal', {
+    precision: 2, // so chu so thap phan toi da
+    scale: 1, // so chu so thap phan
+    name: 'monthly_percentage',
+    default: 0,
+  })
+  monthlyPercentage: number;
+
+  @Column({ name: 'note', default: '-' })
+  note: string;
 }

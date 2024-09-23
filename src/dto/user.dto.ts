@@ -1,4 +1,10 @@
-import { IsNotEmpty, IsNumber, Length } from 'class-validator';
+import {
+  IsArray,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  Length,
+} from 'class-validator';
 
 export class UserDto {
   userId?: number;
@@ -40,7 +46,11 @@ export class UserDto {
 
   departmentId?: string;
 
-  insuranceId?: string;
+  // @IsArray()
+  // @IsString({ each: true })
+  insuranceIds?: string[];
+
+  allowanceIds?: number[];
 
   @IsNumber()
   evaluateId?: number;

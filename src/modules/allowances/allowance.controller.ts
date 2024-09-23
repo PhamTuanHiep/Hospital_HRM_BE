@@ -4,6 +4,7 @@ import {
   Delete,
   Get,
   Param,
+  ParseIntPipe,
   Post,
   Put,
   ValidationPipe,
@@ -37,7 +38,7 @@ export class AllowanceControllers {
 
   @Get('/:allowanceId')
   async findOne(
-    @Param('allowanceId') allowanceId: string,
+    @Param('allowanceId', ParseIntPipe) allowanceId: number,
   ): Promise<ResponseData<Allowance>> {
     try {
       return new ResponseData<Allowance>(
@@ -77,7 +78,7 @@ export class AllowanceControllers {
 
   @Put('/:allowanceId')
   async update(
-    @Param('allowanceId') allowanceId: string,
+    @Param('allowanceId', ParseIntPipe) allowanceId: number,
     @Body() allowanceDto: AllowanceDto,
   ): Promise<ResponseData<Allowance>> {
     try {
@@ -98,7 +99,7 @@ export class AllowanceControllers {
 
   @Delete('/:allowanceId')
   async delete(
-    @Param('allowanceId') allowanceId: string,
+    @Param('allowanceId', ParseIntPipe) allowanceId: number,
   ): Promise<ResponseData<boolean>> {
     try {
       return new ResponseData<boolean>(

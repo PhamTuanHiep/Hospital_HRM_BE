@@ -8,8 +8,10 @@ export class InsuranceDto {
   insuranceName?: string;
 
   @IsNotEmpty()
-  monthlyPrice?: number;
+  insuranceType?: string;
 
   @IsNotEmpty()
-  price?: number;
+  monthlyPercentage?: number;
+
+  note?: string;
 }

@@ -1,13 +1,22 @@
 export class Insurance {
   insuranceId?: string;
   insuranceName?: string;
-  monthlyPrice?: number;
-  price?: number;
+  insuranceType?: string;
+  monthlyPercentage?: number;
+  note?: string;
 
-  constructor({ insuranceId, insuranceName, monthlyPrice, price }) {
+  constructor({
+    insuranceId,
+    insuranceName,
+    insuranceType,
+    monthlyPercentage,
+    note,
+  }) {
     if (insuranceId !== null) this.insuranceId = insuranceId;
     if (insuranceName !== null) this.insuranceName = insuranceName;
-    if (monthlyPrice !== null) this.monthlyPrice = monthlyPrice;
-    if (price !== null) this.price = price;
+    if (insuranceType !== null) this.insuranceType = insuranceType;
+
+    if (monthlyPercentage !== null) this.monthlyPercentage = monthlyPercentage;
+    if (note !== null) this.note = note;
   }
 }
