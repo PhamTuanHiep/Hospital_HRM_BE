@@ -16,25 +16,14 @@ export class RoleService {
     return await this.roleRepository.find();
   }
 
-  // async getRoleById(roleId: string): Promise<Role> {
-  //   const role = await this.roleRepository.findOne({ where: { roleId } });
-  //   if (!role) {
-  //     throw new NotFoundException();
-  //   }
-
-  //   return role;
-  // }
-
   async findOne(roleId: string): Promise<Role | null> {
     return await this.roleRepository.findOne({ where: { roleId } });
   }
 
   async createRole(roleDto: RoleDto) {
     const role = this.roleRepository.create(roleDto);
-    console.log('role:', role);
     //save entity
     let res = await this.roleRepository.save(role);
-    console.log('res:', res);
 
     return res;
   }

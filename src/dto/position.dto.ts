@@ -9,5 +9,7 @@ export class PositionDto {
 
   salaryCoefficient?: number;
 
+  jobDescription?: string[];
+
   leaveId?: string;
 }

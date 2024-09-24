@@ -22,6 +22,10 @@ import { InsuranceModule } from './modules/insurances/insurance.module';
 import { InsuranceEntity } from './entities/insurance.entity';
 import { EvaluateModule } from './modules/evaluates/evaluate.module';
 import { EvaluateEntity } from './entities/evaluate.entity';
+import { OvertimeModule } from './modules/overtimes/overtime.module';
+import { OvertimeEntity } from './entities/overtime.entity';
+import { OvertimeHistoryModule } from './modules/overtimeHistories/overtimehistory.module';
+import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
 
 // @Module({
 //   imports: [
@@ -60,6 +64,8 @@ import { EvaluateEntity } from './entities/evaluate.entity';
         LeaveEntity,
         InsuranceEntity,
         EvaluateEntity,
+        OvertimeEntity,
+        OvertimeHistoryEntity,
       ],
       synchronize: true,
     }),
@@ -72,6 +78,8 @@ import { EvaluateEntity } from './entities/evaluate.entity';
     LeaveModule,
     InsuranceModule,
     EvaluateModule,
+    OvertimeModule,
+    OvertimeHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

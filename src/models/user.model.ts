@@ -15,6 +15,7 @@ export class User {
   motherFullName?: string;
   motherBirthday?: string;
   departmentId?: string;
+  weeklySchedule?: number[];
   insuranceIds?: string[];
   allowances?: string[];
   allowanceIds?: number[];
@@ -41,6 +42,7 @@ export class User {
     motherFullName,
     motherBirthday,
     departmentId,
+    weeklySchedule,
     insuranceIds,
     allowanceIds,
     evaluateId,
@@ -65,6 +67,7 @@ export class User {
     if (motherFullName !== null) this.motherFullName = motherFullName;
     if (motherBirthday !== null) this.motherBirthday = motherBirthday;
     if (departmentId !== null) this.departmentId = departmentId;
+    if (weeklySchedule !== null) this.weeklySchedule = weeklySchedule;
     if (insuranceIds !== null) this.insuranceIds = insuranceIds;
     if (allowanceIds !== null) this.allowanceIds = allowanceIds;
     if (evaluateId !== null) this.evaluateId = evaluateId;

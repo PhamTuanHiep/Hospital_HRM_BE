@@ -94,6 +94,13 @@ export class UserEntity extends BaseEntity {
   departmentId: string;
 
   @Column({
+    type: 'json',
+    name: 'weekly_schedule',
+    default: () => `JSON_ARRAY(2, 3, 4,5, 6)`,
+  })
+  weeklySchedule: number[];
+
+  @Column({
     type: 'simple-array',
     name: 'insurance_ids',
     default: '',

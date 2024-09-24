@@ -14,7 +14,6 @@ import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
 import { RoleService } from './role.service';
 import { Role } from 'src/models/role.model';
 import { RoleDto } from 'src/dto/role.dto';
-import { isString } from 'class-validator';
 
 @Controller('roles')
 export class RoleControllers {
