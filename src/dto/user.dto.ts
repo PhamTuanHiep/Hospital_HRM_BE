@@ -49,7 +49,9 @@ export class UserDto {
   @IsNumber()
   evaluateId?: number;
 
-  description?: string;
+  jobDescription?: string[];
+
+  otherDescription?: string;
 
   createdAt?: Date;
 

@@ -16,13 +16,6 @@ export class PositionEntity extends BaseEntity {
   })
   salaryCoefficient: number;
 
-  @Column({
-    type: 'json',
-    name: 'job_description',
-    default: () => `JSON_ARRAY('Làm việc cả tuần')`,
-  })
-  jobDescription: string[];
-
   @Column({ type: 'varchar', length: 250, name: 'leave_id', default: '2' })
   leaveId: string;
 }

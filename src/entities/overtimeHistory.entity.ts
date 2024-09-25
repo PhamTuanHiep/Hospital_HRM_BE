@@ -14,7 +14,7 @@ export class OvertimeHistoryEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'department_id' })
   departmentId: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'days', default: '' })
+  @Column({ type: 'date', name: 'days' })
   days: string;
 
   @Column({ type: 'varchar', length: 250, name: 'note', default: '' })

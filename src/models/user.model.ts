@@ -20,7 +20,8 @@ export class User {
   allowances?: string[];
   allowanceIds?: number[];
   evaluateId?: number;
-  description?: string;
+  jobDescription?: string[];
+  otherDescription?: string;
   createdAt?: Date;
   updatedAt?: Date;
   status?: string;
@@ -46,7 +47,8 @@ export class User {
     insuranceIds,
     allowanceIds,
     evaluateId,
-    description,
+    jobDescription,
+    otherDescription,
     createdAt,
     updatedAt,
     status,
@@ -71,7 +73,8 @@ export class User {
     if (insuranceIds !== null) this.insuranceIds = insuranceIds;
     if (allowanceIds !== null) this.allowanceIds = allowanceIds;
     if (evaluateId !== null) this.evaluateId = evaluateId;
-    if (description !== null) this.description = description;
+    if (jobDescription !== null) this.jobDescription = jobDescription;
+    if (otherDescription !== null) this.otherDescription = otherDescription;
     if (createdAt !== null) this.createdAt = createdAt;
     if (updatedAt !== null) this.updatedAt = updatedAt;
     if (status !== null) this.status = status;

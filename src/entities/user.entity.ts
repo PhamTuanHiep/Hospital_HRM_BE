@@ -117,8 +117,20 @@ export class UserEntity extends BaseEntity {
   @Column({ name: 'evaluate_id', default: 1 })
   evaluateId: number;
 
-  @Column({ type: 'varchar', length: 1000, name: 'description', default: '-' })
-  description: string;
+  @Column({
+    type: 'json',
+    name: 'job_description',
+    default: () => `JSON_ARRAY('Làm việc cả tuần')`,
+  })
+  jobDescription: string[];
+
+  @Column({
+    type: 'varchar',
+    length: 1000,
+    name: 'other_description',
+    default: '-',
+  })
+  otherDescription: string;
 
   @CreateDateColumn({
     type: 'timestamp',
