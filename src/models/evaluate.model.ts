@@ -12,6 +12,10 @@ export class Evaluate {
   workAttitude?: number;
   workSpirit?: number;
   workResult?: number;
+  averageScore?: number;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 
   constructor({
     evaluateId,
@@ -27,6 +31,9 @@ export class Evaluate {
     workAttitude,
     workSpirit,
     workResult,
+    averageScore,
+    createdAt,
+    updatedAt,
   }) {
     if (evaluateId !== null) this.evaluateId = evaluateId;
     if (userId !== null) this.userId = userId;
@@ -44,5 +51,8 @@ export class Evaluate {
     if (workAttitude !== null) this.workAttitude = workAttitude;
     if (workSpirit !== null) this.workSpirit = workSpirit;
     if (workResult !== null) this.workResult = workResult;
+    if (averageScore !== null) this.averageScore = averageScore;
+    if (createdAt !== null) this.createdAt = createdAt;
+    if (updatedAt !== null) this.updatedAt = updatedAt;
   }
 }

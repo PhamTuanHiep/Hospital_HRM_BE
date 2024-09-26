@@ -1,45 +1,97 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  BeforeInsert,
+  BeforeUpdate,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('evaluates') //table name
 export class EvaluateEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'evaluate_id' }) //auto fill, increase, primary key
   evaluateId: number;
 
-  @Column({ name: 'full_name' })
+  @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'work_load' })
+  @Column({ type: 'int', name: 'work_load' })
   workLoad: number;
 
-  @Column({ name: 'quanlity_of_work' })
+  @Column({ type: 'int', name: 'quanlity_of_work' })
   quanlityOfWork: number;
 
-  @Column({ name: 'capacity_of_work' })
+  @Column({ type: 'int', name: 'capacity_of_work' })
   capacityOfWork: number;
 
-  @Column({ name: 'quantity_of_scientific_works' })
+  @Column({ type: 'int', name: 'quantity_of_scientific_works' })
   quantityOfScientificWorks: number;
 
-  @Column({ name: 'work_initiatives' })
+  @Column({ type: 'int', name: 'work_initiatives' })
   workInitiatives: number;
 
-  @Column({ name: 'professional_ethics' })
+  @Column({ type: 'int', name: 'professional_ethics' })
   professionalEthics: number;
 
-  @Column({ name: 'working_style' })
+  @Column({ type: 'int', name: 'working_style' })
   workingStyle: number;
 
   @Column({
+    type: 'int',
     name: 'responsibility_for_work',
   })
   responsibilityForWork: number;
 
-  @Column({ name: 'work_attitude' })
+  @Column({ type: 'int', name: 'work_attitude' })
   workAttitude: number;
 
-  @Column({ name: 'work_spirit' })
+  @Column({ type: 'int', name: 'work_spirit' })
   workSpirit: number;
 
-  @Column({ name: 'work_result' })
+  @Column({ type: 'int', name: 'work_result' })
   workResult: number;
+
+  @Column({
+    type: 'decimal',
+    name: 'average_score',
+    precision: 2,
+    scale: 1,
+    nullable: true,
+  })
+  averageScore: number;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
+
+  // Tính toán giá trị trung bình trước khi insert
+  @BeforeInsert()
+  @BeforeUpdate()
+  calculateAverage() {
+    let sum =
+      this.workLoad +
+      this.quanlityOfWork +
+      this.capacityOfWork +
+      this.workInitiatives +
+      this.workingStyle +
+      this.responsibilityForWork +
+      this.workAttitude +
+      this.workSpirit +
+      this.workResult;
+    let count = 9;
+    this.averageScore = sum / count;
+  }
 }

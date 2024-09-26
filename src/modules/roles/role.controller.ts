@@ -67,16 +67,25 @@ export class RoleControllers {
   async createRole(
     @Body(new ValidationPipe()) roleDto: RoleDto,
   ): Promise<ResponseData<RoleDto>> {
+    let errCode: number;
+    let errMessage: string;
     try {
-      let data = await this.roleService.createRole(roleDto);
-      console.log('data:', data);
+      let role = await this.roleService.createRole(roleDto);
+      if (!role) {
+        (errCode = HttpStatus.NOT_FOUND), (errMessage = HttpMessage.NOT_FOUND);
+      }
+      console.log('role:', role);
       return new ResponseData<Role>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
+        role,
+        errCode || HttpStatus.SUCCESS,
+        errMessage || HttpMessage.SUCCESS,
       );
     } catch (e) {
-      return new ResponseData<Role>(null, HttpStatus.ERROR, HttpMessage.ERROR);
+      return new ResponseData<Role>(
+        null,
+        HttpStatus.ERROR_SERVER,
+        HttpMessage.ERROR_SERVER,
+      );
     }
   }
 

@@ -24,10 +24,8 @@ export class EvaluateService {
 
   async create(evaluateDto: EvaluateDto) {
     const evaluate = this.evaluateRepository.create(evaluateDto);
-    console.log('evaluate:', evaluate);
     //save entity
     let res = await this.evaluateRepository.save(evaluate);
-    console.log('res:', res);
 
     return res;
   }

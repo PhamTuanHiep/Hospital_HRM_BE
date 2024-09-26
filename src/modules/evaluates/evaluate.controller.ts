@@ -38,7 +38,7 @@ export class EvaluateControllers {
 
   @Get('/:evaluateId')
   async findOne(
-    @Param('evaluateId') evaluateId: number,
+    @Param('evaluateId', ParseIntPipe) evaluateId: number,
   ): Promise<ResponseData<Evaluate>> {
     try {
       return new ResponseData<Evaluate>(
@@ -55,23 +55,49 @@ export class EvaluateControllers {
     }
   }
 
+  // @Post()
+  // async create(
+  //   @Body(new ValidationPipe()) evaluateDto: EvaluateDto,
+  // ): Promise<ResponseData<EvaluateDto>> {
+  //   try {
+  //     let data = await this.evaluateService.create(evaluateDto);
+  //     console.log('data:', data);
+  //     return new ResponseData<Evaluate>(
+  //       data,
+  //       HttpStatus.SUCCESS,
+  //       HttpMessage.SUCCESS,
+  //     );
+  //   } catch (e) {
+  //     return new ResponseData<Evaluate>(
+  //       null,
+  //       HttpStatus.ERROR,
+  //       HttpMessage.ERROR,
+  //     );
+  //   }
+  // }
+
   @Post()
-  async create(
+  async createRole(
     @Body(new ValidationPipe()) evaluateDto: EvaluateDto,
   ): Promise<ResponseData<EvaluateDto>> {
+    let errCode: number;
+    let errMessage: string;
     try {
-      let data = await this.evaluateService.create(evaluateDto);
-      console.log('data:', data);
+      let evaluate = await this.evaluateService.create(evaluateDto);
+      if (!evaluate) {
+        (errCode = HttpStatus.NOT_FOUND), (errMessage = HttpMessage.NOT_FOUND);
+      }
+      console.log('evaluate:', evaluate);
       return new ResponseData<Evaluate>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
+        evaluate,
+        errCode || HttpStatus.SUCCESS,
+        errMessage || HttpMessage.SUCCESS,
       );
     } catch (e) {
       return new ResponseData<Evaluate>(
         null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
+        HttpStatus.ERROR_SERVER,
+        HttpMessage.ERROR_SERVER,
       );
     }
   }
