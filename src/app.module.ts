@@ -28,6 +28,10 @@ import { OvertimeHistoryModule } from './modules/overtimeHistories/overtimehisto
 import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
 import { DescriptionEvaluateModule } from './modules/descriptionOfEvalute/descriptionOfEvaluate.module';
 import { DescriptionEvaluateEntity } from './entities/descriptionOfEvaluate.entity';
+import { MedicalTrainingResultsEntity } from './entities/medicalTrainingResults.entity';
+import { NursingTrainingResultsEntity } from './entities/nursingTrainingResults.entity';
+import { MedicalTrainingResultsModule } from './modules/medicalTrainingResults/medicalTrainingResults.module';
+import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/nursingTrainingResults.module';
 
 // @Module({
 //   imports: [
@@ -69,6 +73,8 @@ import { DescriptionEvaluateEntity } from './entities/descriptionOfEvaluate.enti
         OvertimeEntity,
         OvertimeHistoryEntity,
         DescriptionEvaluateEntity,
+        MedicalTrainingResultsEntity,
+        NursingTrainingResultsEntity,
       ],
       synchronize: true,
     }),
@@ -84,6 +90,8 @@ import { DescriptionEvaluateEntity } from './entities/descriptionOfEvaluate.enti
     OvertimeModule,
     OvertimeHistoryModule,
     DescriptionEvaluateModule,
+    MedicalTrainingResultsModule,
+    NursingTrainingResultsModule,
   ],
   controllers: [AppController],
   providers: [AppService],
