@@ -2,9 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { EvaluateDto } from 'src/dto/evaluate.dto';
 import { EvaluateEntity } from 'src/entities/evaluate.entity';
-
 import { Evaluate } from 'src/models/evaluate.model';
-
 import { Repository } from 'typeorm';
 
 @Injectable()
@@ -13,7 +11,6 @@ export class EvaluateService {
     @InjectRepository(EvaluateEntity)
     private evaluateRepository: Repository<EvaluateEntity>,
   ) {}
-
   async findAll() {
     return await this.evaluateRepository.find();
   }

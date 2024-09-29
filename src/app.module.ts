@@ -26,6 +26,8 @@ import { OvertimeModule } from './modules/overtimes/overtime.module';
 import { OvertimeEntity } from './entities/overtime.entity';
 import { OvertimeHistoryModule } from './modules/overtimeHistories/overtimehistory.module';
 import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
+import { DescriptionEvaluateModule } from './modules/descriptionOfEvalute/descriptionOfEvaluate.module';
+import { DescriptionEvaluateEntity } from './entities/descriptionOfEvaluate.entity';
 
 // @Module({
 //   imports: [
@@ -66,6 +68,7 @@ import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
         EvaluateEntity,
         OvertimeEntity,
         OvertimeHistoryEntity,
+        DescriptionEvaluateEntity,
       ],
       synchronize: true,
     }),
@@ -80,6 +83,7 @@ import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
     EvaluateModule,
     OvertimeModule,
     OvertimeHistoryModule,
+    DescriptionEvaluateModule,
   ],
   controllers: [AppController],
   providers: [AppService],
