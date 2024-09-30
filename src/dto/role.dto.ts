@@ -6,4 +6,12 @@ export class RoleDto {
 
   @IsNotEmpty()
   roleName?: string;
+
+  createdById?: number;
+
+  updatedById?: number;
+
+  createdAt?: Date;
+
+  updatedAt?: Date;
 }

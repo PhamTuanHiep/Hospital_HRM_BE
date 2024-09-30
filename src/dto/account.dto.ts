@@ -15,4 +15,12 @@ export class AccountDto {
 
   @IsNotEmpty()
   userId?: number;
+
+  createdById?: number;
+
+  updatedById?: number;
+
+  createdAt?: Date;
+
+  updatedAt?: Date;
 }

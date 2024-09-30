@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  CreateDateColumn,
+  Entity,
+  PrimaryGeneratedColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity('accounts')
 export class AccountEntity extends BaseEntity {
@@ -16,4 +23,25 @@ export class AccountEntity extends BaseEntity {
 
   @Column({ name: 'user_id' })
   userId: number;
+
+  @Column({ name: 'created_by_id', default: 0 })
+  createdById: number;
+
+  @Column({ name: 'updated_by_id', default: 0 })
+  updatedById: number;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
 }

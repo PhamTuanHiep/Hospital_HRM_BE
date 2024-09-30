@@ -132,6 +132,12 @@ export class UserEntity extends BaseEntity {
   })
   otherDescription: string;
 
+  @Column({ name: 'created_by_id', default: 0 })
+  createdById: number;
+
+  @Column({ name: 'updated_by_id', default: 0 })
+  updatedById: number;
+
   @CreateDateColumn({
     type: 'timestamp',
     name: 'created_at',

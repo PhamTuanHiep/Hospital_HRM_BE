@@ -10,4 +10,12 @@ export class PositionDto {
   salaryCoefficient?: number;
 
   leaveId?: string;
+
+  createdById?: number;
+
+  updatedById?: number;
+
+  createdAt?: Date;
+
+  updatedAt?: Date;
 }

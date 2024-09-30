@@ -22,6 +22,8 @@ export class User {
   evaluateId?: number;
   jobDescription?: string[];
   otherDescription?: string;
+  createdById?: number;
+  updatedById?: number;
   createdAt?: Date;
   updatedAt?: Date;
   status?: string;
@@ -49,6 +51,8 @@ export class User {
     evaluateId,
     jobDescription,
     otherDescription,
+    createdById,
+    updatedById,
     createdAt,
     updatedAt,
     status,
@@ -75,6 +79,8 @@ export class User {
     if (evaluateId !== null) this.evaluateId = evaluateId;
     if (jobDescription !== null) this.jobDescription = jobDescription;
     if (otherDescription !== null) this.otherDescription = otherDescription;
+    if (createdById !== null) this.createdById = createdById;
+    if (updatedById !== null) this.updatedById = updatedById;
     if (createdAt !== null) this.createdAt = createdAt;
     if (updatedAt !== null) this.updatedAt = updatedAt;
     if (status !== null) this.status = status;
