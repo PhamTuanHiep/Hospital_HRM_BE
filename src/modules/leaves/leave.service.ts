@@ -20,7 +20,7 @@ export class LeaveService {
     return await this.leaveRepository.findOne({ where: { leaveId } });
   }
 
-  async createRole(leaveDto: LeaveDto) {
+  async create(leaveDto: LeaveDto) {
     const leave = this.leaveRepository.create(leaveDto);
     console.log('leave:', leave);
     //save entity

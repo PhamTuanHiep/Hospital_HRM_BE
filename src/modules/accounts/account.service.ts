@@ -20,7 +20,7 @@ export class AccountService {
     return await this.accountRepository.findOne({ where: { accountId } });
   }
 
-  async createUser(accountDto: AccountDto) {
+  async create(accountDto: AccountDto) {
     const account = this.accountRepository.create(accountDto);
     console.log('accountDto:', accountDto);
     console.log('account:', account);

@@ -20,7 +20,7 @@ export class RoleService {
     return await this.roleRepository.findOne({ where: { roleId } });
   }
 
-  async createRole(roleDto: RoleDto) {
+  async create(roleDto: RoleDto) {
     const role = this.roleRepository.create(roleDto);
     //save entity
     let res = await this.roleRepository.save(role);

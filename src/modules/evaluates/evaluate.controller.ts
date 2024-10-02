@@ -77,7 +77,7 @@ export class EvaluateControllers {
   // }
 
   @Post()
-  async createRole(
+  async create(
     @Body(new ValidationPipe()) evaluateDto: EvaluateDto,
   ): Promise<ResponseData<Evaluate>> {
     let errCode: number;

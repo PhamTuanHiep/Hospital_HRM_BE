@@ -20,7 +20,7 @@ export class UserService {
     return await this.userRepository.findOne({ where: { userId } });
   }
 
-  async createUser(userDto: UserDto) {
+  async create(userDto: UserDto) {
     // const newUser = {
     //   ...userDto,
     //   insuranceIds: userDto.insuranceIds ? userDto.insuranceIds : ['SI'],

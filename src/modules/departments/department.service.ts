@@ -20,7 +20,7 @@ export class DepartmentService {
     return await this.departmentRepository.findOne({ where: { departmentId } });
   }
 
-  async createRole(departmentDto: DepartmentDto) {
+  async create(departmentDto: DepartmentDto) {
     const department = this.departmentRepository.create(departmentDto);
     console.log('department:', department);
     //save entity

@@ -52,11 +52,11 @@ export class UserControllers {
   }
 
   @Post()
-  async createUser(
+  async create(
     @Body(new ValidationPipe()) userDto: UserDto,
   ): Promise<ResponseData<UserDto>> {
     try {
-      let data = await this.userService.createUser(userDto);
+      let data = await this.userService.create(userDto);
       console.log('data:', data);
       return new ResponseData<User>(
         data,

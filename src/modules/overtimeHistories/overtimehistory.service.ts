@@ -21,7 +21,7 @@ export class OvertimeHistoryService {
     });
   }
 
-  async createUser(overtimeHistoryDto: OvertimeHistoryDto) {
+  async create(overtimeHistoryDto: OvertimeHistoryDto) {
     const overtimeHistory =
       this.overtimeHistoryRepository.create(overtimeHistoryDto);
     //save entity

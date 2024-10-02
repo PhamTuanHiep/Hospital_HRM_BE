@@ -56,11 +56,11 @@ export class AllowanceControllers {
   }
 
   @Post()
-  async createRole(
+  async create(
     @Body(new ValidationPipe()) allowanceDto: AllowanceDto,
   ): Promise<ResponseData<AllowanceDto>> {
     try {
-      let data = await this.allowanceService.createRole(allowanceDto);
+      let data = await this.allowanceService.create(allowanceDto);
       console.log('data:', data);
       return new ResponseData<Allowance>(
         data,

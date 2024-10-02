@@ -56,12 +56,11 @@ export class OvertimeHistoryControllers {
   }
 
   @Post()
-  async createUser(
+  async create(
     @Body(new ValidationPipe()) overtimeHistoryDto: OvertimeHistoryDto,
   ): Promise<ResponseData<OvertimeHistory>> {
     try {
-      let data =
-        await this.overtimeHistoryService.createUser(overtimeHistoryDto);
+      let data = await this.overtimeHistoryService.create(overtimeHistoryDto);
       return new ResponseData<OvertimeHistory>(
         data,
         HttpStatus.SUCCESS,

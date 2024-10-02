@@ -55,11 +55,11 @@ export class InsuranceControllers {
   }
 
   @Post()
-  async createRole(
+  async create(
     @Body(new ValidationPipe()) insuranceDto: InsuranceDto,
   ): Promise<ResponseData<InsuranceDto>> {
     try {
-      let data = await this.insuranceService.createRole(insuranceDto);
+      let data = await this.insuranceService.create(insuranceDto);
       console.log('data:', data);
       return new ResponseData<Insurance>(
         data,

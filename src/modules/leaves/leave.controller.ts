@@ -51,11 +51,11 @@ export class LeaveControllers {
   }
 
   @Post()
-  async createRole(
+  async create(
     @Body(new ValidationPipe()) leaveDto: LeaveDto,
   ): Promise<ResponseData<LeaveDto>> {
     try {
-      let data = await this.leaveService.createRole(leaveDto);
+      let data = await this.leaveService.create(leaveDto);
       console.log('data:', data);
       return new ResponseData<Leave>(
         data,

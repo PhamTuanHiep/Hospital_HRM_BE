@@ -55,11 +55,11 @@ export class DepartmentControllers {
   }
 
   @Post()
-  async createRole(
+  async create(
     @Body(new ValidationPipe()) departmentDto: DepartmentDto,
   ): Promise<ResponseData<DepartmentDto>> {
     try {
-      let data = await this.departmentService.createRole(departmentDto);
+      let data = await this.departmentService.create(departmentDto);
       console.log('data:', data);
       return new ResponseData<Department>(
         data,

@@ -60,7 +60,7 @@ export class AccountControllers {
     @Body(new ValidationPipe()) accountDto: AccountDto,
   ): Promise<ResponseData<AccountDto>> {
     try {
-      let data = await this.accountService.createUser(accountDto);
+      let data = await this.accountService.create(accountDto);
       console.log('data:', data);
       return new ResponseData<Account>(
         data,

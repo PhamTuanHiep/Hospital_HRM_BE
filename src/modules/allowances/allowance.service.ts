@@ -24,7 +24,7 @@ export class AllowanceService {
     });
   }
 
-  async createRole(allowanceDto: AllowanceDto) {
+  async create(allowanceDto: AllowanceDto) {
     const allowance = this.allowanceRepository.create(allowanceDto);
     console.log('allowance:', allowance);
     //save entity

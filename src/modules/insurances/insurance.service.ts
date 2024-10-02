@@ -20,7 +20,7 @@ export class InsuranceService {
     return await this.insuranceRepository.findOne({ where: { insuranceId } });
   }
 
-  async createRole(insuranceDto: InsuranceDto) {
+  async create(insuranceDto: InsuranceDto) {
     const insurance = this.insuranceRepository.create(insuranceDto);
     console.log('insurance:', insurance);
     //save entity

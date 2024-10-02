@@ -64,13 +64,13 @@ export class RoleControllers {
   }
 
   @Post()
-  async createRole(
+  async create(
     @Body(new ValidationPipe()) roleDto: RoleDto,
   ): Promise<ResponseData<RoleDto>> {
     let errCode: number;
     let errMessage: string;
     try {
-      let role = await this.roleService.createRole(roleDto);
+      let role = await this.roleService.create(roleDto);
       if (!role) {
         (errCode = HttpStatus.NOT_FOUND), (errMessage = HttpMessage.NOT_FOUND);
       }
