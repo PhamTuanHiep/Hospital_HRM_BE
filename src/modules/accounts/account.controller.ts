@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -7,6 +8,10 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
+  Req,
+  UploadedFile,
+  UseInterceptors,
   ValidationPipe,
 } from '@nestjs/common';
 import { ResponseData } from 'src/global/globalClass';
@@ -14,105 +19,95 @@ import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
 import { AccountService } from './account.service';
 import { Account } from 'src/models/account.model';
 import { AccountDto } from 'src/dto/account.dto';
+import { FilterDto } from 'src/dto/common.filter.dto';
+import { AccountEntity } from 'src/entities/account.entity';
+import { FileInterceptor } from '@nestjs/platform-express';
+import { ImageService } from '../image/image.service';
+import { fileFilterInterceptor } from 'src/common/common.use.helper';
 
 @Controller('accounts')
 export class AccountControllers {
-  constructor(private accountService: AccountService) {}
+  constructor(
+    private accountService: AccountService,
+    private imageService: ImageService,
+  ) {}
 
   @Get()
-  async findAll(): Promise<ResponseData<Account[]>> {
-    try {
-      return new ResponseData<Account[]>(
-        await this.accountService.findAll(),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Account[]>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findAll(@Query() query: FilterDto): Promise<any> {
+    return this.accountService.findAll(query);
   }
 
   @Get('/:accountId')
-  async findOne(
-    @Param('accountId', ParseIntPipe) accountId: number,
-  ): Promise<ResponseData<Account>> {
-    try {
-      return new ResponseData<Account>(
-        await this.accountService.findOne(accountId),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Account>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findOne(@Param('accountId') accountId: string): Promise<AccountEntity> {
+    return this.accountService.findOne(Number(accountId));
   }
 
   @Post()
-  async createUser(
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      fileFilter: fileFilterInterceptor,
+    }),
+  )
+  async create(
+    @Req() req: any,
     @Body(new ValidationPipe()) accountDto: AccountDto,
-  ): Promise<ResponseData<AccountDto>> {
-    try {
-      let data = await this.accountService.create(accountDto);
-      console.log('data:', data);
-      return new ResponseData<Account>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Account>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
+    @UploadedFile() file: Express.Multer.File,
+  ) {
+    if (req.fileValidationError) {
+      throw new BadRequestException(req.fileValidationError);
     }
+
+    if (!file) {
+      throw new BadRequestException('File is required');
+    }
+    const imageUrl = await this.imageService.uploadImage(file);
+    const userId = accountDto.userId ?? 0;
+    const roleId = accountDto.roleId ?? 'user';
+    const createdById = accountDto.createdById ?? 0;
+    const updatedById = accountDto.updatedById ?? 0;
+    console.log('-userId:', userId);
+    console.log('-roleId:', roleId);
+    console.log('-createdById:', createdById);
+    console.log('-updatedById:', updatedById);
+
+    return this.accountService.create(
+      userId,
+      roleId,
+      createdById,
+      updatedById,
+      {
+        ...accountDto,
+        avatar: imageUrl,
+      },
+    );
   }
 
   @Put('/:accountId')
+  @UseInterceptors(
+    FileInterceptor('avatar', {
+      fileFilter: fileFilterInterceptor,
+    }),
+  )
   async update(
+    @Req() req: any,
+    @UploadedFile() file: Express.Multer.File,
     @Param('accountId', ParseIntPipe) accountId: number,
     @Body() accountDto: AccountDto,
-  ): Promise<ResponseData<Account>> {
-    try {
-      let data = await this.accountService.update(accountId, accountDto);
-      return new ResponseData<Account>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Account>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
+  ): Promise<any> {
+    if (req.fileValidationError) {
+      throw new BadRequestException(req.fileValidationError);
     }
+    if (file) {
+      const imageUrl = await this.imageService.uploadImage(file);
+      accountDto.avatar = imageUrl;
+    }
+    return this.accountService.update(accountId, accountDto);
   }
 
   @Delete('/:accountId')
   async delete(
     @Param('accountId', ParseIntPipe) accountId: number,
-  ): Promise<ResponseData<boolean>> {
-    try {
-      return new ResponseData<boolean>(
-        (await this.accountService.delete(accountId)) ? true : false,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<boolean>(
-        false,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.accountService.delete(accountId);
   }
 }

@@ -32,6 +32,7 @@ import { MedicalTrainingResultsEntity } from './entities/medicalTrainingResults.
 import { NursingTrainingResultsEntity } from './entities/nursingTrainingResults.entity';
 import { MedicalTrainingResultsModule } from './modules/medicalTrainingResults/medicalTrainingResults.module';
 import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/nursingTrainingResults.module';
+import { ImageModule } from './modules/image/image.module';
 
 // @Module({
 //   imports: [
@@ -75,6 +76,7 @@ import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/n
         DescriptionEvaluateEntity,
         MedicalTrainingResultsEntity,
         NursingTrainingResultsEntity,
+        ImageModule,
       ],
       synchronize: true,
     }),

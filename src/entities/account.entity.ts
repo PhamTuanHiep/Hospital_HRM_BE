@@ -1,34 +1,57 @@
+import { Role } from 'src/models/role.model';
+import { User } from 'src/models/user.model';
 import {
   BaseEntity,
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
+  OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { RoleEntity } from './role.entity';
+import { UserEntity } from './user.entity';
 
 @Entity('accounts')
 export class AccountEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'account_id' })
   accountId: number;
 
-  @Column({ type: 'varchar', length: 250, name: 'email' })
+  @Column({ type: 'varchar', length: 30, name: 'email' })
   email: string;
 
-  @Column({ type: 'varchar', length: 1000, name: 'password' })
+  @Column({ type: 'varchar', length: 250, name: 'password' })
   password: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'role_id', default: 'user' })
-  roleId: string;
+  @Column({
+    type: 'varchar',
+    length: 100,
+    name: 'avatar',
+    nullable: true,
+    default: null,
+  })
+  avatar: string;
 
-  @Column({ name: 'user_id' })
-  userId: number;
+  @OneToOne(() => UserEntity, (user) => user.account)
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 
-  @Column({ name: 'created_by_id', default: 0 })
-  createdById: number;
+  @ManyToOne(() => RoleEntity, (role) => role.accounts)
+  @JoinColumn({ name: 'role_id' })
+  @Column({ type: 'varchar', length: 7 })
+  role: RoleEntity;
 
-  @Column({ name: 'updated_by_id', default: 0 })
-  updatedById: number;
+  @ManyToOne(() => UserEntity, (user) => user.createdAccounts, {
+    nullable: true,
+  })
+  createdBy: UserEntity;
+
+  @ManyToOne(() => UserEntity, (user) => user.updatedAccounts, {
+    nullable: true,
+  })
+  updatedBy: UserEntity;
 
   @CreateDateColumn({
     type: 'timestamp',

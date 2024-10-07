@@ -1,5 +1,6 @@
 # compiled output
 /dist
+/firebase-json
 /node_modules
 /build
 

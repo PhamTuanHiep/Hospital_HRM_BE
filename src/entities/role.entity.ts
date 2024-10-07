@@ -3,9 +3,11 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { AccountEntity } from './account.entity';
 
 @Entity('roles')
 export class RoleEntity extends BaseEntity {
@@ -35,4 +37,7 @@ export class RoleEntity extends BaseEntity {
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date;
+
+  @OneToMany(() => AccountEntity, (account) => account.role)
+  accounts: AccountEntity[];
 }
