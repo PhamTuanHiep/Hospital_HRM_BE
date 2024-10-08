@@ -78,7 +78,6 @@ export const fileFilterInterceptor = (
 ) => {
   //lấy ra phần  phần mở rộng của tệp
   const ext = extname(file.originalname);
-  console.log('ext:', ext);
 
   const allowedExtArr = ['.jpg', '.png', '.jpeg'];
   if (!allowedExtArr.includes(ext)) {

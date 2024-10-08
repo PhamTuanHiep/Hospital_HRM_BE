@@ -6,6 +6,7 @@ import {
   Param,
   Post,
   Put,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { ResponseData } from 'src/global/globalClass';
@@ -13,6 +14,7 @@ import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
 import { DepartmentService } from './department.service';
 import { Department } from 'src/models/department.model';
 import { DepartmentDto } from 'src/dto/department.dto';
+import { FilterDto } from 'src/dto/common.filter.dto';
 
 @Controller('departments')
 export class DepartmentControllers {
@@ -34,6 +36,11 @@ export class DepartmentControllers {
       );
     }
   }
+
+  // @Get()
+  // findAll(@Query() query: FilterDto): Promise<any> {
+  //   return this.departmentService.findAll(query);
+  // }
 
   @Get('/:departmentId')
   async findOne(

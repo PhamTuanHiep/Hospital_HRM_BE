@@ -1,5 +1,8 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
+import { Relations, Select } from 'src/common/common.type';
+import { filterGetAll } from 'src/common/common.use.helper';
+import { FilterDto } from 'src/dto/common.filter.dto';
 import { DepartmentDto } from 'src/dto/department.dto';
 import { DepartmentEntity } from 'src/entities/department.entity';
 import { Department } from 'src/models/department.model';
@@ -15,6 +18,21 @@ export class DepartmentService {
   async findAll() {
     return await this.departmentRepository.find();
   }
+  // async findAll(query: FilterDto): Promise<any> {
+  //   const repository = this.departmentRepository;
+  //   const relations: Relations<string> = {
+  //     users: true,
+  //   };
+  //   const select: Select<string> = {
+  //     users: {
+  //       userId: true,
+  //       fullName: true,
+  //     },
+  //   };
+  //   // const arrSearch: string[] = ['email'];
+
+  //   return filterGetAll({ query, repository, relations, select });
+  // }
 
   async findOne(departmentId: string): Promise<Department | null> {
     return await this.departmentRepository.findOne({ where: { departmentId } });

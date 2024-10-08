@@ -3,12 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
+import { DepartmentEntity } from './department.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -46,7 +46,6 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 50, name: 'hometown', default: '' })
   hometown: string;
 
-  // @OnetoMany(() => Position, (position) => position.positionId)
   @Column({ type: 'varchar', length: 10, name: 'position_id', default: '' })
   positionId: string;
 
@@ -135,12 +134,6 @@ export class UserEntity extends BaseEntity {
   })
   otherDescription: string;
 
-  @Column({ name: 'created_by_id', default: 0 })
-  createdById: number;
-
-  @Column({ name: 'updated_by_id', default: 0 })
-  updatedById: number;
-
   @CreateDateColumn({
     type: 'timestamp',
     name: 'created_at',
@@ -159,12 +152,9 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 5, name: 'status', default: '' })
   status: string;
 
-  @OneToMany(() => AccountEntity, (account) => account.createdBy)
-  createdAccounts: AccountEntity[];
-
-  @OneToMany(() => AccountEntity, (account) => account.updatedBy)
-  updatedAccounts: AccountEntity[];
-
   @OneToOne(() => AccountEntity, (account) => account.user)
   account: AccountEntity;
+
+  // @ManyToOne(() => DepartmentEntity, (department) => department.users)
+  // department: DepartmentEntity;
 }

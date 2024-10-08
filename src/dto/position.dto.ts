@@ -11,10 +11,6 @@ export class PositionDto {
 
   leaveId?: string;
 
-  createdById?: number;
-
-  updatedById?: number;
-
   createdAt?: Date;
 
   updatedAt?: Date;

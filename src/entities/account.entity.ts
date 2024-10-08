@@ -27,31 +27,21 @@ export class AccountEntity extends BaseEntity {
 
   @Column({
     type: 'varchar',
-    length: 100,
+    length: 250,
     name: 'avatar',
     nullable: true,
     default: null,
   })
   avatar: string;
 
-  @OneToOne(() => UserEntity, (user) => user.account)
+  @OneToOne(() => UserEntity, (user) => user.account, { nullable: true })
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
-  @ManyToOne(() => RoleEntity, (role) => role.accounts)
+  @ManyToOne(() => RoleEntity, (role) => role.accounts, { nullable: true })
   @JoinColumn({ name: 'role_id' })
-  @Column({ type: 'varchar', length: 7 })
+  // @Column({ type: 'varchar', length: 7 })
   role: RoleEntity;
-
-  @ManyToOne(() => UserEntity, (user) => user.createdAccounts, {
-    nullable: true,
-  })
-  createdBy: UserEntity;
-
-  @ManyToOne(() => UserEntity, (user) => user.updatedAccounts, {
-    nullable: true,
-  })
-  updatedBy: UserEntity;
 
   @CreateDateColumn({
     type: 'timestamp',

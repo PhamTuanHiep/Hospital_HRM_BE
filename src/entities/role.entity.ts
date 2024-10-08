@@ -17,12 +17,6 @@ export class RoleEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'role_name' })
   roleName: string;
 
-  @Column({ name: 'created_by_id', default: 0 })
-  createdById: number;
-
-  @Column({ name: 'updated_by_id', default: 0 })
-  updatedById: number;
-
   @CreateDateColumn({
     type: 'timestamp',
     name: 'created_at',

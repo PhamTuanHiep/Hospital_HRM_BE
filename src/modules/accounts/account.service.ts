@@ -29,10 +29,11 @@ export class AccountService {
     const relations: Relations<string> = {
       user: true,
       role: true,
-      createdBy: true,
-      updatedBy: true,
     };
-    const select: Select<string> = {
+    const select: any = {
+      accountId: true,
+      createdAt: true,
+      updatedAt: true,
       user: {
         userId: true,
         fullName: true,
@@ -40,14 +41,6 @@ export class AccountService {
       role: {
         roleId: true,
         roleName: true,
-      },
-      createdBy: {
-        userId: true,
-        fullName: true,
-      },
-      updatedBy: {
-        userId: true,
-        fullName: true,
       },
     };
     const arrSearch: string[] = ['email'];
@@ -59,8 +52,11 @@ export class AccountService {
     // return await this.accountRepository.findOne({ where: { accountId } });
     return await this.accountRepository.findOne({
       where: { accountId },
-      relations: ['user', 'role', 'createdBy', 'updatedBy'],
+      relations: ['user', 'role'],
       select: {
+        // accountId: true,
+        // createdAt: true,
+        // updatedAt: true,
         user: {
           userId: true,
           fullName: true,
@@ -69,14 +65,6 @@ export class AccountService {
           roleId: true,
           roleName: true,
         },
-        createdBy: {
-          userId: true,
-          fullName: true,
-        },
-        updatedBy: {
-          userId: true,
-          fullName: true,
-        },
       },
     });
   }
@@ -84,35 +72,33 @@ export class AccountService {
   async create(
     userId: number,
     roleId: string,
-    createdById: number,
-    updatedById: number,
     accountDto: AccountDto,
-  ): Promise<AccountEntity> {
+  ): Promise<any> {
     const user = await this.userRepository.findOneBy({ userId });
     const role = await this.roleRepository.findOneBy({ roleId });
-    const createdBy =
-      (await this.userRepository.findOneBy({ userId: createdById })) || null;
-    const updatedBy =
-      (await this.userRepository.findOneBy({ userId: updatedById })) || null;
 
+    console.log('-accountDto:', accountDto);
     console.log('-user:', user);
+
     console.log('-role:', role);
-    console.log('-createdBy:', createdBy);
-    console.log('-updatedBy:', updatedBy);
     try {
+      console.log('---------------');
       const res = await this.accountRepository.save({
         ...accountDto,
-        user: user,
-        role: role,
-        createdBy: createdBy,
-        updatedBy: updatedBy,
+        // user: { userId: user.userId },
+        // role: { roleId: role.roleId },
+        user,
+        role,
       });
       console.log('-res:', res);
 
       return await this.accountRepository.findOne({
         where: { accountId: res.accountId },
-        relations: ['user', 'role', 'createdBy', 'updatedBy'],
+        relations: ['user', 'role'],
         select: {
+          // accountId: true,
+          // createdAt: true,
+          // updatedAt: true,
           user: {
             userId: true,
             fullName: true,
@@ -121,20 +107,14 @@ export class AccountService {
             roleId: true,
             roleName: true,
           },
-          createdBy: {
-            userId: true,
-            fullName: true,
-          },
-          updatedBy: {
-            userId: true,
-            fullName: true,
-          },
         },
       });
     } catch (error) {
+      console.log('error:', error);
       throw new HttpException('Can not create post', HttpStatus.BAD_REQUEST);
     }
   }
+  //can module lai
   private bucket = admin.storage().bucket();
   async update(
     accountId: number,

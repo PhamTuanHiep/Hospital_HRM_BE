@@ -53,10 +53,6 @@ export class UserDto {
 
   otherDescription?: string;
 
-  createdById?: number;
-
-  updatedById?: number;
-
   createdAt?: Date;
 
   updatedAt?: Date;

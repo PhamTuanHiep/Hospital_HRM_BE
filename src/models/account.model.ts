@@ -4,8 +4,6 @@ export class Account {
   password?: string;
   roleId?: string;
   userId?: number;
-  createdById?: number;
-  updatedById?: number;
   createdAt?: Date;
   updatedAt?: Date;
 
@@ -15,8 +13,6 @@ export class Account {
     password,
     roleId,
     userId,
-    createdById,
-    updatedById,
     createdAt,
     updatedAt,
   }) {
@@ -25,8 +21,6 @@ export class Account {
     if (password !== null) this.password = password;
     if (roleId !== null) this.roleId = roleId;
     if (userId !== null) this.userId = userId;
-    if (createdById !== null) this.createdById = createdById;
-    if (updatedById !== null) this.updatedById = updatedById;
     if (createdAt !== null) this.createdAt = createdAt;
     if (updatedAt !== null) this.updatedAt = updatedAt;
   }
