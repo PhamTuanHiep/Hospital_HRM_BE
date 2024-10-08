@@ -3,6 +3,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
   OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
@@ -16,6 +17,9 @@ export class DepartmentEntity extends BaseEntity {
 
   @Column({ type: 'varchar', length: 50, name: 'department_name' })
   departmentName: string;
+
+  @OneToMany(() => UserEntity, (user) => user.department, { nullable: true })
+  users: UserEntity[];
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -31,7 +35,4 @@ export class DepartmentEntity extends BaseEntity {
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date;
-
-  // @OneToMany(() => UserEntity, (user) => user.department)
-  // users: UserEntity[];
 }

@@ -3,6 +3,8 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
@@ -88,14 +90,6 @@ export class UserEntity extends BaseEntity {
   motherBirthday: string;
 
   @Column({
-    type: 'varchar',
-    length: 250,
-    name: 'department_id',
-    default: '',
-  })
-  departmentId: string;
-
-  @Column({
     type: 'json',
     name: 'weekly_schedule',
     default: () => `JSON_ARRAY(2, 3, 4,5, 6)`,
@@ -155,6 +149,9 @@ export class UserEntity extends BaseEntity {
   @OneToOne(() => AccountEntity, (account) => account.user)
   account: AccountEntity;
 
-  // @ManyToOne(() => DepartmentEntity, (department) => department.users)
-  // department: DepartmentEntity;
+  @ManyToOne(() => DepartmentEntity, (department) => department.users, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'department_id' })
+  department: DepartmentEntity;
 }

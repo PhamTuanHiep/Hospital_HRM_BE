@@ -1,4 +1,5 @@
 import { IsNotEmpty, IsNumber, Length } from 'class-validator';
+import { DepartmentEntity } from 'src/entities/department.entity';
 
 export class UserDto {
   userId?: number;
@@ -58,4 +59,6 @@ export class UserDto {
   updatedAt?: Date;
 
   status?: string;
+
+  department?: DepartmentEntity;
 }

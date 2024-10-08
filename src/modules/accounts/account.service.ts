@@ -76,21 +76,12 @@ export class AccountService {
   ): Promise<any> {
     const user = await this.userRepository.findOneBy({ userId });
     const role = await this.roleRepository.findOneBy({ roleId });
-
-    console.log('-accountDto:', accountDto);
-    console.log('-user:', user);
-
-    console.log('-role:', role);
     try {
-      console.log('---------------');
       const res = await this.accountRepository.save({
         ...accountDto,
-        // user: { userId: user.userId },
-        // role: { roleId: role.roleId },
         user,
         role,
       });
-      console.log('-res:', res);
 
       return await this.accountRepository.findOne({
         where: { accountId: res.accountId },

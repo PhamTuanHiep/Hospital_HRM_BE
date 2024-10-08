@@ -57,12 +57,10 @@ export class AccountControllers {
       throw new BadRequestException(req.fileValidationError);
     }
 
-    // if (!file) {
-    //   throw new BadRequestException('File is required');
-    // }
-    // const imageUrl = await this.imageService.uploadImage(file);
-    const imageUrl =
-      'https://firebasestorage.googleapis.com/v0/b/images-of-hhrm-system.appspot.com/o/1728297815310_dog.jpg?alt=media&token=0a6e23b4-2d85-4792-9ef0-83901325a144';
+    if (!file) {
+      throw new BadRequestException('File is required');
+    }
+    const imageUrl = await this.imageService.uploadImage(file);
     const userId = accountDto.userId;
     const roleId = accountDto.roleId ?? 'user';
     console.log('-userId:', userId);
