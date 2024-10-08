@@ -26,13 +26,13 @@ import { OvertimeModule } from './modules/overtimes/overtime.module';
 import { OvertimeEntity } from './entities/overtime.entity';
 import { OvertimeHistoryModule } from './modules/overtimeHistories/overtimehistory.module';
 import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
-import { DescriptionEvaluateModule } from './modules/descriptionOfEvalute/descriptionOfEvaluate.module';
-import { DescriptionEvaluateEntity } from './entities/descriptionOfEvaluate.entity';
 import { MedicalTrainingResultsEntity } from './entities/medicalTrainingResults.entity';
 import { NursingTrainingResultsEntity } from './entities/nursingTrainingResults.entity';
 import { MedicalTrainingResultsModule } from './modules/medicalTrainingResults/medicalTrainingResults.module';
 import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/nursingTrainingResults.module';
 import { ImageModule } from './modules/image/image.module';
+import { LeaveHistoryEntity } from './entities/leaveHistory.entity';
+import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
 
 // @Module({
 //   imports: [
@@ -73,7 +73,7 @@ import { ImageModule } from './modules/image/image.module';
         EvaluateEntity,
         OvertimeEntity,
         OvertimeHistoryEntity,
-        DescriptionEvaluateEntity,
+        LeaveHistoryEntity,
         MedicalTrainingResultsEntity,
         NursingTrainingResultsEntity,
         ImageModule,
@@ -91,7 +91,7 @@ import { ImageModule } from './modules/image/image.module';
     EvaluateModule,
     OvertimeModule,
     OvertimeHistoryModule,
-    DescriptionEvaluateModule,
+    LeaveHistoryModule,
     MedicalTrainingResultsModule,
     NursingTrainingResultsModule,
   ],

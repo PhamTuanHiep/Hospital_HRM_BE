@@ -5,12 +5,14 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
+  OneToMany,
   OneToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { AccountEntity } from './account.entity';
 import { DepartmentEntity } from './department.entity';
+import { LeaveHistoryEntity } from './leaveHistory.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -119,6 +121,11 @@ export class UserEntity extends BaseEntity {
     default: () => `JSON_ARRAY('Làm việc cả tuần')`,
   })
   jobDescription: string[];
+
+  @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
+    nullable: true,
+  })
+  leaveHistories: LeaveHistoryEntity[];
 
   @Column({
     type: 'varchar',

@@ -17,6 +17,7 @@ export const filterGetAll = async ({
   relations,
   select,
   arrSearch = [],
+  order,
 }: FilterGetAllProps<string>): Promise<any> => {
   const items_per_page = Number(query.items_per_page) || 10;
   const page = Number(query.page) || 1;
@@ -40,7 +41,7 @@ export const filterGetAll = async ({
     //   { last_name: Like('%' + keyword + '%') },
     //   { email: Like('%' + keyword + '%') },
     // ],
-    order: { createdAt: 'ASC' },
+    order: order ?? { createdAt: 'ASC' },
     take: items_per_page, //số lượng bản ghi tối đa sẽ được trả về cho mỗi lần truy vấn
     skip: skip, //số lượng bản ghi sẽ bỏ qua khi truy vấn
     relations,

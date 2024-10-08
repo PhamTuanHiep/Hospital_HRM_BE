@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { LeaveHistoryEntity } from './leaveHistory.entity';
 
 @Entity('leaves')
 export class LeaveEntity extends BaseEntity {
@@ -9,5 +10,10 @@ export class LeaveEntity extends BaseEntity {
   leaveTypes: string;
 
   @Column({ name: 'max_leave_entitlement', default: 12 })
-  MaxLeaveEntitlement: number;
+  maxLeaveEntitlement: number;
+
+  @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.leave, {
+    nullable: true,
+  })
+  leaveHistories: LeaveHistoryEntity[];
 }
