@@ -7,6 +7,8 @@ export class InsuranceDto {
   @IsNotEmpty()
   insuranceName?: string;
 
+  userIds?: number[];
+
   @IsNotEmpty()
   insuranceType?: string;
 
@@ -14,4 +16,7 @@ export class InsuranceDto {
   monthlyPercentage?: number;
 
   note?: string;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }

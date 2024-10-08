@@ -4,6 +4,8 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
+  JoinTable,
+  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -13,6 +15,7 @@ import {
 import { AccountEntity } from './account.entity';
 import { DepartmentEntity } from './department.entity';
 import { LeaveHistoryEntity } from './leaveHistory.entity';
+import { InsuranceEntity } from './insurance.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -98,12 +101,16 @@ export class UserEntity extends BaseEntity {
   })
   weeklySchedule: number[];
 
-  @Column({
-    type: 'simple-array',
-    name: 'insurance_ids',
-    default: '',
+  @ManyToMany(() => InsuranceEntity, (insurance) => insurance.users)
+  @JoinTable({
+    name: 'user_insurances', // Tên của bảng trung gian
+    joinColumn: { name: 'userId', referencedColumnName: 'userId' },
+    inverseJoinColumn: {
+      name: 'insuranceId',
+      referencedColumnName: 'insuranceId',
+    },
   })
-  insuranceIds: string[];
+  insurances: InsuranceEntity[];
 
   @Column({
     type: 'json',

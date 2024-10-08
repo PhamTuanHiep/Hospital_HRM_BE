@@ -28,7 +28,7 @@ export class LeaveHistoryControllers {
   findOne(
     @Param('leaveHistoryId', ParseIntPipe) leaveHistoryId: number,
   ): Promise<any> {
-    return this.leaveHistoryService.findOne(Number(leaveHistoryId));
+    return this.leaveHistoryService.findOne(leaveHistoryId);
   }
 
   @Post()
