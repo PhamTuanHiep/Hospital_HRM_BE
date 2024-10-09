@@ -5,13 +5,18 @@ import { FirebaseService } from '../firebase/firebase.service';
 export class ImageService {
   constructor(private readonly firebaseService: FirebaseService) {}
 
-  async uploadImage(file: Express.Multer.File): Promise<string> {
+  async uploadImage(
+    file: Express.Multer.File,
+    folder?: string,
+  ): Promise<string> {
     //Lấy instance của Firebase Storage từ một service firebaseService
     const storage = this.firebaseService.getStorageInstance();
     //Lấy bucket mặc định của Firebase Storage, nơi các file sẽ được lưu trữ.
     const bucket = storage.bucket();
     //tên gốc của file (file.originalname).
-    const fileName = `${Date.now()}_${file.originalname}`;
+    const imagesFolder = folder ?? 'avatars';
+    const fileName = `${imagesFolder}/${Date.now()}_${file.originalname}`;
+
     //Tạo một đối tượng đại diện cho file trong bucket Firebase với tên là fileName.
     const fileUpload = bucket.file(fileName);
 

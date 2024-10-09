@@ -5,7 +5,8 @@ import { filterGetAll } from 'src/common/common.use.helper';
 import { FilterDto } from 'src/dto/common.filter.dto';
 import { InsuranceDto } from 'src/dto/insurance.dto';
 import { InsuranceEntity } from 'src/entities/insurance.entity';
-import { UserEntity } from 'src/entities/user.entity';
+import { UserInsuranceEntity } from 'src/entities/user-insurance.entity';
+
 import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
@@ -13,19 +14,16 @@ export class InsuranceService {
   constructor(
     @InjectRepository(InsuranceEntity)
     private insuranceRepository: Repository<InsuranceEntity>,
-    @InjectRepository(UserEntity)
-    private userRepository: Repository<UserEntity>,
   ) {}
 
   async findAll(query: FilterDto): Promise<any> {
     const repository = this.insuranceRepository;
     const relations: Relations<string> = {
-      users: true,
+      userInsurances: true,
     };
     const select: any = {
-      users: {
-        userId: true,
-        fullName: true,
+      userInsurances: {
+        user: true,
       },
     };
 
@@ -35,44 +33,25 @@ export class InsuranceService {
   async findOne(insuranceId: string): Promise<InsuranceEntity | null> {
     return await this.insuranceRepository.findOne({
       where: { insuranceId },
-      relations: ['users'],
-      select: {
-        users: {
-          userId: true,
-          fullName: true,
-        },
-      },
+      relations: ['userInsurances'],
+      // select: {
+      //   userInsurances: {
+      //     user: true,
+
+      //   },
+      // },
     });
   }
 
   async create(insuranceDto: InsuranceDto): Promise<any> {
-    const { userIds, ...insurance } = insuranceDto;
-    const newInsurance = this.insuranceRepository.create(insurance);
-
     try {
-      if (userIds && userIds.length > 0) {
-        const users = await this.userRepository.find({
-          where: {
-            userId: In(userIds), // Sử dụng In để tìm các id trong mảng userIds
-          },
-        });
-        newInsurance.users = users;
-        console.log('-userIds:', userIds);
-      } else {
-        console.log('Null userIds');
-      }
+      const insurance = this.insuranceRepository.create(insuranceDto);
 
-      const res = await this.insuranceRepository.save(newInsurance);
+      const res = await this.insuranceRepository.save(insurance);
 
       return await this.insuranceRepository.findOne({
         where: { insuranceId: res.insuranceId },
-        relations: ['users'],
-        select: {
-          users: {
-            userId: true,
-            fullName: true,
-          },
-        },
+        relations: ['userInsurances'],
       });
     } catch (error) {
       console.log('error:', error);

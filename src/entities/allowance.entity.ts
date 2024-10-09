@@ -1,4 +1,11 @@
-import { BaseEntity, Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BaseEntity,
+  Column,
+  Entity,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
+import { PositionAllowanceEntity } from './position-allowance.entity';
 
 @Entity('allowances')
 export class AllowanceEntity extends BaseEntity {
@@ -7,6 +14,7 @@ export class AllowanceEntity extends BaseEntity {
 
   @Column({ type: 'varchar', length: 250, name: 'allowance_acronym' })
   allowanceAcronym: string;
+
   @Column({
     type: 'varchar',
     length: 250,
@@ -39,4 +47,10 @@ export class AllowanceEntity extends BaseEntity {
     default: '',
   })
   note: string;
+
+  @OneToMany(
+    () => PositionAllowanceEntity,
+    (positionAllowance) => positionAllowance.allowance,
+  )
+  positionAllowances: PositionAllowanceEntity[];
 }

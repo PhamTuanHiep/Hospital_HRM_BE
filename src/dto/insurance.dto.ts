@@ -7,8 +7,6 @@ export class InsuranceDto {
   @IsNotEmpty()
   insuranceName?: string;
 
-  userIds?: number[];
-
   @IsNotEmpty()
   insuranceType?: string;
 

@@ -3,11 +3,14 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinTable,
   ManyToMany,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
+import { UserInsuranceEntity } from './user-insurance.entity';
 
 @Entity('insurances')
 export class InsuranceEntity extends BaseEntity {
@@ -36,8 +39,11 @@ export class InsuranceEntity extends BaseEntity {
   @Column({ name: 'note', default: '-' })
   note: string;
 
-  @ManyToMany(() => UserEntity, (user) => user.insurances)
-  users: UserEntity[];
+  @OneToMany(
+    () => UserInsuranceEntity,
+    (userInsurance) => userInsurance.insurance,
+  )
+  userInsurances: UserInsuranceEntity[];
 
   @CreateDateColumn({
     type: 'timestamp',

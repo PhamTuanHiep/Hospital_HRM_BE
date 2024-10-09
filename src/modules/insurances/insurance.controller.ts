@@ -9,10 +9,7 @@ import {
   Query,
   ValidationPipe,
 } from '@nestjs/common';
-import { ResponseData } from 'src/global/globalClass';
-import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
 import { InsuranceService } from './insurance.service';
-import { Insurance } from 'src/models/insurance.model';
 import { InsuranceDto } from 'src/dto/insurance.dto';
 import { FilterDto } from 'src/dto/common.filter.dto';
 

@@ -3,9 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserEntity } from './user.entity';
+import { PositionAllowanceEntity } from './position-allowance.entity';
 
 @Entity('positions')
 export class PositionEntity extends BaseEntity {
@@ -23,9 +26,6 @@ export class PositionEntity extends BaseEntity {
   })
   salaryCoefficient: number;
 
-  @Column({ type: 'varchar', length: 250, name: 'leave_id', default: '2' })
-  leaveId: string;
-
   @CreateDateColumn({
     type: 'timestamp',
     name: 'created_at',
@@ -40,4 +40,13 @@ export class PositionEntity extends BaseEntity {
     onUpdate: 'CURRENT_TIMESTAMP(6)',
   })
   updatedAt: Date;
+
+  @OneToMany(() => UserEntity, (user) => user.position)
+  users: UserEntity[];
+
+  @OneToMany(
+    () => PositionAllowanceEntity,
+    (positionAllowance) => positionAllowance.position,
+  )
+  positionAllowances: PositionAllowanceEntity[];
 }

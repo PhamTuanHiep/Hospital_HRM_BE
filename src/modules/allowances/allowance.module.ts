@@ -8,5 +8,6 @@ import { AllowanceService } from './allowance.service';
   imports: [TypeOrmModule.forFeature([AllowanceEntity])],
   controllers: [AllowanceControllers],
   providers: [AllowanceService],
+  exports: [AllowanceService],
 })
 export class AllowanceModule {}

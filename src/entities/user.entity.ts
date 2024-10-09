@@ -4,8 +4,6 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  JoinTable,
-  ManyToMany,
   ManyToOne,
   OneToMany,
   OneToOne,
@@ -15,7 +13,11 @@ import {
 import { AccountEntity } from './account.entity';
 import { DepartmentEntity } from './department.entity';
 import { LeaveHistoryEntity } from './leaveHistory.entity';
-import { InsuranceEntity } from './insurance.entity';
+import { PositionEntity } from './position.entity';
+import { OvertimeHistoryEntity } from './overtimeHistory.entity';
+import { MedicalTrainingResultsEntity } from './medicalTrainingResults.entity';
+import { NursingTrainingResultsEntity } from './nursingTrainingResults.entity';
+import { UserInsuranceEntity } from './user-insurance.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -53,14 +55,14 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 50, name: 'hometown', default: '' })
   hometown: string;
 
-  @Column({ type: 'varchar', length: 10, name: 'position_id', default: '' })
-  positionId: string;
-
+  @ManyToOne(() => PositionEntity, (position) => position.users, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'position_id' })
+  @Column({ type: 'varchar', length: 10 })
+  position: PositionEntity;
   @Column({ type: 'varchar', length: 30, name: 'birthday', default: '' })
   birthday: string;
-
-  @Column({ type: 'varchar', length: 255, name: 'image', default: '' })
-  image: string;
 
   @Column({
     type: 'varchar',
@@ -101,26 +103,22 @@ export class UserEntity extends BaseEntity {
   })
   weeklySchedule: number[];
 
-  @ManyToMany(() => InsuranceEntity, (insurance) => insurance.users)
-  @JoinTable({
-    name: 'user_insurances', // Tên của bảng trung gian
-    joinColumn: { name: 'userId', referencedColumnName: 'userId' },
-    inverseJoinColumn: {
-      name: 'insuranceId',
-      referencedColumnName: 'insuranceId',
-    },
-  })
-  insurances: InsuranceEntity[];
-
-  @Column({
-    type: 'json',
-    name: 'allowance_ids',
-    default: [0],
-  })
-  allowanceIds: number[];
+  @OneToMany(() => UserInsuranceEntity, (userInsurance) => userInsurance.user)
+  userInsurances: UserInsuranceEntity[];
 
   @Column({ name: 'evaluate_id', default: 1 })
   evaluateId: number;
+
+  @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
+    nullable: true,
+  })
+  leaveHistories: LeaveHistoryEntity[];
+
+  // @OneToMany(
+  //   () => OvertimeHistoryEntity,
+  //   (overtimeHistory) => overtimeHistory.user,
+  // )
+  // overtimeHistories: OvertimeHistoryEntity[];
 
   @Column({
     type: 'json',
@@ -129,11 +127,6 @@ export class UserEntity extends BaseEntity {
   })
   jobDescription: string[];
 
-  @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
-    nullable: true,
-  })
-  leaveHistories: LeaveHistoryEntity[];
-
   @Column({
     type: 'varchar',
     length: 255,
@@ -141,6 +134,27 @@ export class UserEntity extends BaseEntity {
     default: '-',
   })
   otherDescription: string;
+
+  @OneToOne(() => AccountEntity, (account) => account.user)
+  account: AccountEntity;
+
+  @ManyToOne(() => DepartmentEntity, (department) => department.users, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'department_id' })
+  department: DepartmentEntity;
+
+  // @OneToMany(
+  //   () => MedicalTrainingResultsEntity,
+  //   (medicalTrainingResult) => medicalTrainingResult.user,
+  // )
+  // medicalTrainingResults: MedicalTrainingResultsEntity[];
+
+  // @OneToMany(
+  //   () => NursingTrainingResultsEntity,
+  //   (nursingTrainingResult) => nursingTrainingResult.user,
+  // )
+  // nursingTrainingResults: NursingTrainingResultsEntity[];
 
   @CreateDateColumn({
     type: 'timestamp',
@@ -159,13 +173,4 @@ export class UserEntity extends BaseEntity {
 
   @Column({ type: 'varchar', length: 5, name: 'status', default: '' })
   status: string;
-
-  @OneToOne(() => AccountEntity, (account) => account.user)
-  account: AccountEntity;
-
-  @ManyToOne(() => DepartmentEntity, (department) => department.users, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'department_id' })
-  department: DepartmentEntity;
 }

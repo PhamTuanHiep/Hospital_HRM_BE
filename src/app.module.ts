@@ -33,6 +33,10 @@ import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/n
 import { ImageModule } from './modules/image/image.module';
 import { LeaveHistoryEntity } from './entities/leaveHistory.entity';
 import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
+import { UserInsuranceModule } from './modules/user_insurance/user_insurance.module';
+import { UserInsuranceEntity } from './entities/user-insurance.entity';
+import { PositionAllowanceModule } from './modules/position-allowance/position-allowance.module';
+import { PositionAllowanceEntity } from './entities/position-allowance.entity';
 
 // @Module({
 //   imports: [
@@ -69,6 +73,7 @@ import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
         DepartmentEntity,
         AllowanceEntity,
         LeaveEntity,
+        UserInsuranceEntity,
         InsuranceEntity,
         EvaluateEntity,
         OvertimeEntity,
@@ -76,7 +81,7 @@ import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
         LeaveHistoryEntity,
         MedicalTrainingResultsEntity,
         NursingTrainingResultsEntity,
-        ImageModule,
+        PositionAllowanceEntity,
       ],
       synchronize: true,
     }),
@@ -85,8 +90,10 @@ import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
     PositionModule,
     AccountModule,
     DepartmentModule,
+    PositionAllowanceModule,
     AllowanceModule,
     LeaveModule,
+    UserInsuranceModule,
     InsuranceModule,
     EvaluateModule,
     OvertimeModule,
@@ -94,6 +101,7 @@ import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
     LeaveHistoryModule,
     MedicalTrainingResultsModule,
     NursingTrainingResultsModule,
+    ImageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
