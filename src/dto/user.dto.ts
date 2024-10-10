@@ -1,5 +1,4 @@
-import { IsNotEmpty, IsNumber, Length } from 'class-validator';
-import { DepartmentEntity } from 'src/entities/department.entity';
+import { IsNotEmpty, Length } from 'class-validator';
 
 export class UserDto {
   userId?: number;
@@ -29,8 +28,6 @@ export class UserDto {
 
   birthday?: string;
 
-  image?: string;
-
   fatherFullName?: string;
 
   fatherBirthday?: string;
@@ -39,26 +36,17 @@ export class UserDto {
 
   motherBirthday?: string;
 
-  departmentId?: string;
-
   weeklySchedule?: number[];
-
-  insuranceIds?: string[];
-
-  allowanceIds?: number[];
-
-  @IsNumber()
-  evaluateId?: number;
 
   jobDescription?: string[];
 
   otherDescription?: string;
+
+  departmentId?: string;
 
   createdAt?: Date;
 
   updatedAt?: Date;
 
   status?: string;
-
-  department?: DepartmentEntity;
 }

@@ -3,12 +3,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
   OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
+import { OvertimeHistoryEntity } from './overtimeHistory.entity';
 
 @Entity('departments')
 export class DepartmentEntity extends BaseEntity {
@@ -20,6 +20,12 @@ export class DepartmentEntity extends BaseEntity {
 
   @OneToMany(() => UserEntity, (user) => user.department, { nullable: true })
   users: UserEntity[];
+
+  @OneToMany(
+    () => OvertimeHistoryEntity,
+    (overtimeHistory) => overtimeHistory.department,
+  )
+  overtimeHistories: OvertimeHistoryEntity[];
 
   @CreateDateColumn({
     type: 'timestamp',

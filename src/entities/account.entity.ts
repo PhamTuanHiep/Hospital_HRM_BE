@@ -1,5 +1,3 @@
-import { Role } from 'src/models/role.model';
-import { User } from 'src/models/user.model';
 import {
   BaseEntity,
   Column,
@@ -34,13 +32,18 @@ export class AccountEntity extends BaseEntity {
   })
   avatar: string;
 
+  @Column({ name: 'role_id' })
+  roleId: string;
+
+  @Column({ name: 'user_id' })
+  userId: number;
+
   @OneToOne(() => UserEntity, (user) => user.account, { nullable: true })
   @JoinColumn({ name: 'user_id' })
   user: UserEntity;
 
   @ManyToOne(() => RoleEntity, (role) => role.accounts, { nullable: true })
   @JoinColumn({ name: 'role_id' })
-  // @Column({ type: 'varchar', length: 7 })
   role: RoleEntity;
 
   @CreateDateColumn({

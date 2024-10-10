@@ -1,6 +1,4 @@
-import { IsEmail, IsNotEmpty, IsNumber, IsString } from 'class-validator';
-import { RoleEntity } from 'src/entities/role.entity';
-import { UserEntity } from 'src/entities/user.entity';
+import { IsEmail, IsNotEmpty, IsString } from 'class-validator';
 
 export class AccountDto {
   accountId?: number;
@@ -15,14 +13,9 @@ export class AccountDto {
 
   avatar?: string;
 
-  @IsNotEmpty()
   roleId?: string;
 
   userId?: number;
-
-  user?: UserEntity;
-
-  role?: RoleEntity;
 
   createdAt?: Date;
 

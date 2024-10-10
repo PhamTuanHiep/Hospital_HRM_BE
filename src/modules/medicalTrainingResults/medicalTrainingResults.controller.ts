@@ -7,13 +7,12 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
-import { ResponseData } from 'src/global/globalClass';
-import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
 import { MedicalTrainingResultsService } from './medicalTrainingResults.service';
-import { MedicalTrainingResults } from 'src/models/medicalTrainingResults.model';
 import { MedicalTrainingResultsDto } from 'src/dto/medicalTrainingResults.dto';
+import { FilterDto } from 'src/dto/common.filter.dto';
 
 @Controller('medical-training-results')
 export class MedicalTrainingResultsControllers {
@@ -22,113 +21,40 @@ export class MedicalTrainingResultsControllers {
   ) {}
 
   @Get()
-  async findAll(): Promise<ResponseData<MedicalTrainingResults[]>> {
-    try {
-      return new ResponseData<MedicalTrainingResults[]>(
-        await this.medicalTrainingResultsService.findAll(),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<MedicalTrainingResults[]>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findAll(@Query() query: FilterDto): Promise<any> {
+    return this.medicalTrainingResultsService.findAll(query);
   }
 
   @Get('/:trainingResultsId')
-  async findOne(
+  findOne(
     @Param('trainingResultsId', ParseIntPipe) trainingResultsId: number,
-  ): Promise<ResponseData<MedicalTrainingResults>> {
-    try {
-      return new ResponseData<MedicalTrainingResults>(
-        await this.medicalTrainingResultsService.findOne(trainingResultsId),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<MedicalTrainingResults>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.medicalTrainingResultsService.findOne(trainingResultsId);
   }
 
   @Post()
   async create(
     @Body(new ValidationPipe())
     medicalTrainingResultsDto: MedicalTrainingResultsDto,
-  ): Promise<ResponseData<MedicalTrainingResultsDto>> {
-    let errCode: number;
-    let errMessage: string;
-    try {
-      let medicalTrainingResults =
-        await this.medicalTrainingResultsService.create(
-          medicalTrainingResultsDto,
-        );
-      if (!medicalTrainingResults) {
-        (errCode = HttpStatus.NOT_FOUND), (errMessage = HttpMessage.NOT_FOUND);
-      }
-
-      return new ResponseData<MedicalTrainingResults>(
-        medicalTrainingResults,
-        errCode || HttpStatus.SUCCESS,
-        errMessage || HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<MedicalTrainingResults>(
-        null,
-        HttpStatus.ERROR_SERVER,
-        HttpMessage.ERROR_SERVER,
-      );
-    }
+  ) {
+    return this.medicalTrainingResultsService.create(medicalTrainingResultsDto);
   }
 
   @Put('/:trainingResultsId')
   async update(
     @Param('trainingResultsId', ParseIntPipe) trainingResultsId: number,
     @Body() medicalTrainingResultsDto: MedicalTrainingResultsDto,
-  ): Promise<ResponseData<MedicalTrainingResults>> {
-    try {
-      let data = await this.medicalTrainingResultsService.update(
-        trainingResultsId,
-        medicalTrainingResultsDto,
-      );
-      return new ResponseData<MedicalTrainingResults>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<MedicalTrainingResults>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.medicalTrainingResultsService.update(
+      trainingResultsId,
+      medicalTrainingResultsDto,
+    );
   }
 
   @Delete('/:trainingResultsId')
   async delete(
     @Param('trainingResultsId', ParseIntPipe) trainingResultsId: number,
-  ): Promise<ResponseData<boolean>> {
-    try {
-      return new ResponseData<boolean>(
-        (await this.medicalTrainingResultsService.delete(trainingResultsId))
-          ? true
-          : false,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<boolean>(
-        false,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.medicalTrainingResultsService.delete(trainingResultsId);
   }
 }

@@ -1,6 +1,6 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Relations, Select } from 'src/common/common.type';
+import { Relations } from 'src/common/common.type';
 import {
   extractFilePathFromUrl,
   filterGetAll,
@@ -48,8 +48,7 @@ export class AccountService {
     return filterGetAll({ query, repository, relations, select, arrSearch });
   }
 
-  async findOne(accountId: number): Promise<AccountEntity | null> {
-    // return await this.accountRepository.findOne({ where: { accountId } });
+  async findOne(accountId: number): Promise<AccountEntity> {
     return await this.accountRepository.findOne({
       where: { accountId },
       relations: ['user', 'role'],
@@ -77,11 +76,12 @@ export class AccountService {
     const user = await this.userRepository.findOneBy({ userId });
     const role = await this.roleRepository.findOneBy({ roleId });
     try {
-      const res = await this.accountRepository.save({
+      const account = await this.accountRepository.create({
         ...accountDto,
         user,
         role,
       });
+      const res = await this.accountRepository.save(account);
 
       return await this.accountRepository.findOne({
         where: { accountId: res.accountId },
@@ -107,10 +107,27 @@ export class AccountService {
   }
   //can module lai
   private bucket = admin.storage().bucket();
-  async update(
-    accountId: number,
-    accountDto: AccountDto,
-  ): Promise<UpdateResult> {
+
+  async update(accountId: number, accountDto: AccountDto): Promise<any> {
+    const { avatar, ...account } = accountDto;
+    if (avatar) {
+      const accountUpdate = await this.accountRepository.findOne({
+        where: {
+          accountId,
+        },
+      });
+
+      const filePath = extractFilePathFromUrl(accountUpdate.avatar);
+      if (filePath) {
+        await this.bucket.file(filePath).delete();
+      }
+      try {
+        console.log(`File ${filePath} deleted successfully.`);
+      } catch (error) {
+        console.error(`Failed to delete file ${filePath}:`, error);
+        throw new Error(`Could not delete file ${filePath}.`);
+      }
+    }
     return await this.accountRepository.update(accountId, accountDto);
   }
 

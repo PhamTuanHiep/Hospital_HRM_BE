@@ -1,4 +1,4 @@
-import { IsArray, IsNotEmpty, IsNumber, IsOptional } from 'class-validator';
+import { IsNotEmpty } from 'class-validator';
 import { UserEntity } from 'src/entities/user.entity';
 
 export class DepartmentDto {
@@ -7,11 +7,6 @@ export class DepartmentDto {
 
   @IsNotEmpty()
   departmentName: string;
-
-  @IsOptional() // Không bắt buộc, có thể thêm user sau
-  @IsArray()
-  @IsNumber({}, { each: true }) // Đảm bảo mỗi phần tử trong mảng là số
-  userIds?: number[]; // Danh sách userId thuộc về department
 
   users?: UserEntity[];
 

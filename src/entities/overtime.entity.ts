@@ -1,4 +1,5 @@
-import { BaseEntity, Column, Entity, PrimaryColumn } from 'typeorm';
+import { BaseEntity, Column, Entity, OneToMany, PrimaryColumn } from 'typeorm';
+import { OvertimeHistoryEntity } from './overtimeHistory.entity';
 
 @Entity('overtimes')
 export class OvertimeEntity extends BaseEntity {
@@ -17,4 +18,10 @@ export class OvertimeEntity extends BaseEntity {
     default: () => `JSON_ARRAY('Ca trực buổi tối')`,
   })
   note: string[];
+
+  @OneToMany(
+    () => OvertimeHistoryEntity,
+    (overtimeHistory) => overtimeHistory.overtime,
+  )
+  overtimeHistories: OvertimeHistoryEntity[];
 }

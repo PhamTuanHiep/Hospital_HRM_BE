@@ -5,9 +5,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserEntity } from './user.entity';
 
 @Entity('medical-training-results') //table name
 export class MedicalTrainingResultsEntity extends BaseEntity {
@@ -16,6 +19,10 @@ export class MedicalTrainingResultsEntity extends BaseEntity {
 
   @Column({ name: 'user_id' })
   userId: number;
+
+  @ManyToOne(() => UserEntity, (user) => user.medicalTrainingResults)
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
 
   @Column({ name: 'understanding_of_medical_theory' })
   understandingOfMedicalTheory: number;

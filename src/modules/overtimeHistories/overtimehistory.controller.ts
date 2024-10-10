@@ -7,116 +7,52 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
 import { OvertimeHistoryDto } from 'src/dto/overtimeHistory.dto';
-import { ResponseData } from 'src/global/globalClass';
-import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
-import { OvertimeHistory } from 'src/models/overtimeHistory.model';
+
 import { OvertimeHistoryService } from './overtimehistory.service';
+import { FilterDto } from 'src/dto/common.filter.dto';
 
 @Controller('overtime-histories')
 export class OvertimeHistoryControllers {
   constructor(private overtimeHistoryService: OvertimeHistoryService) {}
 
   @Get()
-  async findAll(): Promise<ResponseData<OvertimeHistory[]>> {
-    try {
-      return new ResponseData<OvertimeHistory[]>(
-        await this.overtimeHistoryService.findAll(),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<OvertimeHistory[]>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findAll(@Query() query: FilterDto): Promise<any> {
+    return this.overtimeHistoryService.findAll(query);
   }
 
   @Get('/:overtimeHistoryId')
-  async findOne(
+  findOne(
     @Param('overtimeHistoryId', ParseIntPipe) overtimeHistoryId: number,
-  ): Promise<ResponseData<OvertimeHistory>> {
-    try {
-      return new ResponseData<OvertimeHistory>(
-        await this.overtimeHistoryService.findOne(overtimeHistoryId),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<OvertimeHistory>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.overtimeHistoryService.findOne(overtimeHistoryId);
   }
 
   @Post()
   async create(
     @Body(new ValidationPipe()) overtimeHistoryDto: OvertimeHistoryDto,
-  ): Promise<ResponseData<OvertimeHistory>> {
-    try {
-      let data = await this.overtimeHistoryService.create(overtimeHistoryDto);
-      return new ResponseData<OvertimeHistory>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<OvertimeHistory>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ) {
+    return this.overtimeHistoryService.create(overtimeHistoryDto);
   }
 
   @Put('/:overtimeHistoryId')
   async update(
-    @Param('overtimeHistoryId', ParseIntPipe) overtimeHistoryId: number,
+    @Param('overtimeHistoryId') overtimeHistoryId: number,
     @Body() overtimeHistoryDto: OvertimeHistoryDto,
-  ): Promise<ResponseData<OvertimeHistory>> {
-    try {
-      let data = await this.overtimeHistoryService.update(
-        overtimeHistoryId,
-        overtimeHistoryDto,
-      );
-      return new ResponseData<OvertimeHistory>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<OvertimeHistory>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.overtimeHistoryService.update(
+      overtimeHistoryId,
+      overtimeHistoryDto,
+    );
   }
 
   @Delete('/:overtimeHistoryId')
   async delete(
-    @Param('overtimeHistoryId', ParseIntPipe) overtimeHistoryId: number,
-  ): Promise<ResponseData<boolean>> {
-    try {
-      return new ResponseData<boolean>(
-        (await this.overtimeHistoryService.delete(overtimeHistoryId))
-          ? true
-          : false,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<boolean>(
-        false,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+    @Param('overtimeHistoryId') leaveHistoryId: number,
+  ): Promise<any> {
+    return this.overtimeHistoryService.delete(leaveHistoryId);
   }
 }

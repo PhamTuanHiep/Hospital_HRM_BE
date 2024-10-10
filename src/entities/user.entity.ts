@@ -55,12 +55,15 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 50, name: 'hometown', default: '' })
   hometown: string;
 
+  @Column({ name: 'position_id' })
+  positionId: string;
+
   @ManyToOne(() => PositionEntity, (position) => position.users, {
     nullable: true,
   })
   @JoinColumn({ name: 'position_id' })
-  @Column({ type: 'varchar', length: 10 })
   position: PositionEntity;
+
   @Column({ type: 'varchar', length: 30, name: 'birthday', default: '' })
   birthday: string;
 
@@ -106,19 +109,16 @@ export class UserEntity extends BaseEntity {
   @OneToMany(() => UserInsuranceEntity, (userInsurance) => userInsurance.user)
   userInsurances: UserInsuranceEntity[];
 
-  @Column({ name: 'evaluate_id', default: 1 })
-  evaluateId: number;
-
   @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
     nullable: true,
   })
   leaveHistories: LeaveHistoryEntity[];
 
-  // @OneToMany(
-  //   () => OvertimeHistoryEntity,
-  //   (overtimeHistory) => overtimeHistory.user,
-  // )
-  // overtimeHistories: OvertimeHistoryEntity[];
+  @OneToMany(
+    () => OvertimeHistoryEntity,
+    (overtimeHistory) => overtimeHistory.user,
+  )
+  overtimeHistories: OvertimeHistoryEntity[];
 
   @Column({
     type: 'json',
@@ -138,17 +138,20 @@ export class UserEntity extends BaseEntity {
   @OneToOne(() => AccountEntity, (account) => account.user)
   account: AccountEntity;
 
+  @Column({ name: 'department_id' })
+  departmentId: string;
+
   @ManyToOne(() => DepartmentEntity, (department) => department.users, {
     nullable: true,
   })
   @JoinColumn({ name: 'department_id' })
   department: DepartmentEntity;
 
-  // @OneToMany(
-  //   () => MedicalTrainingResultsEntity,
-  //   (medicalTrainingResult) => medicalTrainingResult.user,
-  // )
-  // medicalTrainingResults: MedicalTrainingResultsEntity[];
+  @OneToMany(
+    () => MedicalTrainingResultsEntity,
+    (medicalTrainingResult) => medicalTrainingResult.user,
+  )
+  medicalTrainingResults: MedicalTrainingResultsEntity[];
 
   // @OneToMany(
   //   () => NursingTrainingResultsEntity,

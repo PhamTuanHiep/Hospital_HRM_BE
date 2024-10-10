@@ -26,7 +26,7 @@ export class UserInsuranceControllers {
   }
 
   @Get('/:id')
-  findOne(@Param('id', ParseIntPipe) id: number): Promise<UserInsuranceEntity> {
+  findOne(@Param('id', ParseIntPipe) id: number): Promise<any> {
     return this.userInsuranceService.findOne(id);
   }
 

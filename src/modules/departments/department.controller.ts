@@ -12,31 +12,25 @@ import {
 import { DepartmentService } from './department.service';
 import { DepartmentDto } from 'src/dto/department.dto';
 import { FilterDto } from 'src/dto/common.filter.dto';
-import {
-  DepartmentDataResponse,
-  DepartmentResponse,
-} from 'src/common/common.type';
 
 @Controller('departments')
 export class DepartmentControllers {
   constructor(private departmentService: DepartmentService) {}
 
   @Get()
-  findAll(@Query() query: FilterDto): Promise<DepartmentResponse> {
+  findAll(@Query() query: FilterDto): Promise<any> {
     return this.departmentService.findAll(query);
   }
 
   @Get('/:departmentId')
-  async findOne(
-    @Param('departmentId') departmentId: string,
-  ): Promise<DepartmentDataResponse> {
+  async findOne(@Param('departmentId') departmentId: string): Promise<any> {
     return this.departmentService.findOne(departmentId);
   }
 
   @Post()
   async create(
     @Body(new ValidationPipe()) departmentDto: DepartmentDto,
-  ): Promise<DepartmentDataResponse> {
+  ): Promise<any> {
     return this.departmentService.create(departmentDto);
   }
 

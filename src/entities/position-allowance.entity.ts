@@ -1,4 +1,5 @@
 import {
+  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
@@ -13,6 +14,12 @@ import { AllowanceEntity } from './allowance.entity';
 export class PositionAllowanceEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ name: 'position_id' })
+  positionId: string;
+
+  @Column({ name: 'allowance_id' })
+  allowanceId: number;
 
   @ManyToOne(() => PositionEntity, (position) => position.positionAllowances)
   @JoinColumn({ name: 'position_id' })

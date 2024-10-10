@@ -1,4 +1,5 @@
 import {
+  Column,
   CreateDateColumn,
   Entity,
   JoinColumn,
@@ -13,6 +14,12 @@ import { InsuranceEntity } from './insurance.entity';
 export class UserInsuranceEntity {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column({ name: 'user_id' })
+  userId: number;
+
+  @Column({ name: 'insurance_id' })
+  insuranceId: string;
 
   @ManyToOne(() => UserEntity, (user) => user.userInsurances)
   @JoinColumn({ name: 'user_id' })

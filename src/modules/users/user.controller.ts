@@ -7,100 +7,41 @@ import {
   ParseIntPipe,
   Post,
   Put,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
-import { ResponseData } from 'src/global/globalClass';
-import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
-import { User } from 'src/models/user.model';
 import { UserDto } from 'src/dto/user.dto';
 import { UserService } from './user.service';
+import { FilterDto } from 'src/dto/common.filter.dto';
 
 @Controller('users')
 export class UserControllers {
   constructor(private userService: UserService) {}
-
   @Get()
-  async findAll(): Promise<ResponseData<User[]>> {
-    try {
-      return new ResponseData<User[]>(
-        await this.userService.findAll(),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<User[]>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findAll(@Query() query: FilterDto): Promise<any> {
+    return this.userService.findAll(query);
   }
 
   @Get('/:userId')
-  async findOne(
-    @Param('userId', ParseIntPipe) userId: number,
-  ): Promise<ResponseData<User>> {
-    try {
-      return new ResponseData<User>(
-        await this.userService.findOne(userId),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<User>(null, HttpStatus.ERROR, HttpMessage.ERROR);
-    }
+  findOne(@Param('userId', ParseIntPipe) userId: number): Promise<any> {
+    return this.userService.findOne(userId);
   }
 
   @Post()
-  async create(
-    @Body(new ValidationPipe()) userDto: UserDto,
-  ): Promise<ResponseData<UserDto>> {
-    try {
-      let data = await this.userService.create(userDto);
-      console.log('data:', data);
-      return new ResponseData<User>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<User>(null, HttpStatus.ERROR, HttpMessage.ERROR);
-    }
+  async create(@Body(new ValidationPipe()) userDto: UserDto) {
+    return this.userService.create(userDto);
   }
 
   @Put('/:userId')
   async update(
     @Param('userId', ParseIntPipe) userId: number,
     @Body() userDto: UserDto,
-  ): Promise<ResponseData<User>> {
-    try {
-      let data = await this.userService.update(userId, userDto);
-      return new ResponseData<User>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<User>(null, HttpStatus.ERROR, HttpMessage.ERROR);
-    }
+  ): Promise<any> {
+    return this.userService.update(userId, userDto);
   }
 
   @Delete('/:userId')
-  async delete(
-    @Param('userId', ParseIntPipe) userId: number,
-  ): Promise<ResponseData<boolean>> {
-    try {
-      return new ResponseData<boolean>(
-        (await this.userService.delete(userId)) ? true : false,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<boolean>(
-        false,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  async delete(@Param('userId') userId: number): Promise<any> {
+    return this.userService.delete(userId);
   }
 }

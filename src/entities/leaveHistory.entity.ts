@@ -14,6 +14,12 @@ export class LeaveHistoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'leave_history_id' }) //auto fill, increase, primary key
   leaveHistoryId: number;
 
+  @Column({ name: 'user_id' })
+  userId: number;
+
+  @Column({ name: 'leave_id' })
+  leaveId: string;
+
   @ManyToOne(() => UserEntity, (user) => user.leaveHistories, {
     nullable: true,
   })

@@ -41,7 +41,7 @@ export class InsuranceControllers {
   }
 
   @Delete('/:insuranceId')
-  async delete(@Param('insuranceId') leaveHistoryId: string): Promise<any> {
-    return this.insuranceService.delete(leaveHistoryId);
+  async delete(@Param('insuranceId') insuranceId: string): Promise<any> {
+    return this.insuranceService.delete(insuranceId);
   }
 }
