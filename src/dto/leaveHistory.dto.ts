@@ -5,4 +5,6 @@ export class LeaveHistoryDto {
   startDay: string;
   endDay: string;
   note?: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

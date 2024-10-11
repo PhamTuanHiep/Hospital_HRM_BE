@@ -12,7 +12,10 @@ export class OvertimeHistoryDto {
   @IsNotEmpty()
   departmentId: string;
 
-  days: string;
-
   note: string;
+
+  startDay: string;
+  endDay: string;
+  createdAt?: Date;
+  updatedAt?: Date;
 }

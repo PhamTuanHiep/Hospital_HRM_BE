@@ -52,17 +52,11 @@ export class UserEntity extends BaseEntity {
   })
   nationality: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'hometown', default: '' })
+  @Column({ type: 'varchar', length: 50, name: 'hometown', nullable: true })
   hometown: string;
 
   @Column({ name: 'position_id' })
   positionId: string;
-
-  @ManyToOne(() => PositionEntity, (position) => position.users, {
-    nullable: true,
-  })
-  @JoinColumn({ name: 'position_id' })
-  position: PositionEntity;
 
   @Column({ type: 'varchar', length: 30, name: 'birthday', default: '' })
   birthday: string;
@@ -71,7 +65,7 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     length: 30,
     name: 'father_full_name',
-    default: '',
+    nullable: true,
   })
   fatherFullName: string;
 
@@ -79,7 +73,7 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     length: 10,
     name: 'father_birthday',
-    default: '',
+    nullable: true,
   })
   fatherBirthday: string;
 
@@ -87,7 +81,7 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     length: 30,
     name: 'mother_full_name',
-    default: '',
+    nullable: true,
   })
   motherFullName: string;
 
@@ -95,30 +89,16 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     length: 10,
     name: 'mother_birthday',
-    default: '',
+    nullable: true,
   })
   motherBirthday: string;
 
   @Column({
     type: 'json',
     name: 'weekly_schedule',
-    default: () => `JSON_ARRAY(2, 3, 4,5, 6)`,
+    default: () => `JSON_ARRAY(2, 3, 4, 5, 6)`,
   })
   weeklySchedule: number[];
-
-  @OneToMany(() => UserInsuranceEntity, (userInsurance) => userInsurance.user)
-  userInsurances: UserInsuranceEntity[];
-
-  @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
-    nullable: true,
-  })
-  leaveHistories: LeaveHistoryEntity[];
-
-  @OneToMany(
-    () => OvertimeHistoryEntity,
-    (overtimeHistory) => overtimeHistory.user,
-  )
-  overtimeHistories: OvertimeHistoryEntity[];
 
   @Column({
     type: 'json',
@@ -131,15 +111,58 @@ export class UserEntity extends BaseEntity {
     type: 'varchar',
     length: 255,
     name: 'other_description',
-    default: '-',
+    nullable: true,
   })
   otherDescription: string;
 
-  @OneToOne(() => AccountEntity, (account) => account.user)
-  account: AccountEntity;
-
   @Column({ name: 'department_id' })
   departmentId: string;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
+
+  @Column({ type: 'varchar', length: 5, name: 'status', nullable: true })
+  status: string;
+
+  @OneToOne(() => AccountEntity, (account) => account.user, { nullable: true })
+  account: AccountEntity;
+
+  @ManyToOne(() => PositionEntity, (position) => position.users, {
+    nullable: true,
+  })
+  @JoinColumn({ name: 'position_id' })
+  position: PositionEntity;
+
+  @OneToMany(() => UserInsuranceEntity, (userInsurance) => userInsurance.user, {
+    nullable: true,
+  })
+  userInsurances: UserInsuranceEntity[];
+
+  @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
+    nullable: true,
+  })
+  leaveHistories: LeaveHistoryEntity[];
+
+  @OneToMany(
+    () => OvertimeHistoryEntity,
+    (overtimeHistory) => overtimeHistory.user,
+    {
+      nullable: true,
+    },
+  )
+  overtimeHistories: OvertimeHistoryEntity[];
 
   @ManyToOne(() => DepartmentEntity, (department) => department.users, {
     nullable: true,
@@ -158,22 +181,4 @@ export class UserEntity extends BaseEntity {
   //   (nursingTrainingResult) => nursingTrainingResult.user,
   // )
   // nursingTrainingResults: NursingTrainingResultsEntity[];
-
-  @CreateDateColumn({
-    type: 'timestamp',
-    name: 'created_at',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-  })
-  createdAt: Date;
-
-  @UpdateDateColumn({
-    type: 'timestamp',
-    name: 'updated_at',
-    default: () => 'CURRENT_TIMESTAMP(6)',
-    onUpdate: 'CURRENT_TIMESTAMP(6)',
-  })
-  updatedAt: Date;
-
-  @Column({ type: 'varchar', length: 5, name: 'status', default: '' })
-  status: string;
 }

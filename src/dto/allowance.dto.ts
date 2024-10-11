@@ -17,4 +17,7 @@ export class AllowanceDto {
   allowanceFee?: number;
 
   note?: string;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }

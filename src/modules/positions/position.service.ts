@@ -6,7 +6,6 @@ import { FilterDto } from 'src/dto/common.filter.dto';
 import { PositionDto } from 'src/dto/position.dto';
 
 import { PositionEntity } from 'src/entities/position.entity';
-import { Position } from 'src/models/position.model';
 
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
@@ -19,32 +18,49 @@ export class PositionService {
 
   async findAll(query: FilterDto): Promise<any> {
     const repository = this.positionRepository;
-    const relations: Relations<string> = {
+    const relations: any = {
       users: true,
       positionAllowances: true,
     };
-    // const select: Select<string> = {
-    //   users: {
-    //     userId: true,
-    //     fullName: true,
-    //   },
-    //   positionAllowances: true
-    // };
-    // const arrSearch: string[] = ['email'];
-
-    return filterGetAll({ query, repository, relations });
+    const select: any = {
+      positionId: true,
+      createdAt: true,
+      updatedAt: true,
+      positionName: true,
+      salaryCoefficient: true,
+      users: {
+        userId: true,
+        fullName: true,
+      },
+      positionAllowances: {
+        id: true,
+        positionId: true,
+        allowanceId: true,
+      },
+    };
+    return filterGetAll({ query, repository, relations, select });
   }
 
   async findOne(positionId: string): Promise<PositionEntity | null> {
     return await this.positionRepository.findOne({
       where: { positionId },
       relations: ['users', 'positionAllowances'],
-      // select: {
-      //   users: {
-      //     userId: true,
-      //     fullName: true,
-      //   },
-      // },
+      select: {
+        positionId: true,
+        createdAt: true,
+        updatedAt: true,
+        positionName: true,
+        salaryCoefficient: true,
+        users: {
+          userId: true,
+          fullName: true,
+        },
+        positionAllowances: {
+          id: true,
+          positionId: true,
+          allowanceId: true,
+        },
+      },
     });
   }
 

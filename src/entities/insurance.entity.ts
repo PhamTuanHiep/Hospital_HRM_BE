@@ -3,13 +3,10 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
-  ManyToMany,
   OneToMany,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
 import { UserInsuranceEntity } from './user-insurance.entity';
 
 @Entity('insurances')
@@ -17,12 +14,12 @@ export class InsuranceEntity extends BaseEntity {
   @PrimaryColumn({ name: 'insurance_id' })
   insuranceId: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'insurance_name' })
+  @Column({ type: 'varchar', length: 30, name: 'insurance_name' })
   insuranceName: string;
 
   @Column({
     type: 'varchar',
-    length: 250,
+    length: 10,
     name: 'insurance_type',
     default: 'E',
   })

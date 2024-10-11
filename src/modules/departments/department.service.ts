@@ -21,27 +21,36 @@ export class DepartmentService {
       users: true,
       overtimeHistories: true,
     };
-    // const select: Select<string> = {
-    //   users: {
-    //     userId: true,
-    //     fullName: true,
-    //   },
-    // };
-    // const arrSearch: string[] = ['email'];
+    const select: any = {
+      users: {
+        userId: true,
+        fullName: true,
+      },
+      overtimeHistories: {
+        overtimeHistoryId: true,
+        userId: true,
+        overtimeId: true,
+      },
+    };
 
-    return filterGetAll({ query, repository, relations });
+    return filterGetAll({ query, repository, relations, select });
   }
 
   async findOne(departmentId: string): Promise<DepartmentEntity | null> {
     return await this.departmentRepository.findOne({
       where: { departmentId },
       relations: ['users', 'overtimeHistories'],
-      // select: {
-      //   users: {
-      //     userId: true,
-      //     fullName: true,
-      //   },
-      // },
+      select: {
+        users: {
+          userId: true,
+          fullName: true,
+        },
+        overtimeHistories: {
+          overtimeHistoryId: true,
+          userId: true,
+          overtimeId: true,
+        },
+      },
     });
   }
 

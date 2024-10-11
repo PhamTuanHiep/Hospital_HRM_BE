@@ -30,8 +30,56 @@ export class UserService {
       leaveHistories: true,
       overtimeHistories: true,
     };
-
-    return filterGetAll({ query, repository, relations });
+    const select: any = {
+      userId: true,
+      fullName: true,
+      gender: true,
+      address: true,
+      phoneNumber: true,
+      nationality: true,
+      hometown: true,
+      birthday: true,
+      fatherFullName: true,
+      fatherBirthday: true,
+      motherFullName: true,
+      motherBirthday: true,
+      weeklySchedule: true,
+      jobDescription: true,
+      otherDescription: true,
+      updatedAt: true,
+      createdAt: true,
+      account: {
+        accountId: true,
+        email: true,
+        avatar: true,
+      },
+      department: {
+        departmentId: true,
+        departmentName: true,
+      },
+      leaveHistories: {
+        leaveHistoryId: true,
+        leaveId: true,
+        startDay: true,
+        endDay: true,
+      },
+      overtimeHistories: {
+        overtimeHistoryId: true,
+        overtimeId: true,
+        startDay: true,
+        endDay: true,
+      },
+      userInsurances: {
+        id: true,
+        insuranceId: true,
+      },
+      position: {
+        positionId: true,
+        positionName: true,
+        salaryCoefficient: true,
+      },
+    };
+    return filterGetAll({ query, repository, relations, select });
   }
 
   async findOne(userId: number): Promise<UserDto | null> {
@@ -45,12 +93,55 @@ export class UserService {
         'leaveHistories',
         'overtimeHistories',
       ],
-      // select: {
-      //   userInsurances: {
-      //     user: true,
-
-      //   },
-      // },
+      select: {
+        userId: true,
+        fullName: true,
+        gender: true,
+        address: true,
+        phoneNumber: true,
+        nationality: true,
+        hometown: true,
+        birthday: true,
+        fatherFullName: true,
+        fatherBirthday: true,
+        motherFullName: true,
+        motherBirthday: true,
+        weeklySchedule: true,
+        jobDescription: true,
+        otherDescription: true,
+        updatedAt: true,
+        createdAt: true,
+        account: {
+          accountId: true,
+          email: true,
+          avatar: true,
+        },
+        department: {
+          departmentId: true,
+          departmentName: true,
+        },
+        leaveHistories: {
+          leaveHistoryId: true,
+          leaveId: true,
+          startDay: true,
+          endDay: true,
+        },
+        overtimeHistories: {
+          overtimeHistoryId: true,
+          overtimeId: true,
+          startDay: true,
+          endDay: true,
+        },
+        userInsurances: {
+          id: true,
+          insuranceId: true,
+        },
+        position: {
+          positionId: true,
+          positionName: true,
+          salaryCoefficient: true,
+        },
+      },
     });
   }
 

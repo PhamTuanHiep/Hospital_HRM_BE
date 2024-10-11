@@ -27,6 +27,11 @@ export class LeaveHistoryService {
       leave: true,
     };
     const select: any = {
+      leaveHistoryId: true,
+      createdAt: true,
+      updatedAt: true,
+      startDay: true,
+      endDay: true,
       user: {
         userId: true,
         fullName: true,
@@ -47,6 +52,11 @@ export class LeaveHistoryService {
       where: { leaveHistoryId },
       relations: ['user', 'leave'],
       select: {
+        leaveHistoryId: true,
+        createdAt: true,
+        updatedAt: true,
+        startDay: true,
+        endDay: true,
         user: {
           userId: true,
           fullName: true,

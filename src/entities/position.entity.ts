@@ -15,7 +15,7 @@ export class PositionEntity extends BaseEntity {
   @PrimaryColumn({ name: 'position_id' })
   positionId: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'position_name' })
+  @Column({ type: 'varchar', length: 20, name: 'position_name' })
   positionName: string;
 
   @Column('decimal', {

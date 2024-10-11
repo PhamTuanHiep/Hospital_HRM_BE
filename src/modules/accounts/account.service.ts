@@ -32,6 +32,8 @@ export class AccountService {
     };
     const select: any = {
       accountId: true,
+      email: true,
+      password: true,
       createdAt: true,
       updatedAt: true,
       user: {

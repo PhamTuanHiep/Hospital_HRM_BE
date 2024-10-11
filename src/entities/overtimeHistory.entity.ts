@@ -1,10 +1,12 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { OvertimeEntity } from './overtime.entity';
 import { UserEntity } from './user.entity';
@@ -14,9 +16,6 @@ import { DepartmentEntity } from './department.entity';
 export class OvertimeHistoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'overtime_history_id' })
   overtimeHistoryId: number;
-
-  @Column({ type: 'date', name: 'days' })
-  days: string;
 
   @Column({ type: 'varchar', length: 250, name: 'note', default: '' })
   note: string;
@@ -30,19 +29,43 @@ export class OvertimeHistoryEntity extends BaseEntity {
   @Column({ name: 'department_id' })
   departmentId: string;
 
-  @ManyToOne(() => OvertimeEntity, (overtime) => overtime.overtimeHistories)
+  @Column({ type: 'date', name: 'start_day' })
+  startDay: string;
+
+  @Column({ type: 'date', name: 'end_day' })
+  endDay: string;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
+
+  @ManyToOne(() => OvertimeEntity, (overtime) => overtime.overtimeHistories, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'overtime_id' })
-  @Column({ type: 'varchar', length: 10 })
   overtime: OvertimeEntity;
 
-  @ManyToOne(() => UserEntity, (user) => user.overtimeHistories)
+  @ManyToOne(() => UserEntity, (user) => user.overtimeHistories, {
+    nullable: true,
+  })
   @JoinColumn({ name: 'user_id' })
-  @Column({ type: 'varchar', length: 5 })
   user: UserEntity;
 
   @ManyToOne(
     () => DepartmentEntity,
     (department) => department.overtimeHistories,
+    { nullable: true },
   )
   @JoinColumn({ name: 'department_id' })
   department: DepartmentEntity;

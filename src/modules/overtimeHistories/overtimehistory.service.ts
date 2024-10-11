@@ -30,32 +30,58 @@ export class OvertimeHistoryService {
       user: true,
       department: true,
     };
-    // const select: any = {
-    //   overtimeHistoryId: true,
-    //   createdAt: true,
-    //   updatedAt: true,
-    //   user: {
-    //     userovertimeHistoryId: true,
-    //     fullName: true,
-    //   },
-    //   insurance: {
-    //     insuranceovertimeHistoryId: true,
-    //     insuranceName: true,
-    //     insuranceType: true,
-    //     monthlyPercentage: true,
-    //   },
-    // };
+    const select: any = {
+      overtimeHistoryId: true,
+      createdAt: true,
+      updatedAt: true,
+      note: true,
+      startDay: true,
+      endDay: true,
+      overtime: {
+        overtimeId: true,
+        overtimeName: true,
+        overtimePay: true,
+      },
+      user: {
+        userId: true,
+        fullName: true,
+      },
+      department: {
+        departmentId: true,
+        departmentName: true,
+      },
+    };
 
-    return filterGetAll({ query, repository, relations });
+    return filterGetAll({ query, repository, relations, select });
   }
 
   async findOne(
     overtimeHistoryId: number,
   ): Promise<OvertimeHistoryEntity | null> {
-    // return await this.overtimeHistoryRepository.findOne({ where: { overtimeHistoryId } });
     return await this.overtimeHistoryRepository.findOne({
       where: { overtimeHistoryId },
       relations: ['overtime', 'user', 'department'],
+      select: {
+        overtimeHistoryId: true,
+        createdAt: true,
+        updatedAt: true,
+        note: true,
+        startDay: true,
+        endDay: true,
+        overtime: {
+          overtimeId: true,
+          overtimeName: true,
+          overtimePay: true,
+        },
+        user: {
+          userId: true,
+          fullName: true,
+        },
+        department: {
+          departmentId: true,
+          departmentName: true,
+        },
+      },
     });
   }
 

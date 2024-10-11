@@ -9,4 +9,9 @@ export class LeaveDto {
 
   @IsNotEmpty()
   maxLeaveEntitlement: number;
+
+  unit: string;
+
+  createdAt?: Date;
+  updatedAt?: Date;
 }

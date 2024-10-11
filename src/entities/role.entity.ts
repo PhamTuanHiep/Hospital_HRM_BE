@@ -14,7 +14,7 @@ export class RoleEntity extends BaseEntity {
   @PrimaryColumn({ name: 'role_id' })
   roleId: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'role_name' })
+  @Column({ type: 'varchar', length: 10, name: 'role_name' })
   roleName: string;
 
   @CreateDateColumn({

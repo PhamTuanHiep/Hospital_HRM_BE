@@ -1,10 +1,12 @@
 import {
   BaseEntity,
   Column,
+  CreateDateColumn,
   Entity,
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { LeaveEntity } from './leave.entity';
@@ -20,6 +22,30 @@ export class LeaveHistoryEntity extends BaseEntity {
   @Column({ name: 'leave_id' })
   leaveId: string;
 
+  @Column({ type: 'date', name: 'start_day' })
+  startDay: string;
+
+  @Column({ type: 'date', name: 'end_day' })
+  endDay: string;
+
+  @Column({ type: 'varchar', length: 250, name: 'note', nullable: true })
+  note: string;
+
+  @CreateDateColumn({
+    type: 'timestamp',
+    name: 'created_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+  })
+  createdAt: Date;
+
+  @UpdateDateColumn({
+    type: 'timestamp',
+    name: 'updated_at',
+    default: () => 'CURRENT_TIMESTAMP(6)',
+    onUpdate: 'CURRENT_TIMESTAMP(6)',
+  })
+  updatedAt: Date;
+
   @ManyToOne(() => UserEntity, (user) => user.leaveHistories, {
     nullable: true,
   })
@@ -31,13 +57,4 @@ export class LeaveHistoryEntity extends BaseEntity {
   })
   @JoinColumn({ name: 'leave_id' })
   leave: LeaveEntity;
-
-  @Column({ type: 'date', name: 'start_day' })
-  startDay: string;
-
-  @Column({ type: 'date', name: 'end_day' })
-  endDay: string;
-
-  @Column({ type: 'varchar', length: 250, name: 'note', nullable: true })
-  note: string;
 }

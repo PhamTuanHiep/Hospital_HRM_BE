@@ -23,7 +23,8 @@ export class InsuranceService {
     };
     const select: any = {
       userInsurances: {
-        user: true,
+        id: true,
+        userId: true,
       },
     };
 
@@ -34,12 +35,12 @@ export class InsuranceService {
     return await this.insuranceRepository.findOne({
       where: { insuranceId },
       relations: ['userInsurances'],
-      // select: {
-      //   userInsurances: {
-      //     user: true,
-
-      //   },
-      // },
+      select: {
+        userInsurances: {
+          id: true,
+          userId: true,
+        },
+      },
     });
   }
 

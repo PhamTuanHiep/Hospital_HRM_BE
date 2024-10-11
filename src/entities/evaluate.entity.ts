@@ -21,7 +21,7 @@ export class EvaluateEntity extends BaseEntity {
   workLoad: number;
 
   @Column({ type: 'int', name: 'quanlity_of_work' })
-  quanlityOfWork: number;
+  qualityOfWork: number;
 
   @Column({ type: 'int', name: 'capacity_of_work' })
   capacityOfWork: number;
@@ -83,7 +83,7 @@ export class EvaluateEntity extends BaseEntity {
   calculateAverage() {
     let sum =
       this.workLoad +
-      this.quanlityOfWork +
+      this.qualityOfWork +
       this.capacityOfWork +
       this.workInitiatives +
       this.workingStyle +

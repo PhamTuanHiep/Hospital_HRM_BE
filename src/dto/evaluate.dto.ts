@@ -12,7 +12,7 @@ export class EvaluateDto {
 
   @Min(1)
   @Max(5)
-  quanlityOfWork?: number;
+  qualityOfWork?: number;
 
   @Min(1)
   @Max(5)
