@@ -18,6 +18,17 @@ export class DepartmentEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 50, name: 'department_name' })
   departmentName: string;
 
+  @Column({ type: 'varchar', length: 50, name: 'location', nullable: true })
+  location: string;
+
+  @Column({
+    type: 'varchar',
+    length: 250,
+    name: 'func_description',
+    nullable: true,
+  })
+  funcDescription: string;
+
   @OneToMany(() => UserEntity, (user) => user.department, { nullable: true })
   users: UserEntity[];
 

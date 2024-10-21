@@ -12,10 +12,6 @@ export class EvaluateDto {
 
   @Min(1)
   @Max(5)
-  qualityOfWork?: number;
-
-  @Min(1)
-  @Max(5)
   capacityOfWork?: number;
 
   quantityOfScientificWorks?: number;
@@ -26,19 +22,11 @@ export class EvaluateDto {
 
   @Min(1)
   @Max(5)
-  professionalEthics?: number;
-
-  @Min(1)
-  @Max(5)
   workingStyle?: number;
 
   @Min(1)
   @Max(5)
   responsibilityForWork?: number;
-
-  @Min(1)
-  @Max(5)
-  workAttitude?: number;
 
   @Min(1)
   @Max(5)

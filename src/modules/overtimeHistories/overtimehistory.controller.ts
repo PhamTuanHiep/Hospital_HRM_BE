@@ -40,7 +40,7 @@ export class OvertimeHistoryControllers {
 
   @Put('/:overtimeHistoryId')
   async update(
-    @Param('overtimeHistoryId') overtimeHistoryId: number,
+    @Param('overtimeHistoryId', ParseIntPipe) overtimeHistoryId: number,
     @Body() overtimeHistoryDto: OvertimeHistoryDto,
   ): Promise<any> {
     return this.overtimeHistoryService.update(
@@ -51,7 +51,7 @@ export class OvertimeHistoryControllers {
 
   @Delete('/:overtimeHistoryId')
   async delete(
-    @Param('overtimeHistoryId') leaveHistoryId: number,
+    @Param('overtimeHistoryId', ParseIntPipe) leaveHistoryId: number,
   ): Promise<any> {
     return this.overtimeHistoryService.delete(leaveHistoryId);
   }

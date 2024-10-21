@@ -5,9 +5,12 @@ import {
   Column,
   CreateDateColumn,
   Entity,
+  JoinColumn,
+  ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
+import { UserEntity } from './user.entity';
 
 @Entity('evaluates') //table name
 export class EvaluateEntity extends BaseEntity {
@@ -20,9 +23,6 @@ export class EvaluateEntity extends BaseEntity {
   @Column({ type: 'int', name: 'work_load' })
   workLoad: number;
 
-  @Column({ type: 'int', name: 'quanlity_of_work' })
-  qualityOfWork: number;
-
   @Column({ type: 'int', name: 'capacity_of_work' })
   capacityOfWork: number;
 
@@ -32,9 +32,6 @@ export class EvaluateEntity extends BaseEntity {
   @Column({ type: 'int', name: 'work_initiatives' })
   workInitiatives: number;
 
-  @Column({ type: 'int', name: 'professional_ethics' })
-  professionalEthics: number;
-
   @Column({ type: 'int', name: 'working_style' })
   workingStyle: number;
 
@@ -43,9 +40,6 @@ export class EvaluateEntity extends BaseEntity {
     name: 'responsibility_for_work',
   })
   responsibilityForWork: number;
-
-  @Column({ type: 'int', name: 'work_attitude' })
-  workAttitude: number;
 
   @Column({ type: 'int', name: 'work_spirit' })
   workSpirit: number;
@@ -77,21 +71,24 @@ export class EvaluateEntity extends BaseEntity {
   })
   updatedAt: Date;
 
+  @ManyToOne(() => UserEntity, (user) => user.evaluateHistories)
+  @JoinColumn({ name: 'user_id' })
+  user: UserEntity;
+
   // Tính toán giá trị trung bình trước khi insert
   @BeforeInsert()
   @BeforeUpdate()
   calculateAverage() {
     let sum =
       this.workLoad +
-      this.qualityOfWork +
       this.capacityOfWork +
+      this.quantityOfScientificWorks +
       this.workInitiatives +
       this.workingStyle +
       this.responsibilityForWork +
-      this.workAttitude +
       this.workSpirit +
       this.workResult;
-    let count = 9;
+    let count = 8;
     this.averageScore = sum / count;
   }
 }

@@ -29,6 +29,7 @@ export class UserService {
       userInsurances: true,
       leaveHistories: true,
       overtimeHistories: true,
+      evaluateHistories: true,
     };
     const select: any = {
       userId: true,
@@ -36,6 +37,7 @@ export class UserService {
       gender: true,
       address: true,
       phoneNumber: true,
+      nation: true,
       nationality: true,
       hometown: true,
       birthday: true,
@@ -48,6 +50,7 @@ export class UserService {
       otherDescription: true,
       updatedAt: true,
       createdAt: true,
+      status: true,
       account: {
         accountId: true,
         email: true,
@@ -78,6 +81,20 @@ export class UserService {
         positionName: true,
         salaryCoefficient: true,
       },
+      evaluateHistories: {
+        evaluateId: true,
+        workLoad: true,
+        capacityOfWork: true,
+        quantityOfScientificWorks: true,
+        workInitiatives: true,
+        workingStyle: true,
+        responsibilityForWork: true,
+        workSpirit: true,
+        workResult: true,
+        averageScore: true,
+        createdAt: true,
+        updatedAt: true,
+      },
     };
     return filterGetAll({ query, repository, relations, select });
   }
@@ -92,6 +109,7 @@ export class UserService {
         'userInsurances',
         'leaveHistories',
         'overtimeHistories',
+        'evaluateHistories',
       ],
       select: {
         userId: true,
@@ -99,6 +117,7 @@ export class UserService {
         gender: true,
         address: true,
         phoneNumber: true,
+        nation: true,
         nationality: true,
         hometown: true,
         birthday: true,
@@ -140,6 +159,20 @@ export class UserService {
           positionId: true,
           positionName: true,
           salaryCoefficient: true,
+        },
+        evaluateHistories: {
+          evaluateId: true,
+          workLoad: true,
+          capacityOfWork: true,
+          quantityOfScientificWorks: true,
+          workInitiatives: true,
+          workingStyle: true,
+          responsibilityForWork: true,
+          workSpirit: true,
+          workResult: true,
+          averageScore: true,
+          createdAt: true,
+          updatedAt: true,
         },
       },
     });

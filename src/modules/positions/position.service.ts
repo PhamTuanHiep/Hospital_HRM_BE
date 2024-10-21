@@ -38,7 +38,10 @@ export class PositionService {
         allowanceId: true,
       },
     };
-    return filterGetAll({ query, repository, relations, select });
+
+    const order = { positionId: 'ASC' };
+
+    return filterGetAll({ query, repository, relations, select, order });
   }
 
   async findOne(positionId: string): Promise<PositionEntity | null> {

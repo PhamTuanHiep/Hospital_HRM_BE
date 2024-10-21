@@ -30,10 +30,13 @@ export class DepartmentService {
         overtimeHistoryId: true,
         userId: true,
         overtimeId: true,
+        startDay: true,
+        endDay: true,
       },
     };
+    const order = { departmentId: 'ASC' };
 
-    return filterGetAll({ query, repository, relations, select });
+    return filterGetAll({ query, repository, relations, select, order });
   }
 
   async findOne(departmentId: string): Promise<DepartmentEntity | null> {
@@ -49,6 +52,8 @@ export class DepartmentService {
           overtimeHistoryId: true,
           userId: true,
           overtimeId: true,
+          startDay: true,
+          endDay: true,
         },
       },
     });

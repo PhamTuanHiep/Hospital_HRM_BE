@@ -8,6 +8,10 @@ export class DepartmentDto {
   @IsNotEmpty()
   departmentName: string;
 
+  location?: string;
+
+  funcDescription?: string;
+
   users?: UserEntity[];
 
   createdAt?: Date;

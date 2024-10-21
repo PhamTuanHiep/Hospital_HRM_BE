@@ -36,6 +36,7 @@ export class AccountService {
       password: true,
       createdAt: true,
       updatedAt: true,
+      avatar: true,
       user: {
         userId: true,
         fullName: true,
@@ -55,9 +56,12 @@ export class AccountService {
       where: { accountId },
       relations: ['user', 'role'],
       select: {
-        // accountId: true,
-        // createdAt: true,
-        // updatedAt: true,
+        accountId: true,
+        email: true,
+        password: true,
+        createdAt: true,
+        updatedAt: true,
+        avatar: true,
         user: {
           userId: true,
           fullName: true,

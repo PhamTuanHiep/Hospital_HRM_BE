@@ -18,6 +18,7 @@ import { OvertimeHistoryEntity } from './overtimeHistory.entity';
 import { MedicalTrainingResultsEntity } from './medicalTrainingResults.entity';
 import { NursingTrainingResultsEntity } from './nursingTrainingResults.entity';
 import { UserInsuranceEntity } from './user-insurance.entity';
+import { EvaluateEntity } from './evaluate.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -27,8 +28,8 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 30, name: 'full_name' })
   fullName: string;
 
-  @Column({ type: 'varchar', length: 1, name: 'gender' })
-  gender: string;
+  @Column({ name: 'gender,', default: 1 })
+  gender: number;
 
   @Column({ type: 'varchar', length: 50, name: 'address' })
   address: string;
@@ -133,7 +134,7 @@ export class UserEntity extends BaseEntity {
   })
   updatedAt: Date;
 
-  @Column({ type: 'varchar', length: 5, name: 'status', nullable: true })
+  @Column({ type: 'varchar', length: 30, name: 'status', nullable: true })
   status: string;
 
   @OneToOne(() => AccountEntity, (account) => account.user, { nullable: true })
@@ -176,6 +177,8 @@ export class UserEntity extends BaseEntity {
   )
   medicalTrainingResults: MedicalTrainingResultsEntity[];
 
+  @OneToMany(() => EvaluateEntity, (evaluateHistory) => evaluateHistory.user)
+  evaluateHistories: EvaluateEntity[];
   // @OneToMany(
   //   () => NursingTrainingResultsEntity,
   //   (nursingTrainingResult) => nursingTrainingResult.user,
