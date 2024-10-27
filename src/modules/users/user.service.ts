@@ -30,6 +30,7 @@ export class UserService {
       leaveHistories: true,
       overtimeHistories: true,
       evaluateHistories: true,
+      contractHistories: true,
     };
     const select: any = {
       userId: true,
@@ -95,6 +96,12 @@ export class UserService {
         createdAt: true,
         updatedAt: true,
       },
+      contractHistories: {
+        contractHistoryId: true,
+        contractId: true,
+        startDay: true,
+        endDay: true,
+      },
     };
     return filterGetAll({ query, repository, relations, select });
   }
@@ -110,6 +117,7 @@ export class UserService {
         'leaveHistories',
         'overtimeHistories',
         'evaluateHistories',
+        'contractHistories',
       ],
       select: {
         userId: true,
@@ -174,6 +182,12 @@ export class UserService {
           createdAt: true,
           updatedAt: true,
         },
+        contractHistories: {
+          contractHistoryId: true,
+          contractId: true,
+          startDay: true,
+          endDay: true,
+        },
       },
     });
   }
@@ -206,6 +220,7 @@ export class UserService {
           'userInsurances',
           'leaveHistories',
           'overtimeHistories',
+          'contractHistories',
         ],
       });
     } catch (error) {

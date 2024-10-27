@@ -37,6 +37,10 @@ import { UserInsuranceModule } from './modules/user_insurance/user_insurance.mod
 import { UserInsuranceEntity } from './entities/user-insurance.entity';
 import { PositionAllowanceModule } from './modules/position-allowance/position-allowance.module';
 import { PositionAllowanceEntity } from './entities/position-allowance.entity';
+import { ContractEntity } from './entities/contract.entity';
+import { ContractHistoryEntity } from './entities/contractHistory.entity';
+import { ContractModule } from './modules/contracts/overtime.module';
+import { ContractHistoryModule } from './modules/contractHistories/contractHistory.module';
 
 // @Module({
 //   imports: [
@@ -82,6 +86,8 @@ import { PositionAllowanceEntity } from './entities/position-allowance.entity';
         MedicalTrainingResultsEntity,
         NursingTrainingResultsEntity,
         PositionAllowanceEntity,
+        ContractEntity,
+        ContractHistoryEntity,
       ],
       synchronize: true,
     }),
@@ -102,6 +108,8 @@ import { PositionAllowanceEntity } from './entities/position-allowance.entity';
     MedicalTrainingResultsModule,
     NursingTrainingResultsModule,
     ImageModule,
+    ContractModule,
+    ContractHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

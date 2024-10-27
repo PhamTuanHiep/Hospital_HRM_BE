@@ -19,6 +19,7 @@ import { MedicalTrainingResultsEntity } from './medicalTrainingResults.entity';
 import { NursingTrainingResultsEntity } from './nursingTrainingResults.entity';
 import { UserInsuranceEntity } from './user-insurance.entity';
 import { EvaluateEntity } from './evaluate.entity';
+import { ContractHistoryEntity } from './contractHistory.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -164,6 +165,15 @@ export class UserEntity extends BaseEntity {
     },
   )
   overtimeHistories: OvertimeHistoryEntity[];
+
+  @OneToMany(
+    () => ContractHistoryEntity,
+    (contractHistory) => contractHistory.user,
+    {
+      nullable: true,
+    },
+  )
+  contractHistories: ContractHistoryEntity[];
 
   @ManyToOne(() => DepartmentEntity, (department) => department.users, {
     nullable: true,
