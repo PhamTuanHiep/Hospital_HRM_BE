@@ -118,6 +118,7 @@ export class UserService {
         'overtimeHistories',
         'evaluateHistories',
         'contractHistories',
+        'salaryHistories',
       ],
       select: {
         userId: true,
@@ -150,8 +151,10 @@ export class UserService {
         leaveHistories: {
           leaveHistoryId: true,
           leaveId: true,
-          startDay: true,
-          endDay: true,
+          month: true,
+          year: true,
+          numOfDaysOff: true,
+          dayOffList: true,
         },
         overtimeHistories: {
           overtimeHistoryId: true,
@@ -187,6 +190,18 @@ export class UserService {
           contractId: true,
           startDay: true,
           endDay: true,
+        },
+        salaryHistories: {
+          month: true,
+          year: true,
+          attendance: true,
+          paidLeave: true,
+          unpaidLeave: true,
+          numOfDaysOff: true,
+          standardWorkDays: true,
+          bonus: true,
+          allowance: true,
+          salary: true,
         },
       },
     });

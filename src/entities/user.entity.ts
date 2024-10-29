@@ -20,6 +20,7 @@ import { NursingTrainingResultsEntity } from './nursingTrainingResults.entity';
 import { UserInsuranceEntity } from './user-insurance.entity';
 import { EvaluateEntity } from './evaluate.entity';
 import { ContractHistoryEntity } from './contractHistory.entity';
+import { SalaryHistoryEntity } from './salaryHistory.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -194,4 +195,7 @@ export class UserEntity extends BaseEntity {
   //   (nursingTrainingResult) => nursingTrainingResult.user,
   // )
   // nursingTrainingResults: NursingTrainingResultsEntity[];
+
+  @OneToMany(() => SalaryHistoryEntity, (salaryHistory) => salaryHistory.user)
+  salaryHistories: SalaryHistoryEntity[];
 }

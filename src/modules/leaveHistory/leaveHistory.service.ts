@@ -30,8 +30,10 @@ export class LeaveHistoryService {
       leaveHistoryId: true,
       createdAt: true,
       updatedAt: true,
-      startDay: true,
-      endDay: true,
+      month: true,
+      year: true,
+      numOfDaysOff: true,
+      dayOffList: true,
       user: {
         userId: true,
         fullName: true,
@@ -42,9 +44,8 @@ export class LeaveHistoryService {
         maxLeaveEntitlement: true,
       },
     };
-    const order = { startDay: 'ASC' };
 
-    return filterGetAll({ query, repository, relations, select, order });
+    return filterGetAll({ query, repository, relations, select });
   }
 
   async findOne(leaveHistoryId: number): Promise<LeaveHistoryEntity | null> {
@@ -55,8 +56,10 @@ export class LeaveHistoryService {
         leaveHistoryId: true,
         createdAt: true,
         updatedAt: true,
-        startDay: true,
-        endDay: true,
+        month: true,
+        year: true,
+        numOfDaysOff: true,
+        dayOffList: true,
         user: {
           userId: true,
           fullName: true,

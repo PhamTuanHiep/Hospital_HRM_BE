@@ -41,6 +41,8 @@ import { ContractEntity } from './entities/contract.entity';
 import { ContractHistoryEntity } from './entities/contractHistory.entity';
 import { ContractModule } from './modules/contracts/overtime.module';
 import { ContractHistoryModule } from './modules/contractHistories/contractHistory.module';
+import { SalaryHistoryModule } from './modules/salaryHistories/salaryHistory.module';
+import { SalaryHistoryEntity } from './entities/salaryHistory.entity';
 
 // @Module({
 //   imports: [
@@ -88,6 +90,7 @@ import { ContractHistoryModule } from './modules/contractHistories/contractHisto
         PositionAllowanceEntity,
         ContractEntity,
         ContractHistoryEntity,
+        SalaryHistoryEntity,
       ],
       synchronize: true,
     }),
@@ -110,6 +113,7 @@ import { ContractHistoryModule } from './modules/contractHistories/contractHisto
     ImageModule,
     ContractModule,
     ContractHistoryModule,
+    SalaryHistoryModule,
   ],
   controllers: [AppController],
   providers: [AppService],

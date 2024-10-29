@@ -2,10 +2,14 @@ import { IsNotEmpty } from 'class-validator';
 
 export class ContractDto {
   @IsNotEmpty()
-  contractId?: string;
+  contractId: string;
 
   @IsNotEmpty()
-  contractName?: string;
+  contractNameVI: string;
+
+  @IsNotEmpty()
+  contractNameEN: string;
+
   note?: string[];
   createdAt?: Date;
   updatedAt?: Date;

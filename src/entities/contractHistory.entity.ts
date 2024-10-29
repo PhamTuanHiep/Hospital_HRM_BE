@@ -22,10 +22,10 @@ export class ContractHistoryEntity extends BaseEntity {
   @Column({ name: 'contract_id', length: 5 })
   contractId: string;
 
-  @Column({ type: 'date', name: 'start_day' })
+  @Column({ type: 'varchar', name: 'start_day' })
   startDay: string;
 
-  @Column({ type: 'date', name: 'end_day' })
+  @Column({ type: 'varchar', name: 'end_day' })
   endDay: string;
 
   @Column({ type: 'varchar', length: 250, name: 'note', default: '' })

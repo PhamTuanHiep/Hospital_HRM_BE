@@ -22,14 +22,21 @@ export class LeaveHistoryEntity extends BaseEntity {
   @Column({ name: 'leave_id' })
   leaveId: string;
 
-  @Column({ type: 'date', name: 'start_day' })
-  startDay: string;
+  @Column({ type: 'varchar', length: 2, name: 'month' })
+  month: string;
 
-  @Column({ type: 'date', name: 'end_day' })
-  endDay: string;
+  @Column({ type: 'varchar', length: 4, name: 'year' })
+  year: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'note', nullable: true })
-  note: string;
+  @Column({ name: 'num_of_days_off', default: 0 })
+  numOfDaysOff: number;
+
+  @Column({
+    type: 'json',
+    name: 'day_off_list',
+    default: () => `JSON_ARRAY()`,
+  })
+  dayOffList: number[];
 
   @CreateDateColumn({
     type: 'timestamp',

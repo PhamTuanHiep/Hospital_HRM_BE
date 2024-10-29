@@ -2,9 +2,10 @@ export class LeaveHistoryDto {
   leaveHistoryId: number;
   userId: number;
   leaveId: string;
-  startDay: string;
-  endDay: string;
-  note?: string;
+  month: string;
+  year: string;
+  numOfDaysOff: number;
+  dayOffList: number[];
   createdAt?: Date;
   updatedAt?: Date;
 }

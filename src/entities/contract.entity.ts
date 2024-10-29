@@ -14,8 +14,11 @@ export class ContractEntity extends BaseEntity {
   @PrimaryColumn({ name: 'contract_id', length: 5 })
   contractId: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'contract_name' })
-  contractName: string;
+  @Column({ type: 'varchar', length: 50, name: 'contract_name_vi' })
+  contractNameVI: string;
+
+  @Column({ type: 'varchar', length: 50, name: 'contract_name_en' })
+  contractNameEN: string;
 
   @Column({
     type: 'json',

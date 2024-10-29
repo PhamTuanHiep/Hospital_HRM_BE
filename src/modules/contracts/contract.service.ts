@@ -20,6 +20,12 @@ export class ContractService {
       contractHistories: true,
     };
     const select: any = {
+      contractId: true,
+      contractNameVI: true,
+      contractNameEN: true,
+      note: true,
+      createdAt: true,
+      updatedAt: true,
       contractHistories: true,
     };
     const order = { contractId: 'ASC' };
@@ -32,7 +38,18 @@ export class ContractService {
       where: { contractId },
       relations: ['contractHistories'],
       select: {
-        contractHistories: true,
+        contractId: true,
+        contractNameVI: true,
+        contractNameEN: true,
+        note: true,
+        createdAt: true,
+        updatedAt: true,
+        contractHistories: {
+          contractHistoryId: true,
+          contractId: true,
+          endDay: true,
+          startDay: true,
+        },
       },
     });
   }
