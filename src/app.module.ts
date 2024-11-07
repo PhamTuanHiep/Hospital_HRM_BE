@@ -43,6 +43,10 @@ import { ContractModule } from './modules/contracts/overtime.module';
 import { ContractHistoryModule } from './modules/contractHistories/contractHistory.module';
 import { SalaryHistoryModule } from './modules/salaryHistories/salaryHistory.module';
 import { SalaryHistoryEntity } from './entities/salaryHistory.entity';
+import { RecruitmentPostModule } from './modules/recruitmentPosts/recruitmentPost.module';
+import { RecruitmentPostEntity } from './entities/recruitmentPost.entity';
+import { AnnouncementPostModule } from './modules/announcementPosts/announcementPost.module';
+import { AnnouncementPostEntity } from './entities/announcementPost.entity';
 
 // @Module({
 //   imports: [
@@ -91,6 +95,8 @@ import { SalaryHistoryEntity } from './entities/salaryHistory.entity';
         ContractEntity,
         ContractHistoryEntity,
         SalaryHistoryEntity,
+        RecruitmentPostEntity,
+        AnnouncementPostEntity,
       ],
       synchronize: true,
     }),
@@ -114,6 +120,8 @@ import { SalaryHistoryEntity } from './entities/salaryHistory.entity';
     ContractModule,
     ContractHistoryModule,
     SalaryHistoryModule,
+    RecruitmentPostModule,
+    AnnouncementPostModule,
   ],
   controllers: [AppController],
   providers: [AppService],

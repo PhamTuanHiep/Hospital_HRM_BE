@@ -31,6 +31,9 @@ export class UserService {
       overtimeHistories: true,
       evaluateHistories: true,
       contractHistories: true,
+      salaryHistories: true,
+      recruitmentPosts: true,
+      announcementPosts: true,
     };
     const select: any = {
       userId: true,
@@ -64,8 +67,10 @@ export class UserService {
       leaveHistories: {
         leaveHistoryId: true,
         leaveId: true,
-        startDay: true,
-        endDay: true,
+        month: true,
+        year: true,
+        numOfDaysOff: true,
+        dayOffList: true,
       },
       overtimeHistories: {
         overtimeHistoryId: true,
@@ -102,6 +107,21 @@ export class UserService {
         startDay: true,
         endDay: true,
       },
+      salaryHistories: {
+        salaryHistoryId: true,
+        month: true,
+        year: true,
+        attendance: true,
+        paidLeave: true,
+        unpaidLeave: true,
+        numOfDaysOff: true,
+        standardWorkDays: true,
+        bonus: true,
+        allowance: true,
+        salary: true,
+      },
+      recruitmentPosts: true,
+      announcementPosts: true,
     };
     return filterGetAll({ query, repository, relations, select });
   }
@@ -119,6 +139,8 @@ export class UserService {
         'evaluateHistories',
         'contractHistories',
         'salaryHistories',
+        'recruitmentPosts',
+        'announcementPosts',
       ],
       select: {
         userId: true,
@@ -192,6 +214,7 @@ export class UserService {
           endDay: true,
         },
         salaryHistories: {
+          salaryHistoryId: true,
           month: true,
           year: true,
           attendance: true,
@@ -203,6 +226,8 @@ export class UserService {
           allowance: true,
           salary: true,
         },
+        recruitmentPosts: true,
+        announcementPosts: true,
       },
     });
   }
@@ -236,6 +261,7 @@ export class UserService {
           'leaveHistories',
           'overtimeHistories',
           'contractHistories',
+          'salaryHistories',
         ],
       });
     } catch (error) {

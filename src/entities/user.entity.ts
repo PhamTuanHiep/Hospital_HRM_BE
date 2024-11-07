@@ -21,6 +21,8 @@ import { UserInsuranceEntity } from './user-insurance.entity';
 import { EvaluateEntity } from './evaluate.entity';
 import { ContractHistoryEntity } from './contractHistory.entity';
 import { SalaryHistoryEntity } from './salaryHistory.entity';
+import { AnnouncementPostEntity } from './announcementPost.entity';
+import { RecruitmentPostEntity } from './recruitmentPost.entity';
 
 @Entity('users') //table name
 export class UserEntity extends BaseEntity {
@@ -198,4 +200,16 @@ export class UserEntity extends BaseEntity {
 
   @OneToMany(() => SalaryHistoryEntity, (salaryHistory) => salaryHistory.user)
   salaryHistories: SalaryHistoryEntity[];
+
+  @OneToMany(
+    () => RecruitmentPostEntity,
+    (recruitmentPost) => recruitmentPost.user,
+  )
+  recruitmentPosts: RecruitmentPostEntity[];
+
+  @OneToMany(
+    () => AnnouncementPostEntity,
+    (announcementPost) => announcementPost.user,
+  )
+  announcementPosts: AnnouncementPostEntity[];
 }

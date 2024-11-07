@@ -143,15 +143,17 @@ export class AccountService {
         accountId,
       },
     });
-    const filePath = extractFilePathFromUrl(accountDelete.avatar);
-    try {
-      if (filePath) {
-        await this.bucket.file(filePath).delete();
+    if (accountDelete.avatar) {
+      const filePath = extractFilePathFromUrl(accountDelete.avatar);
+      try {
+        if (filePath) {
+          await this.bucket.file(filePath).delete();
+        }
+        console.log(`File ${filePath} deleted successfully.`);
+      } catch (error) {
+        console.error(`Failed to delete file ${filePath}:`, error);
+        throw new Error(`Could not delete file ${filePath}.`);
       }
-      console.log(`File ${filePath} deleted successfully.`);
-    } catch (error) {
-      console.error(`Failed to delete file ${filePath}:`, error);
-      throw new Error(`Could not delete file ${filePath}.`);
     }
     return await this.accountRepository.delete(accountId);
   }

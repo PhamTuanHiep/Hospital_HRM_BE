@@ -21,6 +21,7 @@ import { AccountEntity } from 'src/entities/account.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageService } from '../image/image.service';
 import { fileFilterInterceptor } from 'src/common/common.use.helper';
+import { AVATAR_FOLDER } from 'src/common/common.constants';
 
 @Controller('accounts')
 export class AccountControllers {
@@ -57,11 +58,9 @@ export class AccountControllers {
     if (!file) {
       throw new BadRequestException('File is required');
     }
-    const imageUrl = await this.imageService.uploadImage(file);
+    const imageUrl = await this.imageService.uploadImage(file, AVATAR_FOLDER);
     const userId = accountDto.userId;
     const roleId = accountDto.roleId ?? 'user';
-    console.log('-userId:', userId);
-    console.log('-roleId:', roleId);
 
     return this.accountService.create(userId, roleId, {
       ...accountDto,
@@ -85,7 +84,7 @@ export class AccountControllers {
       throw new BadRequestException(req.fileValidationError);
     }
     if (file) {
-      const imageUrl = await this.imageService.uploadImage(file);
+      const imageUrl = await this.imageService.uploadImage(file, AVATAR_FOLDER);
       accountDto.avatar = imageUrl;
     }
     return this.accountService.update(accountId, accountDto);
