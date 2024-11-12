@@ -1,7 +1,7 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class RecruitmentPostDto {
-  recruitmentPostId: number;
+  // recruitmentPostId: number;
 
   @IsNotEmpty()
   userId: number;
@@ -24,5 +24,5 @@ export class RecruitmentPostDto {
   @IsNotEmpty()
   contact: string;
 
-  image: string;
+  image?: string;
 }

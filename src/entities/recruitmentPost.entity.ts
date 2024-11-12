@@ -21,7 +21,7 @@ export class RecruitmentPostEntity extends BaseEntity {
   @Column({ name: 'title', length: 200 })
   title: string;
 
-  @Column({ name: 'subtitle' })
+  @Column({ name: 'sub_title' })
   subtitle: string;
 
   @Column({ name: 'general_requirements', length: 1000 })

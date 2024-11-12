@@ -96,28 +96,31 @@ export class RecruitmentPostService {
   async update(
     recruitmentPostId: number,
     recruitmentPostDto: RecruitmentPostDto,
+    imageUrl?: string,
   ): Promise<UpdateResult> {
     const { image, ...recruitmentPost } = recruitmentPostDto;
-    if (image) {
-      const recruitmentPostUpdate =
-        await this.recruitmentPostRepository.findOne({
-          where: {
-            recruitmentPostId,
-          },
-        });
-
-      const filePath = extractFilePathFromUrl(recruitmentPostUpdate.image);
-      if (filePath) {
-        await this.bucket.file(filePath).delete();
+    const recruitmentPostUpdate = await this.recruitmentPostRepository.findOne({
+      where: {
+        recruitmentPostId,
+      },
+    });
+    if (imageUrl) {
+      if (image) {
+        const filePath = extractFilePathFromUrl(recruitmentPostUpdate.image);
+        if (filePath) {
+          await this.bucket.file(filePath).delete();
+        }
+        try {
+          console.log(`File ${filePath} deleted successfully.`);
+        } catch (error) {
+          console.error(`Failed to delete file ${filePath}:`, error);
+          throw new Error(`Could not delete file ${filePath}.`);
+        }
       }
-      try {
-        console.log(`File ${filePath} deleted successfully.`);
-      } catch (error) {
-        console.error(`Failed to delete file ${filePath}:`, error);
-        throw new Error(`Could not delete file ${filePath}.`);
-      }
+      recruitmentPostDto.image = imageUrl;
+    } else {
+      recruitmentPostDto.image = recruitmentPostUpdate.image;
     }
-
     return await this.recruitmentPostRepository.update(
       recruitmentPostId,
       recruitmentPostDto,

@@ -49,7 +49,6 @@ export class RecruitmentPostControllers {
   )
   async create(
     @Req() req: any,
-
     @Body(new ValidationPipe()) recruitmentPostDto: RecruitmentPostDto,
     @UploadedFile() file: Express.Multer.File,
   ) {
@@ -58,8 +57,10 @@ export class RecruitmentPostControllers {
     }
 
     if (!file) {
-      throw new BadRequestException('File is required');
+      throw new BadRequestException('File image is required');
     }
+    console.log('file:', file);
+
     const imageUrl = await this.imageService.uploadImage(
       file,
       RECRUITMENT_POST_IMAGE_FOLDER,
@@ -78,20 +79,27 @@ export class RecruitmentPostControllers {
   )
   async update(
     @Req() req: any,
-    @UploadedFile() file: Express.Multer.File,
     @Param('recruitmentPostId', ParseIntPipe) recruitmentPostId: number,
     @Body() recruitmentPostDto: RecruitmentPostDto,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     if (req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
     }
     if (file) {
+      console.log('file:', file);
       const imageUrl = await this.imageService.uploadImage(
         file,
         RECRUITMENT_POST_IMAGE_FOLDER,
       );
-      recruitmentPostDto.image = imageUrl;
+
+      return this.recruitmentPostService.update(
+        recruitmentPostId,
+        recruitmentPostDto,
+        imageUrl,
+      );
     }
+    console.log('no-file:');
     return this.recruitmentPostService.update(
       recruitmentPostId,
       recruitmentPostDto,
