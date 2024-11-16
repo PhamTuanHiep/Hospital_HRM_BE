@@ -55,9 +55,9 @@ export class AnnouncementPostControllers {
     if (req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
     }
-
+    console.log('file:', file);
     if (!file) {
-      throw new BadRequestException('File is required');
+      throw new BadRequestException('File image is required');
     }
     const imageUrl = await this.imageService.uploadImage(
       file,
@@ -78,9 +78,9 @@ export class AnnouncementPostControllers {
   )
   async update(
     @Req() req: any,
-    @UploadedFile() file: Express.Multer.File,
     @Param('announcementPostId', ParseIntPipe) announcementPostId: number,
     @Body() announcementPostDto: AnnouncementPostDto,
+    @UploadedFile() file: Express.Multer.File,
   ): Promise<any> {
     if (req.fileValidationError) {
       throw new BadRequestException(req.fileValidationError);
@@ -90,7 +90,11 @@ export class AnnouncementPostControllers {
         file,
         ANNOUNCEMENT_POST_IMAGE_FOLDER,
       );
-      announcementPostDto.image = imageUrl;
+      return this.announcementPostService.update(
+        announcementPostId,
+        announcementPostDto,
+        imageUrl,
+      );
     }
 
     return this.announcementPostService.update(

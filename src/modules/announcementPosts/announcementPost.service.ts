@@ -35,6 +35,7 @@ export class AnnouncementPostService {
       notificationType: true,
       contentDetail: true,
       contact: true,
+      image: true,
       user: {
         userId: true,
         fullName: true,
@@ -59,6 +60,7 @@ export class AnnouncementPostService {
         notificationType: true,
         contentDetail: true,
         contact: true,
+        image: true,
         user: {
           userId: true,
           fullName: true,
@@ -93,28 +95,33 @@ export class AnnouncementPostService {
   async update(
     announcementPostId: number,
     announcementPostDto: AnnouncementPostDto,
+    imageUrl?: string,
   ): Promise<UpdateResult> {
     const { image, ...announcementPost } = announcementPostDto;
-    if (image) {
-      const announcementPostUpdate =
-        await this.announcementPostRepository.findOne({
-          where: {
-            announcementPostId,
-          },
-        });
+    const announcementPostUpdate =
+      await this.announcementPostRepository.findOne({
+        where: {
+          announcementPostId,
+        },
+      });
 
-      const filePath = extractFilePathFromUrl(announcementPostUpdate.image);
-      if (filePath) {
-        await this.bucket.file(filePath).delete();
+    if (imageUrl) {
+      if (image) {
+        const filePath = extractFilePathFromUrl(announcementPostUpdate.image);
+        if (filePath) {
+          await this.bucket.file(filePath).delete();
+        }
+        try {
+          console.log(`File ${filePath} deleted successfully.`);
+        } catch (error) {
+          console.error(`Failed to delete file ${filePath}:`, error);
+          throw new Error(`Could not delete file ${filePath}.`);
+        }
       }
-      try {
-        console.log(`File ${filePath} deleted successfully.`);
-      } catch (error) {
-        console.error(`Failed to delete file ${filePath}:`, error);
-        throw new Error(`Could not delete file ${filePath}.`);
-      }
+      announcementPostDto.image = imageUrl;
+    } else {
+      announcementPostDto.image = announcementPostUpdate.image;
     }
-
     return await this.announcementPostRepository.update(
       announcementPostId,
       announcementPostDto,

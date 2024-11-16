@@ -39,7 +39,7 @@ export class RecruitmentPostEntity extends BaseEntity {
   @Column({
     type: 'varchar',
     length: 250,
-    name: 'year',
+    name: 'image',
     nullable: true,
     default: null,
   })

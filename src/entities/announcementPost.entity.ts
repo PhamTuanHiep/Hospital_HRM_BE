@@ -12,7 +12,7 @@ import { UserEntity } from './user.entity';
 
 @Entity('announcement-posts')
 export class AnnouncementPostEntity extends BaseEntity {
-  @PrimaryGeneratedColumn({ name: 'salary_history_id' })
+  @PrimaryGeneratedColumn({ name: 'announcement_post_id' })
   announcementPostId: number;
 
   @Column({ name: 'user_id' })
@@ -24,10 +24,10 @@ export class AnnouncementPostEntity extends BaseEntity {
   @Column({ name: 'abstract', length: 1000 })
   abstract: string;
 
-  @Column({ name: 'notificationType', length: 20 })
+  @Column({ name: 'notification_type', length: 20 })
   notificationType: string;
 
-  @Column({ name: 'contentDetail' })
+  @Column({ name: 'content_detail' })
   contentDetail: string;
 
   @Column({ name: 'contact' })
