@@ -19,7 +19,7 @@ export const filterGetAll = async ({
   arrSearch = [],
   order,
 }: FilterGetAllProps<string>): Promise<any> => {
-  const items_per_page = Number(query.items_per_page) || 10;
+  const items_per_page = Number(query.items_per_page) || 4;
   const page = Number(query.page) || 1;
   const skip = (page - 1) * items_per_page;
   const keyword = query.search || '';
@@ -62,10 +62,13 @@ export const filterGetAll = async ({
   const lastPage = Math.ceil(total / items_per_page);
   const nextPage = page + 1 > lastPage ? null : page + 1;
   const prevPage = page - 1 < 1 ? null : page - 1;
+  console.log('total:', total);
+
   return {
     data: res,
     total,
     currentPage: page,
+    perPage: items_per_page,
     nextPage,
     prevPage,
     lastPage,

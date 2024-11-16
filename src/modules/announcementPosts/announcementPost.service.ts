@@ -41,8 +41,8 @@ export class AnnouncementPostService {
         fullName: true,
       },
     };
-
-    return filterGetAll({ query, repository, relations, select });
+    const arrSearch = ['notificationType'];
+    return filterGetAll({ query, repository, relations, select, arrSearch });
   }
 
   async findOne(
