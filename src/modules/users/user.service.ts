@@ -32,8 +32,6 @@ export class UserService {
       evaluateHistories: true,
       contractHistories: true,
       salaryHistories: true,
-      recruitmentPosts: true,
-      announcementPosts: true,
       medicalTrainingResults: true,
       nursingTrainingResults: true,
     };
@@ -122,8 +120,7 @@ export class UserService {
         allowance: true,
         salary: true,
       },
-      recruitmentPosts: true,
-      announcementPosts: true,
+
       medicalTrainingResults: true,
       nursingTrainingResults: true,
     };
@@ -143,8 +140,6 @@ export class UserService {
         'evaluateHistories',
         'contractHistories',
         'salaryHistories',
-        'recruitmentPosts',
-        'announcementPosts',
         'medicalTrainingResults',
         'nursingTrainingResults',
       ],
@@ -232,8 +227,7 @@ export class UserService {
           allowance: true,
           salary: true,
         },
-        recruitmentPosts: true,
-        announcementPosts: true,
+
         medicalTrainingResults: true,
         nursingTrainingResults: true,
       },
@@ -270,8 +264,7 @@ export class UserService {
           'overtimeHistories',
           'contractHistories',
           'salaryHistories',
-          'recruitmentPosts',
-          'announcementPosts',
+
           'medicalTrainingResults',
           'nursingTrainingResults',
         ],
