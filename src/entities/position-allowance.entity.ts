@@ -15,7 +15,7 @@ export class PositionAllowanceEntity {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column({ name: 'position_id' })
+  @Column({ name: 'position_id', type: 'varchar', length: 4 })
   positionId: string;
 
   @Column({ name: 'allowance_id' })

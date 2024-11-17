@@ -11,10 +11,10 @@ import { LeaveHistoryEntity } from './leaveHistory.entity';
 
 @Entity('leaves')
 export class LeaveEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'leave_id' })
+  @PrimaryColumn({ name: 'leave_id', type: 'varchar', length: 4 })
   leaveId: string;
 
-  @Column({ type: 'varchar', length: 20, name: 'leave_types' })
+  @Column({ type: 'varchar', length: 4, name: 'leave_types' })
   leaveTypes: string;
 
   @Column({ name: 'max_leave_entitlement', default: 12 })

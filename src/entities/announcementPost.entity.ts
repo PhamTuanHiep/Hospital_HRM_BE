@@ -18,13 +18,13 @@ export class AnnouncementPostEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'title', length: 200 })
+  @Column({ name: 'title', length: 150 })
   title: string;
 
   @Column({ name: 'abstract', length: 1000 })
   abstract: string;
 
-  @Column({ name: 'notification_type', length: 20 })
+  @Column({ name: 'notification_type', length: 4 })
   notificationType: string;
 
   @Column({ name: 'content_detail' })

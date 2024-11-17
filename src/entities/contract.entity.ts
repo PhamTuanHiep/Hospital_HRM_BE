@@ -11,7 +11,7 @@ import { ContractHistoryEntity } from './contractHistory.entity';
 
 @Entity('contracts')
 export class ContractEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'contract_id', length: 5 })
+  @PrimaryColumn({ name: 'contract_id', type: 'varchar', length: 4 })
   contractId: string;
 
   @Column({ type: 'varchar', length: 50, name: 'contract_name_vi' })

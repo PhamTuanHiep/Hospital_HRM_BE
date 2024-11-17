@@ -19,10 +19,10 @@ export class SalaryHistoryEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'month' })
+  @Column({ name: 'month', length: 2 })
   month: string;
 
-  @Column({ name: 'year' })
+  @Column({ name: 'year', length: 4 })
   year: string;
 
   @Column({

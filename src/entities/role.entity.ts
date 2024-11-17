@@ -11,10 +11,10 @@ import { AccountEntity } from './account.entity';
 
 @Entity('roles')
 export class RoleEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'role_id' })
+  @PrimaryColumn({ name: 'role_id', type: 'varchar', length: 7 })
   roleId: string;
 
-  @Column({ type: 'varchar', length: 10, name: 'role_name' })
+  @Column({ type: 'varchar', length: 7, name: 'role_name' })
   roleName: string;
 
   @CreateDateColumn({

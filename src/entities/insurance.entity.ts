@@ -11,7 +11,7 @@ import { UserInsuranceEntity } from './user-insurance.entity';
 
 @Entity('insurances')
 export class InsuranceEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'insurance_id' })
+  @PrimaryColumn({ name: 'insurance_id', type: 'varchar', length: 4 })
   insuranceId: string;
 
   @Column({ type: 'varchar', length: 30, name: 'insurance_name' })
@@ -19,7 +19,7 @@ export class InsuranceEntity extends BaseEntity {
 
   @Column({
     type: 'varchar',
-    length: 10,
+    length: 4,
     name: 'insurance_type',
     default: 'E',
   })

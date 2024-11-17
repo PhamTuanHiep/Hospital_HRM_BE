@@ -7,8 +7,6 @@ export class PositionDto {
   @IsNotEmpty()
   positionName?: string;
 
-  salaryCoefficient?: number;
-
   createdAt?: Date;
 
   updatedAt?: Date;

@@ -26,13 +26,13 @@ export class OvertimeHistoryEntity extends BaseEntity {
   @Column({ name: 'overtime_id' })
   overtimeId: string;
 
-  @Column({ name: 'department_id' })
+  @Column({ name: 'department_id', type: 'varchar', length: 4 })
   departmentId: string;
 
-  @Column({ type: 'date', name: 'start_day' })
+  @Column({ type: 'varchar', name: 'start_day', length: 10 })
   startDay: string;
 
-  @Column({ type: 'date', name: 'end_day' })
+  @Column({ type: 'varchar', name: 'end_day', length: 10 })
   endDay: string;
 
   @CreateDateColumn({

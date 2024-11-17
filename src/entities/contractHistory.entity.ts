@@ -19,13 +19,13 @@ export class ContractHistoryEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'contract_id', length: 5 })
+  @Column({ name: 'contract_id', type: 'varchar', length: 4 })
   contractId: string;
 
-  @Column({ type: 'varchar', name: 'start_day' })
+  @Column({ type: 'varchar', name: 'start_day', length: 10 })
   startDay: string;
 
-  @Column({ type: 'varchar', name: 'end_day' })
+  @Column({ type: 'varchar', name: 'end_day', length: 10 })
   endDay: string;
 
   @Column({ type: 'varchar', length: 250, name: 'note', default: '' })

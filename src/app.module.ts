@@ -74,7 +74,7 @@ import { AnnouncementPostEntity } from './entities/announcementPost.entity';
       port: 3306,
       username: 'root',
       password: '',
-      database: 'hospital_hrm',
+      database: 'hospital_hrm_test',
       entities: [
         UserEntity,
         RoleEntity,

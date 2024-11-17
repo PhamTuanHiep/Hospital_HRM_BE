@@ -18,7 +18,7 @@ export class RecruitmentPostEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'title', length: 200 })
+  @Column({ name: 'title', length: 150 })
   title: string;
 
   @Column({ name: 'sub_title' })

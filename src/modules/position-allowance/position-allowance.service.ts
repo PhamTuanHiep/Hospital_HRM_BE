@@ -34,7 +34,6 @@ export class PositionAllowanceService {
       position: {
         positionId: true,
         positionName: true,
-        salaryCoefficient: true,
       },
       allowance: {
         allowanceId: true,
@@ -62,7 +61,6 @@ export class PositionAllowanceService {
         position: {
           positionId: true,
           positionName: true,
-          salaryCoefficient: true,
         },
         allowance: {
           allowanceId: true,
@@ -102,7 +100,6 @@ export class PositionAllowanceService {
           position: {
             positionId: true,
             positionName: true,
-            salaryCoefficient: true,
           },
           allowance: {
             allowanceId: true,

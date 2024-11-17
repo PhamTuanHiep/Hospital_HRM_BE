@@ -11,7 +11,7 @@ import { OvertimeHistoryEntity } from './overtimeHistory.entity';
 
 @Entity('overtimes')
 export class OvertimeEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'overtime_id' })
+  @PrimaryColumn({ name: 'overtime_id', type: 'varchar', length: 4 })
   overtimeId: string;
 
   @Column({ type: 'varchar', length: 20, name: 'overtime_name' })

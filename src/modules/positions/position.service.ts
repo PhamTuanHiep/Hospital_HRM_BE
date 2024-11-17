@@ -27,7 +27,6 @@ export class PositionService {
       createdAt: true,
       updatedAt: true,
       positionName: true,
-      salaryCoefficient: true,
       users: {
         userId: true,
         fullName: true,
@@ -53,7 +52,6 @@ export class PositionService {
         createdAt: true,
         updatedAt: true,
         positionName: true,
-        salaryCoefficient: true,
         users: {
           userId: true,
           fullName: true,

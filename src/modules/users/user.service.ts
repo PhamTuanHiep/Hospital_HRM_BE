@@ -34,6 +34,8 @@ export class UserService {
       salaryHistories: true,
       recruitmentPosts: true,
       announcementPosts: true,
+      medicalTrainingResults: true,
+      nursingTrainingResults: true,
     };
     const select: any = {
       userId: true,
@@ -55,6 +57,7 @@ export class UserService {
       updatedAt: true,
       createdAt: true,
       status: true,
+      salaryCoefficient: true,
       account: {
         accountId: true,
         email: true,
@@ -85,7 +88,6 @@ export class UserService {
       position: {
         positionId: true,
         positionName: true,
-        salaryCoefficient: true,
       },
       evaluateHistories: {
         evaluateId: true,
@@ -122,6 +124,8 @@ export class UserService {
       },
       recruitmentPosts: true,
       announcementPosts: true,
+      medicalTrainingResults: true,
+      nursingTrainingResults: true,
     };
     return filterGetAll({ query, repository, relations, select });
   }
@@ -141,6 +145,8 @@ export class UserService {
         'salaryHistories',
         'recruitmentPosts',
         'announcementPosts',
+        'medicalTrainingResults',
+        'nursingTrainingResults',
       ],
       select: {
         userId: true,
@@ -161,6 +167,7 @@ export class UserService {
         otherDescription: true,
         updatedAt: true,
         createdAt: true,
+        salaryCoefficient: true,
         account: {
           accountId: true,
           email: true,
@@ -191,7 +198,6 @@ export class UserService {
         position: {
           positionId: true,
           positionName: true,
-          salaryCoefficient: true,
         },
         evaluateHistories: {
           evaluateId: true,
@@ -228,6 +234,8 @@ export class UserService {
         },
         recruitmentPosts: true,
         announcementPosts: true,
+        medicalTrainingResults: true,
+        nursingTrainingResults: true,
       },
     });
   }
@@ -262,6 +270,10 @@ export class UserService {
           'overtimeHistories',
           'contractHistories',
           'salaryHistories',
+          'recruitmentPosts',
+          'announcementPosts',
+          'medicalTrainingResults',
+          'nursingTrainingResults',
         ],
       });
     } catch (error) {

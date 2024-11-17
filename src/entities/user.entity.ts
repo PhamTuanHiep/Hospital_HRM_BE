@@ -60,8 +60,16 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 50, name: 'hometown', nullable: true })
   hometown: string;
 
-  @Column({ name: 'position_id' })
+  @Column({ name: 'position_id', type: 'varchar', length: 4 })
   positionId: string;
+
+  @Column('decimal', {
+    precision: 3,
+    scale: 2,
+    name: 'salary_coefficient',
+    default: 1,
+  })
+  salaryCoefficient: number;
 
   @Column({ type: 'varchar', length: 30, name: 'birthday', default: '' })
   birthday: string;
@@ -120,7 +128,7 @@ export class UserEntity extends BaseEntity {
   })
   otherDescription: string;
 
-  @Column({ name: 'department_id' })
+  @Column({ name: 'department_id', type: 'varchar', length: 4 })
   departmentId: string;
 
   @CreateDateColumn({
@@ -190,13 +198,14 @@ export class UserEntity extends BaseEntity {
   )
   medicalTrainingResults: MedicalTrainingResultsEntity[];
 
+  @OneToMany(
+    () => NursingTrainingResultsEntity,
+    (nursingTrainingResult) => nursingTrainingResult.user,
+  )
+  nursingTrainingResults: NursingTrainingResultsEntity[];
+
   @OneToMany(() => EvaluateEntity, (evaluateHistory) => evaluateHistory.user)
   evaluateHistories: EvaluateEntity[];
-  // @OneToMany(
-  //   () => NursingTrainingResultsEntity,
-  //   (nursingTrainingResult) => nursingTrainingResult.user,
-  // )
-  // nursingTrainingResults: NursingTrainingResultsEntity[];
 
   @OneToMany(() => SalaryHistoryEntity, (salaryHistory) => salaryHistory.user)
   salaryHistories: SalaryHistoryEntity[];

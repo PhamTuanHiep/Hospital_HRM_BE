@@ -26,6 +26,8 @@ export class UserDto {
 
   positionId?: string;
 
+  salaryCoefficient?: number;
+
   birthday?: string;
 
   fatherFullName?: string;

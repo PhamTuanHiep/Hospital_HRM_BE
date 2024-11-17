@@ -12,19 +12,11 @@ import { PositionAllowanceEntity } from './position-allowance.entity';
 
 @Entity('positions')
 export class PositionEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'position_id' })
+  @PrimaryColumn({ name: 'position_id', type: 'varchar', length: 4 })
   positionId: string;
 
   @Column({ type: 'varchar', length: 20, name: 'position_name' })
   positionName: string;
-
-  @Column('decimal', {
-    precision: 3,
-    scale: 2,
-    name: 'salary_coefficient',
-    default: 1,
-  })
-  salaryCoefficient: number;
 
   @CreateDateColumn({
     type: 'timestamp',

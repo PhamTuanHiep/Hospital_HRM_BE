@@ -32,7 +32,7 @@ export class AccountEntity extends BaseEntity {
   })
   avatar: string;
 
-  @Column({ name: 'role_id' })
+  @Column({ name: 'role_id', type: 'varchar', length: 7 })
   roleId: string;
 
   @Column({ name: 'user_id' })

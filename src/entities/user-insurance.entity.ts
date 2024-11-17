@@ -18,7 +18,7 @@ export class UserInsuranceEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'insurance_id' })
+  @Column({ name: 'insurance_id', type: 'varchar', length: 4 })
   insuranceId: string;
 
   @ManyToOne(() => UserEntity, (user) => user.userInsurances)

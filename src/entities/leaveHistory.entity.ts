@@ -19,7 +19,7 @@ export class LeaveHistoryEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'leave_id' })
+  @Column({ name: 'leave_id', type: 'varchar', length: 4 })
   leaveId: string;
 
   @Column({ type: 'varchar', length: 2, name: 'month' })
