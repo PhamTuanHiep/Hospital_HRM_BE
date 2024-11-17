@@ -57,10 +57,13 @@ import { AnnouncementPostEntity } from './entities/announcementPost.entity';
       imports: [ConfigModule],
       inject: [ConfigService],
       useFactory: (configService: ConfigService) => ({
-        type: 'mysql', // Hoặc 'postgres', 'sqlite', tùy DB bạn dùng
+        type: configService.get<string>('DB_TYPE') as
+          | 'postgres'
+          | 'mysql'
+          | 'sqlite', // Hoặc 'postgres', 'sqlite', tùy DB bạn dùng
         host: configService.get<string>('DB_HOST'),
         port: configService.get<number>('DB_PORT'),
-        username: configService.get<string>('DB_USERNAME'),
+        username: configService.get<string>('DB_USER_NAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
         entities: [
@@ -89,38 +92,7 @@ import { AnnouncementPostEntity } from './entities/announcementPost.entity';
         synchronize: true, // Không khuyến nghị bật trong môi trường production
       }),
     }),
-    // TypeOrmModule.forRoot({
-    //   type: 'mysql',
-    //   host: 'localhost',
-    //   port: 3306,
-    //   username: 'root',
-    //   password: '',
-    //   database: 'hospital_hrm_test',
-    //   entities: [
-    //     UserEntity,
-    //     RoleEntity,
-    //     PositionEntity,
-    //     AccountEntity,
-    //     DepartmentEntity,
-    //     AllowanceEntity,
-    //     LeaveEntity,
-    //     UserInsuranceEntity,
-    //     InsuranceEntity,
-    //     EvaluateEntity,
-    //     OvertimeEntity,
-    //     OvertimeHistoryEntity,
-    //     LeaveHistoryEntity,
-    //     MedicalTrainingResultsEntity,
-    //     NursingTrainingResultsEntity,
-    //     PositionAllowanceEntity,
-    //     ContractEntity,
-    //     ContractHistoryEntity,
-    //     SalaryHistoryEntity,
-    //     RecruitmentPostEntity,
-    //     AnnouncementPostEntity,
-    //   ],
-    //   synchronize: true,
-    // }),
+
     UserModule,
     RoleModule,
     PositionModule,
