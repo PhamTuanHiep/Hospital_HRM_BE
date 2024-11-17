@@ -8,14 +8,7 @@ export class FirebaseService {
 
   constructor() {
     const serviceAccount = require(
-      path.resolve(
-        __dirname,
-        '..',
-        '..',
-        '..',
-        'firebase-json',
-        'images-of-hhrm-system-firebase-adminsdk-e6wjw-e23217cc34.json',
-      ),
+      path.resolve(__dirname, '..', '..', '..', 'images-firebase-json.json'),
     );
 
     // const serviceAccount = require('./images-of-hhrm-system-firebase-adminsdk-e6wjw-e23217cc34.json');

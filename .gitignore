@@ -42,7 +42,7 @@ lerna-debug.log*
 .env.test.local
 .env.production.local
 .env.local
-
+images-firebase-json.json
 # temp directory
 .temp
 .tmp
