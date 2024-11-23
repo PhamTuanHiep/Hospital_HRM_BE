@@ -16,14 +16,18 @@ import { DepartmentEntity } from './department.entity';
 export class OvertimeHistoryEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'overtime_history_id' })
   overtimeHistoryId: number;
-
-  @Column({ type: 'varchar', length: 250, name: 'note', default: '' })
-  note: string;
+  @Column({
+    type: 'json',
+    name: 'note',
+    default: () =>
+      `JSON_ARRAY('Trực thông thường, không phải tình huống khẩn cấp')`,
+  })
+  note: string[];
 
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'overtime_id' })
+  @Column({ name: 'overtime_id', type: 'varchar', length: 5 })
   overtimeId: string;
 
   @Column({ name: 'department_id', type: 'varchar', length: 4 })

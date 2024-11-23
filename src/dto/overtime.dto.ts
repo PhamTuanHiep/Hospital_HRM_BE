@@ -9,7 +9,6 @@ export class OvertimeDto {
 
   overtimePay?: number;
 
-  note?: string[];
   createdAt?: Date;
   updatedAt?: Date;
 }

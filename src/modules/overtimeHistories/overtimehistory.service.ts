@@ -107,6 +107,27 @@ export class OvertimeHistoryService {
       return await this.overtimeHistoryRepository.findOne({
         where: { overtimeHistoryId: res.overtimeHistoryId },
         relations: ['overtime', 'user', 'department'],
+        select: {
+          overtimeHistoryId: true,
+          createdAt: true,
+          updatedAt: true,
+          note: true,
+          startDay: true,
+          endDay: true,
+          overtime: {
+            overtimeId: true,
+            overtimeName: true,
+            overtimePay: true,
+          },
+          user: {
+            userId: true,
+            fullName: true,
+          },
+          department: {
+            departmentId: true,
+            departmentName: true,
+          },
+        },
       });
     } catch (error) {
       console.log('error:', error);

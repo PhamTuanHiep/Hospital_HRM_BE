@@ -11,7 +11,7 @@ import { OvertimeHistoryEntity } from './overtimeHistory.entity';
 
 @Entity('overtimes')
 export class OvertimeEntity extends BaseEntity {
-  @PrimaryColumn({ name: 'overtime_id', type: 'varchar', length: 4 })
+  @PrimaryColumn({ name: 'overtime_id', type: 'varchar', length: 5 })
   overtimeId: string;
 
   @Column({ type: 'varchar', length: 20, name: 'overtime_name' })
@@ -19,13 +19,6 @@ export class OvertimeEntity extends BaseEntity {
 
   @Column({ name: 'overtime_pay' })
   overtimePay: number;
-
-  @Column({
-    type: 'json',
-    name: 'note',
-    default: () => `JSON_ARRAY('Ca trực buổi tối')`,
-  })
-  note: string[];
 
   @CreateDateColumn({
     type: 'timestamp',
