@@ -32,7 +32,7 @@ export class UserEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 30, name: 'full_name' })
   fullName: string;
 
-  @Column({ name: 'gender,', default: 1 })
+  @Column({ name: 'gender', default: 1 })
   gender: number;
 
   @Column({ type: 'varchar', length: 50, name: 'address' })
