@@ -37,6 +37,7 @@ export class ContractHistoryService {
         contractId: true,
         contractNameVI: true,
         contractNameEN: true,
+        note: true,
       },
       user: {
         userId: true,
@@ -64,6 +65,7 @@ export class ContractHistoryService {
           contractId: true,
           contractNameVI: true,
           contractNameEN: true,
+          note: true,
         },
         user: {
           userId: true,

@@ -9,9 +9,10 @@ export class ContractHistoryDto {
   @IsNotEmpty()
   contractId: string;
 
-  startDay: string;
-  endDay: string;
-  note: string;
+  startDay?: string;
+  endDay?: string;
+  note?: string;
+  status?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
