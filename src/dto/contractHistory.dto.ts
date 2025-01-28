@@ -12,7 +12,7 @@ export class ContractHistoryDto {
   startDay?: string;
   endDay?: string;
   note?: string;
-  status?: string;
+  status?: number;
   createdAt?: Date;
   updatedAt?: Date;
 }

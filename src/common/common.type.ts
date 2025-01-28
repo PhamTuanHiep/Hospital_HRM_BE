@@ -52,3 +52,5 @@ export interface DepartmentDataResponse extends DataReponse {
 export interface DepartmentResponse extends PaginationResponse {
   data: DepartmentDataResponse[];
 }
+
+export type DefaultOrderSort = 'ASC' | 'DESC';

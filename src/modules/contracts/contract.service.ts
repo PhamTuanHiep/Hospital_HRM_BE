@@ -29,6 +29,7 @@ export class ContractService {
       contractHistories: true,
     };
     const order = { contractId: 'ASC' };
+    query.items_per_page = String(5);
 
     return filterGetAll({ query, repository, relations, select, order });
   }

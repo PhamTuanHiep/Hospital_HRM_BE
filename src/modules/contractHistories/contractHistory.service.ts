@@ -1,8 +1,8 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Relations } from 'src/common/common.type';
-import { filterGetAll } from 'src/common/common.use.helper';
-import { FilterDto } from 'src/dto/common.filter.dto';
+import { filterGetContractHistories } from 'src/common/common.use.helper';
+import { FilterContractHistoriesDto } from 'src/dto/common.filter.dto';
 import { ContractHistoryDto } from 'src/dto/contractHistory.dto';
 import { ContractEntity } from 'src/entities/contract.entity';
 import { ContractHistoryEntity } from 'src/entities/contractHistory.entity';
@@ -20,7 +20,7 @@ export class ContractHistoryService {
     private contractRepository: Repository<ContractEntity>,
   ) {}
 
-  async findAll(query: FilterDto): Promise<any> {
+  async findAll(query: FilterContractHistoriesDto): Promise<any> {
     const repository = this.contractHistoryRepository;
     const relations: Relations<string> = {
       contract: true,
@@ -33,6 +33,7 @@ export class ContractHistoryService {
       startDay: true,
       endDay: true,
       note: true,
+      status: true,
       contract: {
         contractId: true,
         contractNameVI: true,
@@ -45,7 +46,16 @@ export class ContractHistoryService {
       },
     };
 
-    return filterGetAll({ query, repository, relations, select });
+    const arrSearch = ['status', 'contractId'];
+    const order = { contractHistoryId: 'ASC' };
+    return filterGetContractHistories({
+      query,
+      repository,
+      relations,
+      select,
+      arrSearch,
+      order,
+    });
   }
 
   async findOne(
@@ -61,6 +71,7 @@ export class ContractHistoryService {
         startDay: true,
         endDay: true,
         note: true,
+        status: true,
         contract: {
           contractId: true,
           contractNameVI: true,

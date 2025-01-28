@@ -43,8 +43,8 @@ export class ContractHistoryEntity extends BaseEntity {
   @Column({ type: 'varchar', length: 250, name: 'note', default: '' })
   note: string;
 
-  @Column({ length: 1, name: 'status', default: 1 })
-  status: string;
+  @Column({ name: 'status', default: 1 })
+  status: number;
 
   @CreateDateColumn({
     type: 'timestamp',
