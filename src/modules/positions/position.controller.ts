@@ -11,14 +11,14 @@ import {
 } from '@nestjs/common';
 import { PositionService } from './position.service';
 import { PositionDto } from 'src/dto/position.dto';
-import { FilterDto } from 'src/dto/common.filter.dto';
+import { FilterPositionsDto } from 'src/dto/common.filter.dto';
 
 @Controller('positions')
 export class PositionControllers {
   constructor(private positionService: PositionService) {}
 
   @Get()
-  findAll(@Query() query: FilterDto): Promise<any> {
+  findAll(@Query() query: FilterPositionsDto): Promise<any> {
     return this.positionService.findAll(query);
   }
 

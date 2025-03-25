@@ -18,24 +18,26 @@ export class AnnouncementPostEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'title', length: 150 })
+  @Column({ name: 'title', type: 'text' })
   title: string;
 
-  @Column({ name: 'abstract', length: 1000 })
+  @Column({ name: 'abstract', type: 'text' })
   abstract: string;
 
   @Column({ name: 'notification_type', length: 4 })
   notificationType: string;
 
-  @Column({ name: 'content_detail' })
+  @Column({ name: 'content_detail', type: 'text' })
   contentDetail: string;
 
-  @Column({ name: 'contact' })
+  @Column({
+    name: 'contact',
+    type: 'text',
+  })
   contact: string;
 
   @Column({
-    type: 'varchar',
-    length: 250,
+    type: 'text',
     name: 'image',
     nullable: true,
     default: null,

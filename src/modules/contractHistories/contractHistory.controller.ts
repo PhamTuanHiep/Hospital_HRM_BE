@@ -20,6 +20,7 @@ export class ContractHistoryControllers {
 
   @Get()
   findAll(@Query() query: FilterDto): Promise<any> {
+    console.log('query:', query);
     return this.contractHistoryService.findAll(query);
   }
 
@@ -46,6 +47,13 @@ export class ContractHistoryControllers {
       contractHistoryId,
       contractHistoryDto,
     );
+  }
+
+  @Put()
+  async updateAll(
+    @Body() contractHistoriesDto: ContractHistoryDto[],
+  ): Promise<any> {
+    return this.contractHistoryService.updateAll(contractHistoriesDto);
   }
 
   @Delete('/:contractHistoryId')

@@ -1,9 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { AllowanceDto } from 'src/dto/allowance.dto';
+import { FilterDto } from 'src/dto/common.filter.dto';
 
 import { AllowanceEntity } from 'src/entities/allowance.entity';
-import { Allowance } from 'src/models/allowance.model';
+import { filterGetAllowances } from 'src/repositories/allowances.repository';
 
 import { Repository } from 'typeorm';
 
@@ -14,27 +15,33 @@ export class AllowanceService {
     private allowanceRepository: Repository<AllowanceEntity>,
   ) {}
 
-  async findAll() {
-    return await this.allowanceRepository.find();
+  async findAll(query: FilterDto): Promise<any> {
+    const repository = this.allowanceRepository;
+
+    return filterGetAllowances({ query, repository });
   }
 
-  async findOne(allowanceId: number): Promise<Allowance | null> {
+  async findOne(allowanceId: string): Promise<AllowanceEntity | null> {
     return await this.allowanceRepository.findOne({
       where: { allowanceId },
     });
   }
 
   async create(allowanceDto: AllowanceDto) {
-    const allowance = this.allowanceRepository.create(allowanceDto);
-    console.log('allowance:', allowance);
-    //save entity
-    let res = await this.allowanceRepository.save(allowance);
-    console.log('res:', res);
-
-    return res;
+    try {
+      const allowance = this.allowanceRepository.create(allowanceDto);
+      console.log('allowance:', allowance);
+      //save entity
+      const res = await this.allowanceRepository.save(allowance);
+      console.log('res:', res);
+      return res;
+    } catch (error) {
+      console.log('error:', error);
+      throw new HttpException('Can not create post', HttpStatus.BAD_REQUEST);
+    }
   }
 
-  async update(allowanceId: number, allowanceDto: AllowanceDto) {
+  async update(allowanceId: string, allowanceDto: AllowanceDto) {
     const allowance = await this.allowanceRepository.findOne({
       where: { allowanceId },
     });
@@ -45,7 +52,7 @@ export class AllowanceService {
     return await this.allowanceRepository.save(allowanceUpdate);
   }
 
-  async delete(allowanceId: number) {
+  async delete(allowanceId: string) {
     const allowance = await this.allowanceRepository.findOne({
       where: { allowanceId },
     });

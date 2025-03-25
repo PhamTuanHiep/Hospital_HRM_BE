@@ -54,16 +54,16 @@ export class UserInsuranceService {
         id: true,
         createdAt: true,
         updatedAt: true,
-        user: {
-          userId: true,
-          fullName: true,
-        },
-        insurance: {
-          insuranceId: true,
-          insuranceName: true,
-          insuranceType: true,
-          monthlyPercentage: true,
-        },
+        // user: {
+        //   userId: true,
+        //   fullName: true,
+        // },
+        // insurance: {
+        //   insuranceId: true,
+        //   insuranceName: true,
+        //   insuranceType: true,
+        //   monthlyPercentage: true,
+        // },
       },
     });
   }
@@ -77,8 +77,8 @@ export class UserInsuranceService {
       });
       const newUserInsurance =
         this.userInsuranceRepository.create(userInsurance);
-      newUserInsurance.user = user;
-      newUserInsurance.insurance = insurance;
+      // newUserInsurance.user = user;
+      // newUserInsurance.insurance = insurance;
 
       const res = await this.userInsuranceRepository.save(newUserInsurance);
       return await this.userInsuranceRepository.findOne({
@@ -88,16 +88,16 @@ export class UserInsuranceService {
           id: true,
           createdAt: true,
           updatedAt: true,
-          user: {
-            userId: true,
-            fullName: true,
-          },
-          insurance: {
-            insuranceId: true,
-            insuranceName: true,
-            insuranceType: true,
-            monthlyPercentage: true,
-          },
+          // user: {
+          //   userId: true,
+          //   fullName: true,
+          // },
+          // insurance: {
+          //   insuranceId: true,
+          //   insuranceName: true,
+          //   insuranceType: true,
+          //   monthlyPercentage: true,
+          // },
         },
       });
     } catch (error) {

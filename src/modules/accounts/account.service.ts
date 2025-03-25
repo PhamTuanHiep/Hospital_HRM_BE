@@ -1,17 +1,14 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Relations } from 'src/common/common.type';
-import {
-  extractFilePathFromUrl,
-  filterGetAll,
-} from 'src/common/common.use.helper';
+import { extractFilePathFromUrl } from 'src/common/common.use.helper';
 import { AccountDto } from 'src/dto/account.dto';
-import { FilterDto } from 'src/dto/common.filter.dto';
+import { FilterAccountsDto } from 'src/dto/common.filter.dto';
 import { AccountEntity } from 'src/entities/account.entity';
 import { RoleEntity } from 'src/entities/role.entity';
 import { UserEntity } from 'src/entities/user.entity';
 import * as admin from 'firebase-admin';
-import { DeleteResult, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository } from 'typeorm';
+import { filterGetAccounts } from 'src/repositories/accounts.repository';
 
 @Injectable()
 export class AccountService {
@@ -24,31 +21,12 @@ export class AccountService {
     private roleRepository: Repository<RoleEntity>,
   ) {}
 
-  async findAll(query: FilterDto): Promise<any> {
+  async findAll(query: FilterAccountsDto): Promise<any> {
     const repository = this.accountRepository;
-    const relations: Relations<string> = {
-      user: true,
-      role: true,
-    };
-    const select: any = {
-      accountId: true,
-      email: true,
-      password: true,
-      createdAt: true,
-      updatedAt: true,
-      avatar: true,
-      user: {
-        userId: true,
-        fullName: true,
-      },
-      role: {
-        roleId: true,
-        roleName: true,
-      },
-    };
-    const arrSearch: string[] = ['email'];
-
-    return filterGetAll({ query, repository, relations, select, arrSearch });
+    return filterGetAccounts({
+      query,
+      repository,
+    });
   }
 
   async findOne(accountId: number): Promise<AccountEntity> {

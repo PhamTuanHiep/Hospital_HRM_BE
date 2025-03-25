@@ -4,18 +4,19 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
-import { PositionAllowanceEntity } from './position-allowance.entity';
+import { AllowanceRelationshipEntity } from './allowance-relationship.entity';
 
 @Entity('positions')
 export class PositionEntity extends BaseEntity {
   @PrimaryColumn({ name: 'position_id', type: 'varchar', length: 4 })
   positionId: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'position_name' })
+  @Column({ type: 'text', name: 'position_name' })
   positionName: string;
 
   @CreateDateColumn({
@@ -36,9 +37,10 @@ export class PositionEntity extends BaseEntity {
   @OneToMany(() => UserEntity, (user) => user.position)
   users: UserEntity[];
 
-  @OneToMany(
-    () => PositionAllowanceEntity,
-    (positionAllowance) => positionAllowance.position,
+  @OneToOne(
+    () => AllowanceRelationshipEntity,
+    (allowanceRelationship) => allowanceRelationship.position,
+    { nullable: true },
   )
-  positionAllowances: PositionAllowanceEntity[];
+  allowanceRelationship: AllowanceRelationshipEntity;
 }

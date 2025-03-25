@@ -5,7 +5,6 @@ import {
   Entity,
   JoinColumn,
   ManyToOne,
-  PrimaryColumn,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
@@ -74,6 +73,15 @@ export class SalaryHistoryEntity extends BaseEntity {
     nullable: true,
   })
   bonus: number;
+
+  @Column({
+    type: 'decimal',
+    name: 'overtime_cost',
+    precision: 11,
+    scale: 0,
+    nullable: true,
+  })
+  overtimeCost: number;
 
   @Column({
     type: 'decimal',

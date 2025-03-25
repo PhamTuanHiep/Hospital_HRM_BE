@@ -4,32 +4,30 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { PositionAllowanceEntity } from './position-allowance.entity';
+import { AllowanceRelationshipEntity } from './allowance-relationship.entity';
 
 @Entity('allowances')
 export class AllowanceEntity extends BaseEntity {
-  @PrimaryGeneratedColumn({ name: 'allowance_id' })
-  allowanceId: number;
+  @PrimaryColumn({ name: 'allowance_id', type: 'varchar', length: 4 })
+  allowanceId: string;
 
-  @Column({ type: 'varchar', length: 30, name: 'allowance_acronym' })
-  allowanceAcronym: string;
-
-  @Column({
-    type: 'varchar',
-    length: 30,
-    name: 'allowance_type',
-  })
+  @Column({ name: 'allowance_type', type: 'varchar', length: 2 })
   allowanceType: string;
 
   @Column({
-    type: 'varchar',
-    length: 30,
-    name: 'allowance_name',
+    type: 'text',
+    name: 'allowance_name_vi',
   })
-  allowanceName: string;
+  allowanceNameVI: string;
+
+  @Column({
+    type: 'text',
+    name: 'allowance_name_en',
+  })
+  allowanceNameEN: string;
 
   @Column('decimal', {
     precision: 2, // so chu so thap phan toi da
@@ -37,14 +35,13 @@ export class AllowanceEntity extends BaseEntity {
     name: 'allowance_rate',
     default: 0,
   })
-  allowanceRate: number;
+  allowanceRate?: number;
 
   @Column({ name: 'allowance_fee', default: 0 })
   allowanceFee?: number;
 
   @Column({
-    type: 'varchar',
-    length: 250,
+    type: 'text',
     name: 'note',
     default: '',
   })
@@ -66,8 +63,8 @@ export class AllowanceEntity extends BaseEntity {
   updatedAt: Date;
 
   @OneToMany(
-    () => PositionAllowanceEntity,
-    (positionAllowance) => positionAllowance.allowance,
+    () => AllowanceRelationshipEntity,
+    (allowanceRelationship) => allowanceRelationship.allowance,
   )
-  positionAllowances: PositionAllowanceEntity[];
+  allowanceRelationships: AllowanceRelationshipEntity[];
 }

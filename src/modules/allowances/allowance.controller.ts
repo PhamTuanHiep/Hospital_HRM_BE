@@ -4,115 +4,46 @@ import {
   Delete,
   Get,
   Param,
-  ParseIntPipe,
   Post,
   Put,
+  Query,
   ValidationPipe,
 } from '@nestjs/common';
-import { ResponseData } from 'src/global/globalClass';
-import { HttpMessage, HttpStatus } from 'src/global/globalEnum';
+
 import { AllowanceService } from './allowance.service';
-import { Allowance } from 'src/models/allowance.model';
 import { AllowanceDto } from 'src/dto/allowance.dto';
+import { FilterDto } from 'src/dto/common.filter.dto';
 
 @Controller('allowances')
 export class AllowanceControllers {
   constructor(private allowanceService: AllowanceService) {}
 
   @Get()
-  async findAll(): Promise<ResponseData<Allowance[]>> {
-    try {
-      return new ResponseData<Allowance[]>(
-        await this.allowanceService.findAll(),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Allowance[]>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findAll(@Query() query: FilterDto): Promise<any> {
+    console.log('query:', query);
+    return this.allowanceService.findAll(query);
   }
 
   @Get('/:allowanceId')
-  async findOne(
-    @Param('allowanceId', ParseIntPipe) allowanceId: number,
-  ): Promise<ResponseData<Allowance>> {
-    try {
-      return new ResponseData<Allowance>(
-        await this.allowanceService.findOne(allowanceId),
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Allowance>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  findOne(@Param('allowanceId') allowanceId: string): Promise<any> {
+    return this.allowanceService.findOne(allowanceId);
   }
 
   @Post()
-  async create(
-    @Body(new ValidationPipe()) allowanceDto: AllowanceDto,
-  ): Promise<ResponseData<AllowanceDto>> {
-    try {
-      let data = await this.allowanceService.create(allowanceDto);
-      console.log('data:', data);
-      return new ResponseData<Allowance>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Allowance>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  async create(@Body(new ValidationPipe()) allowanceDto: AllowanceDto) {
+    return this.allowanceService.create(allowanceDto);
   }
 
   @Put('/:allowanceId')
   async update(
-    @Param('allowanceId', ParseIntPipe) allowanceId: number,
+    @Param('allowanceId') allowanceId: string,
     @Body() allowanceDto: AllowanceDto,
-  ): Promise<ResponseData<Allowance>> {
-    try {
-      let data = await this.allowanceService.update(allowanceId, allowanceDto);
-      return new ResponseData<Allowance>(
-        data,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<Allowance>(
-        null,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  ): Promise<any> {
+    return this.allowanceService.update(allowanceId, allowanceDto);
   }
 
   @Delete('/:allowanceId')
-  async delete(
-    @Param('allowanceId', ParseIntPipe) allowanceId: number,
-  ): Promise<ResponseData<boolean>> {
-    try {
-      return new ResponseData<boolean>(
-        (await this.allowanceService.delete(allowanceId)) ? true : false,
-        HttpStatus.SUCCESS,
-        HttpMessage.SUCCESS,
-      );
-    } catch (e) {
-      return new ResponseData<boolean>(
-        false,
-        HttpStatus.ERROR,
-        HttpMessage.ERROR,
-      );
-    }
+  async delete(@Param('allowanceId') allowanceId: string): Promise<any> {
+    return this.allowanceService.delete(allowanceId);
   }
 }

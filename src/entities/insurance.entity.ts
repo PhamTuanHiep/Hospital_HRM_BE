@@ -33,14 +33,14 @@ export class InsuranceEntity extends BaseEntity {
   })
   monthlyPercentage: number;
 
-  @Column({ name: 'note', default: '-' })
+  @Column({ name: 'note', default: '', type: 'text' })
   note: string;
 
-  @OneToMany(
-    () => UserInsuranceEntity,
-    (userInsurance) => userInsurance.insurance,
-  )
-  userInsurances: UserInsuranceEntity[];
+  // @OneToMany(
+  //   () => UserInsuranceEntity,
+  //   (userInsurance) => userInsurance.insurance,
+  // )
+  // userInsurances: UserInsuranceEntity[];
 
   @CreateDateColumn({
     type: 'timestamp',

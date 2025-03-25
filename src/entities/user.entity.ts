@@ -16,8 +16,8 @@ import { LeaveHistoryEntity } from './leaveHistory.entity';
 import { PositionEntity } from './position.entity';
 import { OvertimeHistoryEntity } from './overtimeHistory.entity';
 import { MedicalTrainingResultsEntity } from './medicalTrainingResults.entity';
-import { NursingTrainingResultsEntity } from './nursingTrainingResults.entity';
-import { UserInsuranceEntity } from './user-insurance.entity';
+// import { NursingTrainingResultsEntity } from './nursingTrainingResults.entity';
+// import { UserInsuranceEntity } from './user-insurance.entity';
 import { EvaluateEntity } from './evaluate.entity';
 import { ContractHistoryEntity } from './contractHistory.entity';
 import { SalaryHistoryEntity } from './salaryHistory.entity';
@@ -29,13 +29,13 @@ export class UserEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'user_id' }) //auto fill, increase, primary key
   userId: number;
 
-  @Column({ type: 'varchar', length: 30, name: 'full_name' })
+  @Column({ type: 'text', name: 'full_name' })
   fullName: string;
 
   @Column({ name: 'gender', default: 1 })
   gender: number;
 
-  @Column({ type: 'varchar', length: 50, name: 'address' })
+  @Column({ type: 'text', name: 'address' })
   address: string;
 
   @Column({
@@ -46,18 +46,17 @@ export class UserEntity extends BaseEntity {
   })
   phoneNumber: string;
 
-  @Column({ type: 'varchar', length: 30, name: 'nation', default: 'Việt Nam' })
+  @Column({ type: 'text', name: 'nation', default: 'Việt Nam' })
   nation: string;
 
   @Column({
-    type: 'varchar',
-    length: 30,
+    type: 'text',
     name: 'nationality',
     default: 'Kinh',
   })
   nationality: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'hometown', nullable: true })
+  @Column({ type: 'text', name: 'hometown', nullable: true })
   hometown: string;
 
   @Column({ name: 'position_id', type: 'varchar', length: 4 })
@@ -71,12 +70,12 @@ export class UserEntity extends BaseEntity {
   })
   salaryCoefficient: number;
 
-  @Column({ type: 'varchar', length: 30, name: 'birthday', default: '' })
+  @Column({ type: 'text', name: 'birthday', default: '' })
   birthday: string;
 
   @Column({
-    type: 'varchar',
-    length: 30,
+    type: 'text',
+
     name: 'father_full_name',
     nullable: true,
   })
@@ -91,8 +90,7 @@ export class UserEntity extends BaseEntity {
   fatherBirthday: string;
 
   @Column({
-    type: 'varchar',
-    length: 30,
+    type: 'text',
     name: 'mother_full_name',
     nullable: true,
   })
@@ -121,8 +119,7 @@ export class UserEntity extends BaseEntity {
   jobDescription: string[];
 
   @Column({
-    type: 'varchar',
-    length: 255,
+    type: 'text',
     name: 'other_description',
     nullable: true,
   })
@@ -146,7 +143,7 @@ export class UserEntity extends BaseEntity {
   })
   updatedAt: Date;
 
-  @Column({ type: 'varchar', length: 30, name: 'status', nullable: true })
+  @Column({ type: 'text', name: 'status', nullable: true })
   status: string;
 
   @OneToOne(() => AccountEntity, (account) => account.user, { nullable: true })
@@ -158,10 +155,10 @@ export class UserEntity extends BaseEntity {
   @JoinColumn({ name: 'position_id' })
   position: PositionEntity;
 
-  @OneToMany(() => UserInsuranceEntity, (userInsurance) => userInsurance.user, {
-    nullable: true,
-  })
-  userInsurances: UserInsuranceEntity[];
+  // @OneToMany(() => UserInsuranceEntity, (userInsurance) => userInsurance.user, {
+  //   nullable: true,
+  // })
+  // userInsurances: UserInsuranceEntity[];
 
   @OneToMany(() => LeaveHistoryEntity, (leaveHistory) => leaveHistory.user, {
     nullable: true,
@@ -198,11 +195,11 @@ export class UserEntity extends BaseEntity {
   )
   medicalTrainingResults: MedicalTrainingResultsEntity[];
 
-  @OneToMany(
-    () => NursingTrainingResultsEntity,
-    (nursingTrainingResult) => nursingTrainingResult.user,
-  )
-  nursingTrainingResults: NursingTrainingResultsEntity[];
+  // @OneToMany(
+  //   () => NursingTrainingResultsEntity,
+  //   (nursingTrainingResult) => nursingTrainingResult.user,
+  // )
+  // nursingTrainingResults: NursingTrainingResultsEntity[];
 
   @OneToMany(() => EvaluateEntity, (evaluateHistory) => evaluateHistory.user)
   evaluateHistories: EvaluateEntity[];

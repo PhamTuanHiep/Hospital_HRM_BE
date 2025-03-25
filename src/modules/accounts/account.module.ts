@@ -1,4 +1,4 @@
-import { Module } from '@nestjs/common';
+import { forwardRef, Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { AccountEntity } from 'src/entities/account.entity';
 import { AccountControllers } from './account.controller';
@@ -13,6 +13,7 @@ import { RoleModule } from '../roles/role.module';
 @Module({
   imports: [
     TypeOrmModule.forFeature([AccountEntity, UserEntity, RoleEntity]),
+    // forwardRef(() => AccountModule),
     ImageModule,
     FirebaseModule,
     UserModule,
@@ -20,5 +21,6 @@ import { RoleModule } from '../roles/role.module';
   ],
   controllers: [AccountControllers],
   providers: [AccountService],
+  // exports: [AccountService],
 })
 export class AccountModule {}

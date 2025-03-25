@@ -34,6 +34,7 @@ export class SalaryHistoryService {
       numOfDaysOff: true,
       standardWorkDays: true,
       bonus: true,
+      overtimeCost: true,
       allowance: true,
       salary: true,
       user: {
@@ -61,6 +62,7 @@ export class SalaryHistoryService {
         numOfDaysOff: true,
         standardWorkDays: true,
         bonus: true,
+        overtimeCost: true,
         allowance: true,
         salary: true,
         user: {

@@ -1,16 +1,16 @@
 import { IsNotEmpty } from 'class-validator';
 
 export class AllowanceDto {
-  allowanceId?: number;
+  allowanceId?: string;
 
   @IsNotEmpty()
-  allowanceAcronym?: string;
+  allowanceType: string;
 
   @IsNotEmpty()
-  allowanceType?: string;
+  allowanceNameVI: string;
 
   @IsNotEmpty()
-  allowanceName?: string;
+  allowanceNameEN: string;
 
   allowanceRate?: number;
 

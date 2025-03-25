@@ -63,11 +63,24 @@ export class MedicalTrainingResultsService {
 
   async update(
     trainingResultsId: number,
-    MedicalTrainingResultsDto: MedicalTrainingResultsDto,
+    medicalTrainingResultsDto: MedicalTrainingResultsDto,
   ): Promise<UpdateResult> {
+    const sum =
+      medicalTrainingResultsDto.understandingOfMedicalTheory +
+      medicalTrainingResultsDto.knowledgeOfTreatmentProtocols +
+      medicalTrainingResultsDto.abilityToLearnNewKnowledge +
+      medicalTrainingResultsDto.diagnosticSkills +
+      medicalTrainingResultsDto.treatmentSkills +
+      medicalTrainingResultsDto.decisionMakingSkills +
+      medicalTrainingResultsDto.communicationSkillsWithPatientsAndTheirFamilies +
+      medicalTrainingResultsDto.communicationSkillsWithColleagues +
+      medicalTrainingResultsDto.patientMonitoringAndCare +
+      medicalTrainingResultsDto.participationInMedicalResearch;
+    const count = 10;
+    const newAverageScore = sum / count;
     return await this.medicalTrainingResultsEntityRepository.update(
       trainingResultsId,
-      MedicalTrainingResultsDto,
+      { ...medicalTrainingResultsDto, averageScore: newAverageScore },
     );
   }
 

@@ -1,11 +1,11 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Relations, Select } from 'src/common/common.type';
-import { filterGetAll } from 'src/common/common.use.helper';
-import { FilterDto } from 'src/dto/common.filter.dto';
+
+import { FilterPositionsDto } from 'src/dto/common.filter.dto';
 import { PositionDto } from 'src/dto/position.dto';
 
 import { PositionEntity } from 'src/entities/position.entity';
+import { filterGetPositions } from 'src/repositories/positions.repository';
 
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
@@ -16,37 +16,16 @@ export class PositionService {
     private positionRepository: Repository<PositionEntity>,
   ) {}
 
-  async findAll(query: FilterDto): Promise<any> {
+  async findAll(query: FilterPositionsDto): Promise<any> {
     const repository = this.positionRepository;
-    const relations: any = {
-      users: true,
-      positionAllowances: true,
-    };
-    const select: any = {
-      positionId: true,
-      createdAt: true,
-      updatedAt: true,
-      positionName: true,
-      users: {
-        userId: true,
-        fullName: true,
-      },
-      positionAllowances: {
-        id: true,
-        positionId: true,
-        allowanceId: true,
-      },
-    };
 
-    const order = { positionId: 'ASC' };
-
-    return filterGetAll({ query, repository, relations, select, order });
+    return filterGetPositions({ query, repository });
   }
 
   async findOne(positionId: string): Promise<PositionEntity | null> {
     return await this.positionRepository.findOne({
       where: { positionId },
-      relations: ['users', 'positionAllowances'],
+      relations: ['users', 'allowanceRelationship'],
       select: {
         positionId: true,
         createdAt: true,
@@ -55,11 +34,6 @@ export class PositionService {
         users: {
           userId: true,
           fullName: true,
-        },
-        positionAllowances: {
-          id: true,
-          positionId: true,
-          allowanceId: true,
         },
       },
     });
@@ -73,7 +47,7 @@ export class PositionService {
 
       return await this.positionRepository.findOne({
         where: { positionId: res.positionId },
-        relations: ['users', 'positionAllowances'],
+        relations: ['users', 'allowanceRelationship'],
       });
     } catch (error) {
       console.log('error:', error);

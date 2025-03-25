@@ -16,7 +16,7 @@ import {
 } from '@nestjs/common';
 import { AccountService } from './account.service';
 import { AccountDto } from 'src/dto/account.dto';
-import { FilterDto } from 'src/dto/common.filter.dto';
+import { FilterAccountsDto, FilterDto } from 'src/dto/common.filter.dto';
 import { AccountEntity } from 'src/entities/account.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { ImageService } from '../image/image.service';
@@ -31,7 +31,7 @@ export class AccountControllers {
   ) {}
 
   @Get()
-  findAll(@Query() query: FilterDto): Promise<any> {
+  findAll(@Query() query: FilterAccountsDto): Promise<any> {
     return this.accountService.findAll(query);
   }
 

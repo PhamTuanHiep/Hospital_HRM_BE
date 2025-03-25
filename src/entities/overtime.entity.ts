@@ -14,7 +14,7 @@ export class OvertimeEntity extends BaseEntity {
   @PrimaryColumn({ name: 'overtime_id', type: 'varchar', length: 5 })
   overtimeId: string;
 
-  @Column({ type: 'varchar', length: 40, name: 'overtime_name' })
+  @Column({ type: 'text', name: 'overtime_name' })
   overtimeName: string;
 
   @Column({ name: 'overtime_pay' })

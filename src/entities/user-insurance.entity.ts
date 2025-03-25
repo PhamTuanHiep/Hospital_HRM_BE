@@ -2,13 +2,13 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinColumn,
-  ManyToOne,
+  // JoinColumn,
+  // ManyToOne,
   PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from 'typeorm';
-import { UserEntity } from './user.entity';
-import { InsuranceEntity } from './insurance.entity';
+// import { UserEntity } from './user.entity';
+// import { InsuranceEntity } from './insurance.entity';
 
 @Entity({ name: 'user_insurance' })
 export class UserInsuranceEntity {
@@ -21,13 +21,13 @@ export class UserInsuranceEntity {
   @Column({ name: 'insurance_id', type: 'varchar', length: 4 })
   insuranceId: string;
 
-  @ManyToOne(() => UserEntity, (user) => user.userInsurances)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  // @ManyToOne(() => UserEntity, (user) => user.userInsurances)
+  // @JoinColumn({ name: 'user_id' })
+  // user: UserEntity;
 
-  @ManyToOne(() => InsuranceEntity, (insurance) => insurance.userInsurances)
-  @JoinColumn({ name: 'insurance_id' })
-  insurance: InsuranceEntity;
+  // @ManyToOne(() => InsuranceEntity, (insurance) => insurance.userInsurances)
+  // @JoinColumn({ name: 'insurance_id' })
+  // insurance: InsuranceEntity;
 
   @CreateDateColumn({
     type: 'timestamp',

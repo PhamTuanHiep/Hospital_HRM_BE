@@ -17,15 +17,14 @@ export class AccountEntity extends BaseEntity {
   @PrimaryGeneratedColumn({ name: 'account_id' })
   accountId: number;
 
-  @Column({ type: 'varchar', length: 30, name: 'email' })
+  @Column({ type: 'text', name: 'email' })
   email: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'password' })
+  @Column({ type: 'text', name: 'password' })
   password: string;
 
   @Column({
-    type: 'varchar',
-    length: 250,
+    type: 'text',
     name: 'avatar',
     nullable: true,
     default: null,

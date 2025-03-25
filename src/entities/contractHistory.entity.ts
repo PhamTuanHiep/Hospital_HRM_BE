@@ -40,8 +40,16 @@ export class ContractHistoryEntity extends BaseEntity {
   })
   endDay: string;
 
-  @Column({ type: 'varchar', length: 250, name: 'note', default: '' })
+  @Column({
+    type: 'varchar',
+    length: 13,
+    name: 'note',
+    default: 'Kí kết lần 1',
+  })
   note: string;
+
+  @Column({ name: 'suspension_time', default: 0 })
+  suspensionTime: number;
 
   @Column({ name: 'status', default: 1 })
   status: number;

@@ -28,6 +28,8 @@ export class SalaryHistoryDto {
 
   bonus: number;
 
+  overtimeCost: number;
+
   allowance: number;
 
   @IsNotEmpty()

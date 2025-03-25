@@ -18,27 +18,26 @@ export class RecruitmentPostEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @Column({ name: 'title', length: 150 })
+  @Column({ name: 'title', type: 'text' })
   title: string;
 
   @Column({ name: 'sub_title' })
   subtitle: string;
 
-  @Column({ name: 'general_requirements', length: 1000 })
+  @Column({ name: 'general_requirements', type: 'text' })
   generalRequirements: string;
 
-  @Column({ name: 'benefits', length: 1000 })
+  @Column({ name: 'benefits', type: 'text' })
   benefits: string;
 
-  @Column({ name: 'required_documents', length: 1000 })
+  @Column({ name: 'required_documents', type: 'text' })
   requiredDocuments: string;
 
-  @Column({ name: 'contact', length: 500 })
+  @Column({ name: 'contact', type: 'text' })
   contact: string;
 
   @Column({
-    type: 'varchar',
-    length: 250,
+    type: 'text',
     name: 'image',
     nullable: true,
     default: null,

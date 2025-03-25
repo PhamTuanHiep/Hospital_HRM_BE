@@ -46,7 +46,7 @@ export class NursingTrainingResultsService {
         this.nursingTrainingResultsEntityRepository.create(
           nursingTrainingResults,
         );
-      newNursingTrainingResults.user = user;
+      // newNursingTrainingResults.user = user;
 
       const res = await this.nursingTrainingResultsEntityRepository.save(
         newNursingTrainingResults,

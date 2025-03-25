@@ -20,9 +20,9 @@ export class NursingTrainingResultsEntity extends BaseEntity {
   @Column({ name: 'user_id' })
   userId: number;
 
-  @ManyToOne(() => UserEntity, (user) => user.nursingTrainingResults)
-  @JoinColumn({ name: 'user_id' })
-  user: UserEntity;
+  // @ManyToOne(() => UserEntity, (user) => user.nursingTrainingResults)
+  // @JoinColumn({ name: 'user_id' })
+  // user: UserEntity;
 
   @Column({ name: 'understanding_of_nursing_theory' })
   understandingOfNursingTheory: number;

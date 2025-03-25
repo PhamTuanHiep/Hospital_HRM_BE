@@ -1,10 +1,9 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Relations } from 'src/common/common.type';
-import { filterGetAll } from 'src/common/common.use.helper';
 import { FilterDto } from 'src/dto/common.filter.dto';
 import { DepartmentDto } from 'src/dto/department.dto';
 import { DepartmentEntity } from 'src/entities/department.entity';
+import { filterGetDepartments } from 'src/repositories/departments.repository';
 
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
@@ -17,26 +16,11 @@ export class DepartmentService {
 
   async findAll(query: FilterDto): Promise<any> {
     const repository = this.departmentRepository;
-    const relations: Relations<string> = {
-      users: true,
-      overtimeHistories: true,
-    };
-    const select: any = {
-      users: {
-        userId: true,
-        fullName: true,
-      },
-      overtimeHistories: {
-        overtimeHistoryId: true,
-        userId: true,
-        overtimeId: true,
-        startDay: true,
-        endDay: true,
-      },
-    };
-    const order = { departmentId: 'ASC' };
 
-    return filterGetAll({ query, repository, relations, select, order });
+    return filterGetDepartments({
+      query,
+      repository,
+    });
   }
 
   async findOne(departmentId: string): Promise<DepartmentEntity | null> {

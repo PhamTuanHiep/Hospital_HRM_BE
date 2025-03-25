@@ -4,26 +4,27 @@ import {
   CreateDateColumn,
   Entity,
   OneToMany,
+  OneToOne,
   PrimaryColumn,
   UpdateDateColumn,
 } from 'typeorm';
 import { UserEntity } from './user.entity';
 import { OvertimeHistoryEntity } from './overtimeHistory.entity';
+import { AllowanceRelationshipEntity } from './allowance-relationship.entity';
 
 @Entity('departments')
 export class DepartmentEntity extends BaseEntity {
   @PrimaryColumn({ name: 'department_id', type: 'varchar', length: 4 })
   departmentId: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'department_name' })
+  @Column({ type: 'text', name: 'department_name' })
   departmentName: string;
 
-  @Column({ type: 'varchar', length: 50, name: 'location', nullable: true })
+  @Column({ type: 'text', name: 'location', nullable: true })
   location: string;
 
   @Column({
-    type: 'varchar',
-    length: 250,
+    type: 'text',
     name: 'func_description',
     nullable: true,
   })
@@ -35,8 +36,16 @@ export class DepartmentEntity extends BaseEntity {
   @OneToMany(
     () => OvertimeHistoryEntity,
     (overtimeHistory) => overtimeHistory.department,
+    { nullable: true },
   )
   overtimeHistories: OvertimeHistoryEntity[];
+
+  @OneToOne(
+    () => AllowanceRelationshipEntity,
+    (allowanceRelationship) => allowanceRelationship.department,
+    { nullable: true },
+  )
+  allowanceRelationship: AllowanceRelationshipEntity;
 
   @CreateDateColumn({
     type: 'timestamp',

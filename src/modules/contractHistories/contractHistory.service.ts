@@ -1,12 +1,12 @@
 import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Relations } from 'src/common/common.type';
-import { filterGetContractHistories } from 'src/common/common.use.helper';
+
 import { FilterContractHistoriesDto } from 'src/dto/common.filter.dto';
 import { ContractHistoryDto } from 'src/dto/contractHistory.dto';
 import { ContractEntity } from 'src/entities/contract.entity';
 import { ContractHistoryEntity } from 'src/entities/contractHistory.entity';
 import { UserEntity } from 'src/entities/user.entity';
+import { filterGetContractHistories } from 'src/repositories/contractHistories.repository';
 import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
@@ -22,39 +22,9 @@ export class ContractHistoryService {
 
   async findAll(query: FilterContractHistoriesDto): Promise<any> {
     const repository = this.contractHistoryRepository;
-    const relations: Relations<string> = {
-      contract: true,
-      user: true,
-    };
-    const select: any = {
-      contractHistoryId: true,
-      createdAt: true,
-      updatedAt: true,
-      startDay: true,
-      endDay: true,
-      note: true,
-      status: true,
-      contract: {
-        contractId: true,
-        contractNameVI: true,
-        contractNameEN: true,
-        note: true,
-      },
-      user: {
-        userId: true,
-        fullName: true,
-      },
-    };
-
-    const arrSearch = ['status', 'contractId'];
-    const order = { contractHistoryId: 'ASC' };
     return filterGetContractHistories({
       query,
       repository,
-      relations,
-      select,
-      arrSearch,
-      order,
     });
   }
 
@@ -71,6 +41,7 @@ export class ContractHistoryService {
         startDay: true,
         endDay: true,
         note: true,
+        suspensionTime: true,
         status: true,
         contract: {
           contractId: true,
@@ -119,6 +90,19 @@ export class ContractHistoryService {
       contractHistoryId,
       contractHistoryDto,
     );
+  }
+
+  async updateAll(
+    contractHistoriesDto: ContractHistoryDto[],
+  ): Promise<UpdateResult[]> {
+    console.log('contractHistoriesDto:', contractHistoriesDto);
+    const updatePromises = contractHistoriesDto.map((contractHistory) =>
+      this.contractHistoryRepository.update(contractHistory.contractHistoryId, {
+        status: contractHistory.status,
+      }),
+    );
+
+    return await Promise.all(updatePromises);
   }
 
   async delete(contractHistoryId: number): Promise<DeleteResult> {

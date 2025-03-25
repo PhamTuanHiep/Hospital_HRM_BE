@@ -18,8 +18,8 @@ import { AllowanceModule } from './modules/allowances/allowance.module';
 import { AllowanceEntity } from './entities/allowance.entity';
 import { LeaveModule } from './modules/leaves/leave.module';
 import { LeaveEntity } from './entities/leave.entity';
-import { InsuranceModule } from './modules/insurances/insurance.module';
-import { InsuranceEntity } from './entities/insurance.entity';
+// import { InsuranceModule } from './modules/insurances/insurance.module';
+// import { InsuranceEntity } from './entities/insurance.entity';
 import { EvaluateModule } from './modules/evaluates/evaluate.module';
 import { EvaluateEntity } from './entities/evaluate.entity';
 import { OvertimeModule } from './modules/overtimes/overtime.module';
@@ -27,16 +27,15 @@ import { OvertimeEntity } from './entities/overtime.entity';
 import { OvertimeHistoryModule } from './modules/overtimeHistories/overtimehistory.module';
 import { OvertimeHistoryEntity } from './entities/overtimeHistory.entity';
 import { MedicalTrainingResultsEntity } from './entities/medicalTrainingResults.entity';
-import { NursingTrainingResultsEntity } from './entities/nursingTrainingResults.entity';
+// import { NursingTrainingResultsEntity } from './entities/nursingTrainingResults.entity';
 import { MedicalTrainingResultsModule } from './modules/medicalTrainingResults/medicalTrainingResults.module';
-import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/nursingTrainingResults.module';
+// import { NursingTrainingResultsModule } from './modules/nursingTrainingResults/nursingTrainingResults.module';
 import { ImageModule } from './modules/image/image.module';
 import { LeaveHistoryEntity } from './entities/leaveHistory.entity';
 import { LeaveHistoryModule } from './modules/leaveHistory/leaveHistory.module';
-import { UserInsuranceModule } from './modules/user_insurance/user_insurance.module';
-import { UserInsuranceEntity } from './entities/user-insurance.entity';
-import { PositionAllowanceModule } from './modules/position-allowance/position-allowance.module';
-import { PositionAllowanceEntity } from './entities/position-allowance.entity';
+// import { UserInsuranceModule } from './modules/user_insurance/user_insurance.module';
+// import { UserInsuranceEntity } from './entities/user-insurance.entity';
+
 import { ContractEntity } from './entities/contract.entity';
 import { ContractHistoryEntity } from './entities/contractHistory.entity';
 import { ContractModule } from './modules/contracts/contract.module';
@@ -47,6 +46,8 @@ import { RecruitmentPostModule } from './modules/recruitmentPosts/recruitmentPos
 import { RecruitmentPostEntity } from './entities/recruitmentPost.entity';
 import { AnnouncementPostModule } from './modules/announcementPosts/announcementPost.module';
 import { AnnouncementPostEntity } from './entities/announcementPost.entity';
+import { AllowanceRelationshipModule } from './modules/allowance-relationship/allowance-relationship.module';
+import { AllowanceRelationshipEntity } from './entities/allowance-relationship.entity';
 
 @Module({
   imports: [
@@ -72,17 +73,17 @@ import { AnnouncementPostEntity } from './entities/announcementPost.entity';
           PositionEntity,
           AccountEntity,
           DepartmentEntity,
+          AllowanceRelationshipEntity,
           AllowanceEntity,
           LeaveEntity,
-          UserInsuranceEntity,
-          InsuranceEntity,
+          // UserInsuranceEntity,
+          // InsuranceEntity,
           EvaluateEntity,
           OvertimeEntity,
           OvertimeHistoryEntity,
           LeaveHistoryEntity,
           MedicalTrainingResultsEntity,
-          NursingTrainingResultsEntity,
-          PositionAllowanceEntity,
+          // NursingTrainingResultsEntity,
           ContractEntity,
           ContractHistoryEntity,
           SalaryHistoryEntity,
@@ -98,17 +99,17 @@ import { AnnouncementPostEntity } from './entities/announcementPost.entity';
     PositionModule,
     AccountModule,
     DepartmentModule,
-    PositionAllowanceModule,
+    AllowanceRelationshipModule,
     AllowanceModule,
     LeaveModule,
-    UserInsuranceModule,
-    InsuranceModule,
+    // UserInsuranceModule,
+    // InsuranceModule,
     EvaluateModule,
     OvertimeModule,
     OvertimeHistoryModule,
     LeaveHistoryModule,
     MedicalTrainingResultsModule,
-    NursingTrainingResultsModule,
+    // NursingTrainingResultsModule,
     ImageModule,
     ContractModule,
     ContractHistoryModule,

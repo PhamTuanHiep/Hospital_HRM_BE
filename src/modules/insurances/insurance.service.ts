@@ -5,9 +5,9 @@ import { filterGetAll } from 'src/common/common.use.helper';
 import { FilterDto } from 'src/dto/common.filter.dto';
 import { InsuranceDto } from 'src/dto/insurance.dto';
 import { InsuranceEntity } from 'src/entities/insurance.entity';
-import { UserInsuranceEntity } from 'src/entities/user-insurance.entity';
+// import { UserInsuranceEntity } from 'src/entities/user-insurance.entity';
 
-import { DeleteResult, In, Repository, UpdateResult } from 'typeorm';
+import { DeleteResult, Repository, UpdateResult } from 'typeorm';
 
 @Injectable()
 export class InsuranceService {
@@ -36,10 +36,10 @@ export class InsuranceService {
       where: { insuranceId },
       relations: ['userInsurances'],
       select: {
-        userInsurances: {
-          id: true,
-          userId: true,
-        },
+        // userInsurances: {
+        //   id: true,
+        //   userId: true,
+        // },
       },
     });
   }

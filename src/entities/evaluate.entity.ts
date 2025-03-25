@@ -79,7 +79,7 @@ export class EvaluateEntity extends BaseEntity {
   @BeforeInsert()
   @BeforeUpdate()
   calculateAverage() {
-    let sum =
+    const sum =
       this.workLoad +
       this.capacityOfWork +
       this.quantityOfScientificWorks +
@@ -88,7 +88,7 @@ export class EvaluateEntity extends BaseEntity {
       this.responsibilityForWork +
       this.workSpirit +
       this.workResult;
-    let count = 8;
+    const count = 8;
     this.averageScore = sum / count;
   }
 }

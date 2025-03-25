@@ -82,7 +82,7 @@ export class MedicalTrainingResultsEntity extends BaseEntity {
   @BeforeInsert()
   @BeforeUpdate()
   calculateAverage() {
-    let sum =
+    const sum =
       this.understandingOfMedicalTheory +
       this.knowledgeOfTreatmentProtocols +
       this.abilityToLearnNewKnowledge +
@@ -93,7 +93,7 @@ export class MedicalTrainingResultsEntity extends BaseEntity {
       this.communicationSkillsWithColleagues +
       this.patientMonitoringAndCare +
       this.participationInMedicalResearch;
-    let count = 10;
+    const count = 10;
     this.averageScore = sum / count;
   }
 }

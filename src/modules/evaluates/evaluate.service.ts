@@ -92,7 +92,22 @@ export class EvaluateService {
     evaluateId: number,
     evaluateDto: EvaluateDto,
   ): Promise<UpdateResult> {
-    return await this.evaluateRepository.update(evaluateId, evaluateDto);
+    const sum =
+      evaluateDto.workLoad +
+      evaluateDto.capacityOfWork +
+      evaluateDto.quantityOfScientificWorks +
+      evaluateDto.workInitiatives +
+      evaluateDto.workingStyle +
+      evaluateDto.responsibilityForWork +
+      evaluateDto.workSpirit +
+      evaluateDto.workResult;
+    const count = 8;
+    const newAverageScore = sum / count;
+
+    return await this.evaluateRepository.update(evaluateId, {
+      ...evaluateDto,
+      averageScore: newAverageScore,
+    });
   }
 
   async delete(evaluateId: number): Promise<DeleteResult> {
